@@ -52,7 +52,10 @@ public class DFA {
                     currentString.append(value);
                 }
             }
-
+        }
+        if (current_state.isAccept()) {
+            System.out.println(current_state.name);
+            Tokens.add(currentString.toString());
         }
         return Tokens;
     }
