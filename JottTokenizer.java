@@ -16,7 +16,7 @@ public class JottTokenizer {
     * @param myFile a file object to be parsed
     * @return an ArrayList of Strings
     */
-    public static ArrayList<String> getLines(File myFile) throws FileNotFoundException {
+    public static ArrayList<String> getLines(File myFile) throws FileNotFoundException{
         ArrayList<String> returnMe = new ArrayList<String>();
         Scanner myReader = new Scanner(myFile);
         while(myReader.hasNextLine()) {
@@ -32,7 +32,7 @@ public class JottTokenizer {
      * @param filename the name of the file to tokenize; can be relative or absolute path
      * @return an ArrayList of Jott Tokens
      */
-    public static ArrayList<Token> tokenize(String filename){
+    public static ArrayList<Token> tokenize(String filename) throws FileNotFoundException{
         ArrayList<String> myLines = getLines(new File(filename));
 		return null;
 	}
