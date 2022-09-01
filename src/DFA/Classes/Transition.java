@@ -13,8 +13,10 @@ public class Transition {
     }
 
     public boolean checkCondition(Character input){
-
-        for(int i = 0; i < conditions.length(); i++) {
+        if (conditions.equals("non-newline")) {
+            return !input.equals('\n');
+        }
+        for (int i = 0; i < conditions.length(); i++) {
             if (input.equals(conditions.charAt(i))) {
                 return true;
             }

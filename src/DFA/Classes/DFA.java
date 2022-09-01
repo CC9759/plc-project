@@ -48,7 +48,9 @@ public class DFA {
 
             }
             else {
-                currentString.append(value);
+                if(current_state.name.equals("string1") || !value.equals(' ')) {
+                    currentString.append(value);
+                }
             }
 
         }

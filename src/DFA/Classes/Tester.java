@@ -42,6 +42,10 @@ public class Tester {
         scannerDFA.addState("string2", true);
 
 
+        scannerDFA.addTransition("start","comment","#");
+        scannerDFA.addTransition("comment","comment","non-newline");
+        scannerDFA.addTransition("comment","start","\n");
+
         scannerDFA.addTransition("start","comma",",");
         scannerDFA.addTransition("start","rbracket","]");
         scannerDFA.addTransition("start","lbracket","[");
@@ -76,13 +80,16 @@ public class Tester {
         scannerDFA.addTransition("!","notEquals","=");
 
         scannerDFA.addTransition("start","string1","\"");
+        System.out.println(letters+digits+" ");
         scannerDFA.addTransition("string1","string1",letters+digits+" ");
         scannerDFA.addTransition("string1","string2","\"");
 
 
-        ArrayList<String> results = scannerDFA.execute("3+4==7foo1bar\nprint[\"hello\"]\n");
+//        ArrayList<String> results = scannerDFA.execute("3+4==7foo1bar\nprint[\"hello\"]\n");
+        ArrayList<String> results1 = scannerDFA.execute("\"hello\"\n");
+        ArrayList<String> results2 = scannerDFA.execute("#  e  \"\n3   + \"ee    e\"         4     \n");
 
-        for (String result : results) {
+        for (String result : results2) {
             System.out.println(result);
         }
 
