@@ -16,11 +16,11 @@ public class JottTokenizer {
     * @param myFile a file object to be parsed
     * @return an ArrayList of Strings
     */
-    public static ArrayList<String> getLines(File myFile) {
+    public static ArrayList<String> getLines(File myFile) throws FileNotFoundException {
         ArrayList<String> returnMe = new ArrayList<String>();
         Scanner myReader = new Scanner(myFile);
         while(myReader.hasNextLine()) {
-            returnMe.add(myReader.nextLine())
+            returnMe.add(myReader.nextLine());
         }
         myReader.close();
         return returnMe;
