@@ -5,8 +5,25 @@
  **/
 
 import java.util.ArrayList;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.util.Scanner;
 
 public class JottTokenizer {
+
+   /**
+    * Takes in a file object and returns the lines as a list of strings
+    *
+    *
+    *
+    */
+    public static ArrayList<String> getLines(File myFile) {
+        ArrayList<String> returnMe = new ArrayList<String>();
+        Scanner myReader = new Scanner(myFile);
+        while(myReader.hasNextLine()) {
+            returnMe.add(myReader.nextLine())
+        }
+    }
 
 	/**
      * Takes in a filename and tokenizes that file into Tokens
@@ -15,6 +32,8 @@ public class JottTokenizer {
      * @return an ArrayList of Jott Tokens
      */
     public static ArrayList<Token> tokenize(String filename){
+        ArrayList<String> myLines = getLines(new File(filename));
 		return null;
 	}
+
 }
