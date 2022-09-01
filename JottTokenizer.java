@@ -13,9 +13,8 @@ public class JottTokenizer {
 
    /**
     * Takes in a file object and returns the lines as a list of strings
-    *
-    *
-    *
+    * @param myFile a file object to be parsed
+    * @return an ArrayList of Strings
     */
     public static ArrayList<String> getLines(File myFile) {
         ArrayList<String> returnMe = new ArrayList<String>();
@@ -23,6 +22,8 @@ public class JottTokenizer {
         while(myReader.hasNextLine()) {
             returnMe.add(myReader.nextLine())
         }
+        myReader.close();
+        return returnMe;
     }
 
 	/**
