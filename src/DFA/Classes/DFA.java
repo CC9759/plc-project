@@ -1,3 +1,5 @@
+package DFA.Classes;
+
 import java.util.ArrayList;
 import java.util.HashMap;
 
@@ -40,10 +42,11 @@ public class DFA {
                 if(previous_state.isAccept()) {
                     System.out.println(previous_state.name);
                     Tokens.add(currentString);
-                    current_state = start_state;
-                    currentString = "";
                     i -= 1;
                 }
+                current_state = start_state;
+                currentString = "";
+
             }
             else {
                 currentString = currentString + value;

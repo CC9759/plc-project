@@ -1,3 +1,5 @@
+package DFA.Classes;
+
 import java.util.ArrayList;
 
 

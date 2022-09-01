@@ -1,4 +1,4 @@
-import java.util.ArrayList;
+package DFA.Classes;
 
 public class Transition {
     private State start;
