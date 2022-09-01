@@ -7,9 +7,9 @@ import java.util.ArrayList;
  * State class used in several automata's
  */
 public class State {
-    public String name;
-    private boolean accept;
-    private ArrayList<Transition> transitions = new ArrayList<>();
+    public final String name;
+    private final boolean accept;
+    private final ArrayList<Transition> transitions = new ArrayList<>();
 
     public State(String name){
         this.name = name;
@@ -24,22 +24,14 @@ public class State {
     /**
      * adds a transition within the state. Again this works pretty well for DFA
      * but the current implementation would force us to create a custom state and
-     * transition for each automata, which is kinda cringe. Should probably use some
+     * transition for each automaton, which is kinda cringe. Should probably use some
      * inheritance and polymorphism to fix this.
-     * @param end
-     * @param cond
-     * @return
+     * @param end the end state
+     * @param cond a string of possible characters that will cause the transition
      */
-    public boolean add_transition(State end, String cond) {
-        //checks that new transition doesn't override any old transition
-//        for (int i = 0; i < transitions.size(); i++) {
-//            Transition temp = transitions.get(i);
-//            if (temp.checkcondition(cond)) {
-//                return false;
-//            }
-//        }
-        transitions.add(new Transition(this, end, cond));
-        return true;
+    public void add_transition(State end, String cond) {
+        //TODO checks that new transition doesn't override any old transition
+        transitions.add(new Transition(end, cond));
     }
 
     /**
@@ -50,13 +42,12 @@ public class State {
      * This new implementation would forgo the multiple for loops, and also
      * allow for much easier access instead of all these nested classes.
      *
-     * @param input
-     * @return
+     * @param input Character used to check transition
+     * @return Returns State if transition successful, otherwise returns null
      */
     public State next_state(Character input){
-        for(int i=0; i < transitions.size();i++){
-            Transition temp = transitions.get(i);
-            if(temp.checkcondition(input)){
+        for (Transition temp : transitions) {
+            if (temp.checkCondition(input)) {
                 return temp.getEnd();
             }
         }

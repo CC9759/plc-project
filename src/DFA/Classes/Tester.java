@@ -3,10 +3,10 @@ package DFA.Classes;
 import java.util.ArrayList;
 
 public class Tester {
-    private static String digits = "0123456789";
-    private static String letters = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ";
-    private static String mathOps = "/+-*";
-    private static String relOps = "<>";
+    private static final String digits = "0123456789";
+    private static final String letters = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ";
+    private static final String mathOps = "/+-*";
+    private static final String relOps = "<>";
 
 
     public static void main(String[] args){
@@ -82,8 +82,8 @@ public class Tester {
 
         ArrayList<String> results = scannerDFA.execute("3+4==7foo1bar\nprint[\"hello\"]\n");
 
-        for(int i = 0; i < results.size(); i++){
-            System.out.println(results.get(i));
+        for (String result : results) {
+            System.out.println(result);
         }
 
     }

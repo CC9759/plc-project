@@ -11,9 +11,8 @@ import java.util.HashMap;
  *
  */
 public class DFA {
-    private State start_state;
-    private State current_state;
-    private HashMap<String,State> states = new HashMap<>();
+    private final State start_state;
+    private final HashMap<String,State> states = new HashMap<>();
 
     public ArrayList<String> Tokens;
 
@@ -31,9 +30,9 @@ public class DFA {
      *
      */
     public ArrayList<String> execute(String input){
-        current_state = start_state;
+        State current_state = start_state;
         Tokens = new ArrayList<>();
-        String currentString = "";
+        StringBuilder currentString = new StringBuilder();
         for(int i = 0; i < input.length(); i++){
             State previous_state = current_state;
             Character value = input.charAt(i);
@@ -41,15 +40,15 @@ public class DFA {
             if(current_state == null){
                 if(previous_state.isAccept()) {
                     System.out.println(previous_state.name);
-                    Tokens.add(currentString);
+                    Tokens.add(currentString.toString());
                     i -= 1;
                 }
                 current_state = start_state;
-                currentString = "";
+                currentString = new StringBuilder();
 
             }
             else {
-                currentString = currentString + value;
+                currentString.append(value);
             }
 
         }
@@ -60,17 +59,16 @@ public class DFA {
         states.put(name,new State(name,accept));
     }
 
-    public boolean addTransition(String state1, String state2, String cond){
+    public void addTransition(String state1, String state2, String cond){
         State start = states.get(state1);
         if(start == null){
-            return false;
+            return;
         }
         State end = states.get(state2);
         if(end == null){
-            return false;
+            return;
         }
         start.add_transition(end,cond);
-        return true;
     }
 
 
