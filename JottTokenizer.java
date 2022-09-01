@@ -20,7 +20,7 @@ public class JottTokenizer {
         ArrayList<String> returnMe = new ArrayList<String>();
         Scanner myReader = new Scanner(myFile);
         while(myReader.hasNextLine()) {
-            returnMe.add(myReader.nextLine())
+            returnMe.add(myReader.nextLine());
         }
         myReader.close();
         return returnMe;
