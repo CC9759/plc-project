@@ -1,0 +1,5 @@
+5 + 5
+print["hello"]
+# this prints hello
+3.7
+x.x

@@ -18,7 +18,7 @@ public class DFA {
 
 
     public DFA(){
-        this.start_state = new State("start");
+        this.start_state = new State("start", false);
         states.put("start",start_state);
     }
 
@@ -37,15 +37,21 @@ public class DFA {
             State previous_state = current_state;
             Character value = input.charAt(i);
             current_state = current_state.next_state(value);
+
             if(current_state == null){
                 if(previous_state.isAccept()) {
-                    System.out.println(previous_state.name);
-                    Tokens.add(currentString.toString());
+                    Tokens.add(previous_state.name + " " + currentString);
                     i -= 1;
+                }
+                else if(previous_state != start_state){
+                    throw new RuntimeException();
                 }
                 current_state = start_state;
                 currentString = new StringBuilder();
 
+            }
+            if(current_state == start_state){
+                currentString = new StringBuilder();
             }
             else {
                 if(current_state.name.equals("string1") || !value.equals(' ')) {
@@ -54,8 +60,10 @@ public class DFA {
             }
         }
         if (current_state.isAccept()) {
-            System.out.println(current_state.name);
-            Tokens.add(currentString.toString());
+            Tokens.add(current_state.name + " "+ currentString);
+        }
+        else if (!current_state.name.equals("comment") && current_state != start_state){
+            throw new RuntimeException();
         }
         return Tokens;
     }
@@ -75,9 +83,5 @@ public class DFA {
         }
         start.add_transition(end,cond);
     }
-
-
-
-
 
 }
