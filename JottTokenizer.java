@@ -34,7 +34,7 @@ public class JottTokenizer {
      */
     public static ArrayList<Token> tokenize(String filename) throws FileNotFoundException{
         ArrayList<String> myLines = getLines(new File(filename));
-		return null;
+		return myLines;
 	}
 
 }
