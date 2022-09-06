@@ -11,11 +11,6 @@ public class State {
     private final boolean accept;
     private final ArrayList<Transition> transitions = new ArrayList<>();
 
-    public State(String name){
-        this.name = name;
-        accept = false;
-
-    }
     public State(String name, boolean accept){
         this.name = name;
         this.accept = accept;

@@ -1,14 +1,10 @@
 package DFA.Classes;
 
-import java.util.ArrayList;
-
 public class TokenTree {
     private static final String digits = "0123456789";
     private static final String letters = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ";
     private static final String mathOps = "/+-*";
     private static final String relOps = "<>";
-
-
 
     public static DFA createTokenTree(){
 
@@ -86,33 +82,5 @@ public class TokenTree {
         newTokenTree.addTransition("string1","string2","\"");
 
         return newTokenTree;
-
-
-
-
-
-//        ArrayList<String> results = newTokenTree.execute("3+4==7foo1bar\nprint[\"hello\"]\n");
-//        ArrayList<String> results1 = newTokenTree.execute("\"hello\"");
-//        ArrayList<String> results2 = newTokenTree.execute("#  e  \"\n3   + \"ee    e\"         4");
-
-//        for (String result : results2) {
-//            System.out.println(result);
-//        }
-
-    }
-
-
-    public static void main(String[] args) {
-        DFA tester = createTokenTree();
-        ArrayList<String> result2 = tester.execute("#this is an example\n" +
-                "main[]:Integer{\n" +
-                "    print[5];\n" +
-                "    #this is a comment\n" +
-                "    print[ \"foo bar\" ];\n" +
-                "}");
-
-        for (String result : result2) {
-            System.out.println(result);
-        }
     }
 }

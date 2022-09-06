@@ -4,16 +4,14 @@
  * @author 
  **/
 
-import java.util.ArrayList;
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.util.HashMap;
-import java.util.Map;
-import java.util.Scanner;
-
-
 import DFA.Classes.DFA;
 import DFA.Classes.TokenTree;
+
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Scanner;
 
 public class JottTokenizer {
    /**
@@ -22,11 +20,10 @@ public class JottTokenizer {
     * @return an ArrayList of Strings
     */
     public static ArrayList<String> getLines(String filename){
-        ArrayList<String> returnMe = new ArrayList<String>();
+        ArrayList<String> returnMe = new ArrayList<>();
 
         Scanner myReader = null;
         try {
-            new File("testDir").mkdirs();
             myReader = new Scanner(new File(filename));
         } catch (FileNotFoundException e) {
             System.out.println(e);
@@ -53,8 +50,8 @@ public class JottTokenizer {
             for (int i = 0; i < fileLines.size(); i++) {
 
                 ArrayList<String> stringTokens = tokenTree.execute(fileLines.get(i));
-                for (int j = 0; j < stringTokens.size(); j++) {
-                    String[] tokenValues = stringTokens.get(j).split(" ", 2);
+                for (String stringToken : stringTokens) {
+                    String[] tokenValues = stringToken.split(" ", 2);
                     Token newToken = new Token(tokenValues[1], filename, i + 1, tokenTypeMap.get(tokenValues[0]));
                     tokens.add(newToken);
                 }
