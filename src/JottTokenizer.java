@@ -49,7 +49,10 @@ public class JottTokenizer {
             ArrayList<Token> tokens = new ArrayList<>();
             for (int i = 0; i < fileLines.size(); i++) {
 
-                ArrayList<String> stringTokens = tokenTree.execute(fileLines.get(i));
+                ArrayList<String> stringTokens = tokenTree.execute(fileLines.get(i),i+1,filename);
+                if(stringTokens == null){
+                    return null;
+                }
                 for (String stringToken : stringTokens) {
                     String[] tokenValues = stringToken.split(" ", 2);
                     Token newToken = new Token(tokenValues[1], filename, i + 1, tokenTypeMap.get(tokenValues[0]));
@@ -87,7 +90,9 @@ public class JottTokenizer {
     }
 
     public static void main(String[] args) {
-            System.out.print(tokenize("C:\\Users\\jlote\\IdeaProjects\\plc-project\\src\\testFile.txt"));
+        for( Token token: tokenize("src\\testFile.txt")){
+            System.out.println(token.getTokenType() + " " + token.getToken());
+        }
     }
 
     }

@@ -29,7 +29,7 @@ public class DFA {
      * @param input the string that will be executed
      *
      */
-    public ArrayList<String> execute(String input){
+    public ArrayList<String> execute(String input,int lineNumber, String filename){
         State current_state = start_state;
         Tokens = new ArrayList<>();
         StringBuilder currentString = new StringBuilder();
@@ -44,7 +44,8 @@ public class DFA {
                     i -= 1;
                 }
                 else if(previous_state != start_state){
-                    throw new RuntimeException();
+                    System.err.println("Syntax Error\nInvalid token \""+currentString+"\"\n"+filename+":"+lineNumber);
+                    return null;
                 }
                 current_state = start_state;
                 currentString = new StringBuilder();
@@ -63,7 +64,8 @@ public class DFA {
             Tokens.add(current_state.name + " "+ currentString);
         }
         else if (!current_state.name.equals("comment") && current_state != start_state){
-            throw new RuntimeException();
+            System.err.println("Syntax Error\nInvalid token \""+currentString+"\"\n"+filename+":"+lineNumber);
+            return null;
         }
         return Tokens;
     }
