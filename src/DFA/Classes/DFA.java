@@ -43,7 +43,7 @@ public class DFA {
                     Tokens.add(previous_state.name + " " + currentString);
                     i -= 1;
                 }
-                else if(previous_state != start_state){
+                else if(previous_state != start_state || !value.equals(' ')) {
                     System.err.println("Syntax Error\nInvalid token \""+currentString+"\"\n"+filename+":"+lineNumber);
                     return null;
                 }
