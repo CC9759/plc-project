@@ -25,9 +25,17 @@ public class DFA {
 
     /**
      * executes DFS given a string
+     * Will move through states using transitions
+     * once there are no more transitions it can go
+     * through, it checks if it is an accept state and
+     * adds the token string to the array of token strings
      *
      * @param input the string that will be executed
-     *
+     * @param lineNumber line number. Used for error handling
+     * @param filename name of file. Used for error handling
+     * @return an ArrayList of Strings, each string includes
+     * the end state and the token itself separated by a space
+     * examples: "mathOp +", "string2 \" hello world\""
      */
     public ArrayList<String> execute(String input,int lineNumber, String filename){
         State current_state = start_state;
@@ -49,7 +57,6 @@ public class DFA {
                 }
                 current_state = start_state;
                 currentString = new StringBuilder();
-
             }
             if(current_state == start_state){
                 currentString = new StringBuilder();
@@ -70,10 +77,22 @@ public class DFA {
         return Tokens;
     }
 
+    /**
+     * adds a new state to the DFA
+     * @param name name of state
+     * @param accept boolean value deciding if it is an accept state
+     */
     public void addState(String name, boolean accept){
         states.put(name,new State(name,accept));
     }
 
+    /**
+     * adds a transition to the DFA
+     * @param state1 start state
+     * @param state2 end state
+     * @param cond string of characters. If input is equal to any
+     *             character in the string, the transition will happen
+     */
     public void addTransition(String state1, String state2, String cond){
         State start = states.get(state1);
         if(start == null){

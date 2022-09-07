@@ -21,7 +21,6 @@ public class State {
      * @param cond a string of possible characters that will cause the transition
      */
     public void add_transition(State end, String cond) {
-        //TODO checks that new transition doesn't override any old transition
         transitions.add(new Transition(end, cond));
     }
 

@@ -12,6 +12,12 @@ public class Transition {
 
     }
 
+    /**
+     * checks if input character is equal to any character in
+     * the transition's condition string
+     * @param input value used to check what transition to follow
+     * @return
+     */
     public boolean checkCondition(Character input){
         if (conditions.equals("non-newline")) {
             return !input.equals('\n');
