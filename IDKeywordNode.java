@@ -1,7 +1,7 @@
 /**
  *
  */
-public class IDKeywordNode implements interface{
+public class IDKeywordNode implements JottTree{
     private Token idKeyword;
     public String getValue() {
         return idKeyword.getToken();
