@@ -1,13 +1,20 @@
 public class ConstantNode implements JottTree {
-    private Token constant;
+    private Token token;
     private TokenType type;
+    private String value;
 
     /**
      * Will output a string of this tree in Jott
      * @return a string representing the Jott code of this tree
      */
+    public ConstantNode(Token inputToken) {
+        this.token = inputToken;
+        this.type = inputToken.getTokenType();
+        this.value = token.getToken();
+    }
+
     public String convertToJott() {
-        return null;
+        return value;
     }
 
     /**
@@ -15,7 +22,7 @@ public class ConstantNode implements JottTree {
      * @return a string representing the Java code of this tree
      */
     public String convertToJava() {
-        return null;
+        return value;
     }
 
     /**
@@ -23,7 +30,7 @@ public class ConstantNode implements JottTree {
      * @return a string representing the C code of this tree
      */
     public String convertToC() {
-        return null;
+        return value;
     }
 
     /**
@@ -31,7 +38,7 @@ public class ConstantNode implements JottTree {
      * @return a string representing the Python code of this tree
      */
     public String convertToPython() {
-        return null;
+        return value;
     }
 
     /**
