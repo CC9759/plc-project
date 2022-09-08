@@ -3,6 +3,7 @@
  */
 public class IDKeywordNode implements JottTree {
     private Token idKeyword;
+
     public String getValue() {
         return idKeyword.getToken();
     }
@@ -11,7 +12,7 @@ public class IDKeywordNode implements JottTree {
      * @return a string representing the Jott code of this tree
      */
     public String convertToJott() {
-        return null;
+        return idKeyword.getToken();
     }
 
     /**
