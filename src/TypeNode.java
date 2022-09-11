@@ -1,8 +1,33 @@
-public class RelOpNode implements JottTree {
-    private Token relOp;
+public class TypeNode implements JottTree {
+    private final Token token;
+    private final String value;
+    private final InformationType type;
+
+    public TypeNode(Token inputToken) {
+        token = inputToken;
+        value = token.getToken();
+        String string = "Double | Integer | String | Boolean";
+        if(value.equals("Double")) {
+            type = InformationType.DOUBLE;
+        }
+        else if(value.equals("Integer")){
+            type = InformationType.INT;
+        }
+        else if(value.equals("String")){
+            type = InformationType.STRING;
+        }
+        else if(value.equals("Boolean")){
+            type = InformationType.BOOLEAN;
+        }
+        else{
+            //temporary
+            type = InformationType.BOOLEAN;
+            //error?
+        }
+    }
 
     public String getValue() {
-        return relOp.getToken();
+        return token.getToken();
     }
     
     /**
@@ -10,7 +35,7 @@ public class RelOpNode implements JottTree {
      * @return a string representing the Jott code of this tree
      */
     public String convertToJott() {
-        return relOp.getToken();
+        return token.getToken();
     }
 
     /**

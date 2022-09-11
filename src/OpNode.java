@@ -1,8 +1,12 @@
 public class OpNode implements JottTree {
-    private Token op;
+    private final Token token;
+
+    public OpNode(Token inputToken) {
+        token = inputToken;
+    }
 
     public String getValue() {
-        return op.getToken();
+        return token.getToken();
     }
     
     /**
@@ -10,7 +14,7 @@ public class OpNode implements JottTree {
      * @return a string representing the Jott code of this tree
      */
     public String convertToJott() {
-        return op.getToken();
+        return token.getToken();
     }
 
     /**

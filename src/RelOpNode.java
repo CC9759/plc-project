@@ -1,23 +1,20 @@
-/**
- *
- */
-public class IDKeywordNode implements JottTree {
-    private Token idKeyword;
+public class RelOpNode implements JottTree {
+    private final Token token;
 
-    public IDKeywordNode(Token inputToken) {
-        idKeyword = inputToken;
+    public RelOpNode(Token inputToken) {
+        token = inputToken;
     }
 
     public String getValue() {
-        return idKeyword.getToken();
+        return token.getToken();
     }
-
+    
     /**
      * Will output a string of this tree in Jott
      * @return a string representing the Jott code of this tree
      */
     public String convertToJott() {
-        return idKeyword.getToken();
+        return token.getToken();
     }
 
     /**
