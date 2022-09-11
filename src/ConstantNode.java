@@ -1,6 +1,11 @@
 public class ConstantNode implements JottTree {
+
+    enum ConstantTypes {
+        BOOLEAN, DOUBLE, INT, STRING        
+    }
+
     private Token token;
-    private TokenType type;
+    private ConstantType type;
     private String value;
 
     /**
@@ -9,12 +14,32 @@ public class ConstantNode implements JottTree {
      */
     public ConstantNode(Token inputToken) {
         this.token = inputToken;
-        this.type = inputToken.getTokenType();
-        this.value = token.getToken();
+        this.value = this.token.getToken();
+
+        //Is this a boolean?
+        if(this.value.equals("True") ||
+           this.value.euqlas("False")) {
+            this.type = BOOLEAN;
+        }
+
+        //If not, is this an Int/Double?
+        else if(this.token.getTokenType() == NUMBER) {
+            if(this.value.indexOf(".") != -1) {
+                this.type = DOUBLE;
+            }
+            else {
+                this.type = INT;
+            }
+        }
+
+        //This should be a String
+        else {
+            this.type = STRING;
+        }
     }
 
     public String convertToJott() {
-        return value;
+        return this.value;
     }
 
     /**
@@ -22,7 +47,7 @@ public class ConstantNode implements JottTree {
      * @return a string representing the Java code of this tree
      */
     public String convertToJava() {
-        return value;
+        return this.value;
     }
 
     /**
@@ -30,7 +55,7 @@ public class ConstantNode implements JottTree {
      * @return a string representing the C code of this tree
      */
     public String convertToC() {
-        return value;
+        return this.value;
     }
 
     /**
@@ -38,7 +63,7 @@ public class ConstantNode implements JottTree {
      * @return a string representing the Python code of this tree
      */
     public String convertToPython() {
-        return value;
+        return this.value;
     }
 
     /**
@@ -48,6 +73,10 @@ public class ConstantNode implements JottTree {
      */
     public boolean validateTree() {
         return true;
+    }
+
+    public String toString() {
+        return this.value;
     }
 
 }
