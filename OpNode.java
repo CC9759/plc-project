@@ -1,11 +1,8 @@
-/**
- *
- */
-public class IDKeywordNode implements JottTree {
-    private Token idKeyword;
+public class OpNode implements JottTree {
+    private Token op;
 
     public String getValue() {
-        return idKeyword.getToken();
+        return op.getToken();
     }
     
     /**
@@ -13,7 +10,7 @@ public class IDKeywordNode implements JottTree {
      * @return a string representing the Jott code of this tree
      */
     public String convertToJott() {
-        return idKeyword.getToken();
+        return op.getToken();
     }
 
     /**
