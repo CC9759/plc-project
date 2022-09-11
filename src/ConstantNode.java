@@ -1,11 +1,7 @@
 public class ConstantNode implements JottTree {
 
-    enum ConstantTypes {
-        BOOLEAN, DOUBLE, INT, STRING        
-    }
-
     private final Token token;
-    private final ConstantTypes type;
+    private final InformationType type;
     private final String value;
 
     /**
@@ -19,22 +15,22 @@ public class ConstantNode implements JottTree {
         //Is this a boolean?
         if(this.value.equals("True") ||
            this.value.equals("False")) {
-            this.type = ConstantTypes.BOOLEAN;
+            this.type = InformationType.BOOLEAN;
         }
 
         //If not, is this an Int/Double?
         else if(this.token.getTokenType() == TokenType.NUMBER) {
             if(this.value.contains(".")) {
-                this.type = ConstantTypes.DOUBLE;
+                this.type = InformationType.DOUBLE;
             }
             else {
-                this.type = ConstantTypes.INT;
+                this.type = InformationType.INT;
             }
         }
 
         //This should be a String
         else {
-            this.type = ConstantTypes.STRING;
+            this.type = InformationType.STRING;
         }
     }
 
