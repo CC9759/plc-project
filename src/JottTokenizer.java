@@ -13,31 +13,31 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Scanner;
 
+
 public class JottTokenizer {
-   /**
-    * Takes in a file object and returns the lines as a list of strings
-    * @param filename a file object to be parsed
-    * @return an ArrayList of Strings
-    */
-    public static ArrayList<String> getLines(String filename){
+    /**
+     * Takes in a file object and returns the lines as a list of strings
+     *
+     * @param filename a file object to be parsed
+     * @return an ArrayList of Strings
+     */
+    public static ArrayList<String> getLines(String filename) throws FileNotFoundException{
         ArrayList<String> returnMe = new ArrayList<>();
 
         Scanner myReader = null;
-        try {
-            myReader = new Scanner(new File(filename));
-        } catch (FileNotFoundException e) {
-            System.out.println(e);
-        }
-        while(myReader.hasNextLine()) {
+        myReader = new Scanner(new File(filename));
+
+        while (myReader.hasNextLine()) {
             returnMe.add(myReader.nextLine());
         }
         myReader.close();
         return returnMe;
     }
 
-	/**
+    /**
      * Takes in a filename and tokenizes that file into Tokens
      * based on the rules of the Jott Language
+     *
      * @param filename the name of the file to tokenize; can be relative or absolute path
      * @return an ArrayList of Jott Tokens
      */
@@ -49,8 +49,8 @@ public class JottTokenizer {
             ArrayList<Token> tokens = new ArrayList<>();
             for (int i = 0; i < fileLines.size(); i++) {
 
-                ArrayList<String> stringTokens = tokenTree.execute(fileLines.get(i),i+1,filename);
-                if(stringTokens == null){
+                ArrayList<String> stringTokens = tokenTree.execute(fileLines.get(i), i + 1, filename);
+                if (stringTokens == null) {
                     return null;
                 }
                 for (String stringToken : stringTokens) {
@@ -60,11 +60,14 @@ public class JottTokenizer {
                 }
             }
             return tokens;
-        }catch(RuntimeException e){
-            System.out.println(e);
+        } catch (RuntimeException e) {
+            System.err.println(e);
+            return null;
+        } catch (FileNotFoundException e) {
+            System.err.println("File: " + filename + " not found");
             return null;
         }
-	}
+    }
 
     private static HashMap<String, TokenType> createTokenTypeMap() {
 
@@ -88,11 +91,5 @@ public class JottTokenizer {
 
         return tokenTypeMap;
     }
+}
 
-    public static void main(String[] args) {
-        for( Token token: tokenize("src\\testFile.txt")){
-            System.out.println(token.getTokenType() + " " + token.getToken());
-        }
-    }
-
-    }
