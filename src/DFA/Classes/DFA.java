@@ -41,40 +41,40 @@ public class DFA {
         State current_state = start_state;
         Tokens = new ArrayList<>();
         StringBuilder currentString = new StringBuilder();
-        for(int i = 0; i < input.length(); i++){
-            State previous_state = current_state;
-            Character value = input.charAt(i);
-            current_state = current_state.next_state(value);
+        try {
+            for (int i = 0; i < input.length(); i++) {
+                State previous_state = current_state;
+                Character value = input.charAt(i);
+                current_state = current_state.next_state(value);
 
-            if(current_state == null){
-                if(previous_state.isAccept()) {
-                    Tokens.add(previous_state.name + " " + currentString);
-                    i -= 1;
+                if (current_state == null) {
+                    if (previous_state.isAccept()) {
+                        Tokens.add(previous_state.name + " " + currentString);
+                        i -= 1;
+                    } else if (previous_state != start_state || !value.equals(' ')) {
+                        throw new RuntimeException();
+                    }
+                    current_state = start_state;
+                    currentString = new StringBuilder();
                 }
-                else if(previous_state != start_state || !value.equals(' ')) {
-                    System.err.println("Syntax Error\nInvalid token \""+currentString+"\"\n"+filename+":"+lineNumber);
-                    return null;
-                }
-                current_state = start_state;
-                currentString = new StringBuilder();
-            }
-            if(current_state == start_state){
-                currentString = new StringBuilder();
-            }
-            else {
-                if(current_state.name.equals("string1") || !value.equals(' ')) {
-                    currentString.append(value);
+                if (current_state == start_state) {
+                    currentString = new StringBuilder();
+                } else {
+                    if (current_state.name.equals("string1") || !value.equals(' ')) {
+                        currentString.append(value);
+                    }
                 }
             }
-        }
-        if (current_state.isAccept()) {
-            Tokens.add(current_state.name + " "+ currentString);
-        }
-        else if (!current_state.name.equals("comment") && current_state != start_state){
-            System.err.println("Syntax Error\nInvalid token \""+currentString+"\"\n"+filename+":"+lineNumber);
+            if (current_state.isAccept()) {
+                Tokens.add(current_state.name + " " + currentString);
+            } else if (!current_state.name.equals("comment") && current_state != start_state) {
+                throw new RuntimeException();
+            }
+            return Tokens;
+        } catch(RuntimeException e){
+            System.err.println("Syntax Error\nInvalid token \"" + currentString + "\"\n" + filename + ":" + lineNumber);
             return null;
         }
-        return Tokens;
     }
 
     /**
