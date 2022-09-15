@@ -1,4 +1,4 @@
-package DFA.Classes;
+package DFAClasses;
 
 public class Transition {
     private final State end;

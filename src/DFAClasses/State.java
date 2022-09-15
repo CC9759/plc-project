@@ -1,4 +1,4 @@
-package DFA.Classes;
+package DFAClasses;
 
 import java.util.ArrayList;
 
