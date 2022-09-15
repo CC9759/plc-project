@@ -1,11 +1,11 @@
 /**
  * This class is responsible for tokenizing Jott code.
  * 
- * @author 
+ * @author Jonathon LoTempio, Halle Masaryk, Celina, Kaiming Zhang
  **/
 
-import DFA.Classes.DFA;
-import DFA.Classes.TokenTree;
+import DFAClasses.DFA;
+import DFAClasses.TokenTree;
 
 import java.io.File;
 import java.io.FileNotFoundException;
