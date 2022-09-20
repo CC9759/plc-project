@@ -1,4 +1,4 @@
-package DFA.Classes;
+package DFAClasses;
 
 public class TokenTree {
     private static final String digits = "0123456789";
