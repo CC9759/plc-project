@@ -5,5 +5,7 @@ public enum InformationType {
 
     INT,
 
-    STRING
+    STRING, 
+
+    VOID
 }

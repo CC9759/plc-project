@@ -1,28 +1,18 @@
-public class TypeNode implements JottTree {
+public class FunctionReturnNode {
     private final Token token;
-    private final String value;
     private final InformationType type;
+    private final TypeNode typeNode;
 
-    public TypeNode(Token inputToken) {
+    public FunctionReturnNode(Token inputToken) {
         token = inputToken;
-        value = token.getToken();
-        String string = "Double | Integer | String | Boolean";
-        if(value.equals("Double")) {
-            type = InformationType.DOUBLE;
-        }
-        else if(value.equals("Integer")){
-            type = InformationType.INT;
-        }
-        else if(value.equals("String")){
-            type = InformationType.STRING;
-        }
-        else if(value.equals("Boolean")){
-            type = InformationType.BOOLEAN;
+        if(inputToken.getToken() == "Void") {
+            type = InformationType.VOID;
+            // how else better to do this?
+            typeNode = null;
         }
         else{
-            //temporary
-            type = InformationType.BOOLEAN;
-            //error?
+            typeNode = new TypeNode(inputToken);
+            type = typeNode.getType();
         }
     }
 
@@ -39,7 +29,12 @@ public class TypeNode implements JottTree {
      * @return a string representing the Jott code of this tree
      */
     public String convertToJott() {
-        return token.getToken();
+        if(type == InformationType.VOID){
+            return "Void";
+        }
+        else{
+            return typeNode.convertToJott();
+        }
     }
 
     /**
