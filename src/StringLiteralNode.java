@@ -1,13 +1,14 @@
+import java.util.*;
 public class StringLiteralNode implements JottTree {
 
-    private ConstantNode child;
+    private final ConstantNode child;
 
     /**
      * Will output a string of this tree in Jott
      * @return a string representing the Jott code of this tree
      */
-    public StringLiteralNode(ConstantNode inputNode) {
-        this.child = inputNode;
+    public StringLiteralNode(List<Token> inputTokens) {
+        this.child = new ConstantNode(inputTokens.get(1));
     }
 
     public String convertToJott() {

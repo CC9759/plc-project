@@ -1,4 +1,4 @@
-public class EndStatementNode implements  JottTree {
+public class EndStatementNode implements JottTree {
 
     private Token token;
 
