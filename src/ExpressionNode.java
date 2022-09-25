@@ -1,15 +1,31 @@
 import java.util.*;
-class ExpressionNode {
+class ExpressionNode implements JottTree{
     List<JottTree> children = new ArrayList<>();
     private InformationType type;
+    public ExpressionNode() {}
 
-    public ExpressionNode(List<Token> inputTokens) {
+    public ExpressionNode ExpressionNode(List<Token> inputTokens) {
         //TODO ADD THIS WHEN SYMBOL TABLES ARE ADDED
         //GENERIC EXPRESSIONNODE WILL BE GENERATED
         Token firstToken = inputTokens.get(0);
         if(firstToken.getTokenType() == TokenType.ID_KEYWORD) {
-
+            //CHECK ID TYPE FROM SYMB TABLE, EMPTY FOR NOW
+            return null;
         }
+        else if(firstToken.getTokenType() == TokenType.NUMBER) {
+            if(firstToken.getToken().contains(".")) {
+                return new DoubleExpressionNode(inputTokens);
+            }
+            else {
+                //TODO return new IntegerExpressionNode(inputTokens);
+            }
+        }
+        else if(firstToken.getToken().equals("True") ||
+                firstToken.getToken().equals("False")) {
+            //TODO return new BooleanExpressionNode(inputTokens);
+        }
+        //TODO return new StringExpressionNode(inputTokens);
+        return null;
     }
 
     public String convertToJott() {
