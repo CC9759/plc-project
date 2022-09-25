@@ -10,7 +10,9 @@ public class StringLiteralNode implements JottTree {
      * @return a string representing the Jott code of this tree
      */
     public StringLiteralNode(List<Token> inputTokens) {
-        this.child = new ConstantNode(inputTokens.get(1));
+        // adding this remove to keep it so it ignores quotes
+        inputTokens.remove(0);
+        this.child = new ConstantNode(inputTokens);
     }
 
     public String convertToJott() {

@@ -1,12 +1,14 @@
 package Phase2;
 
+import java.util.*;
+
 public class TypeNode implements JottTree {
     private final Token token;
     private final String value;
     private final InformationType type;
 
-    public TypeNode(Token inputToken) {
-        token = inputToken;
+    public TypeNode(List<Token> inputTokens) {
+        token = inputTokens.remove(0);
         value = token.getToken();
         String string = "Double | Integer | String | Boolean";
         if(value.equals("Double")) {

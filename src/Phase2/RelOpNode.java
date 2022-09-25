@@ -1,9 +1,11 @@
 package Phase2;
+import java.util.List;
 
 public class RelOpNode implements JottTree {
     private final Token token;
 
-    public RelOpNode(Token inputToken) {
+    public RelOpNode(List<Token> inputTokens) {
+        Token inputToken = inputTokens.remove(0);
         token = inputToken;
     }
 

@@ -1,10 +1,12 @@
 package Phase2;
 
+import java.util.*;
+
 public class OpNode implements JottTree {
     private final Token token;
 
-    public OpNode(Token inputToken) {
-        token = inputToken;
+    public OpNode(List<Token> inputTokens) {
+        token = inputTokens.remove(0);
     }
 
     public String getValue() {

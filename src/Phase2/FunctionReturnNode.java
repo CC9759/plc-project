@@ -1,19 +1,21 @@
 package Phase2;
 
+import java.util.*;
+
 public class FunctionReturnNode {
     private final Token token;
     private final InformationType type;
     private final TypeNode typeNode;
 
-    public FunctionReturnNode(Token inputToken) {
-        token = inputToken;
-        if(inputToken.getToken() == "Void") {
+    public FunctionReturnNode(List<Token> inputTokens) {
+        token = inputTokens.remove(0);
+        if(token.getToken() == "Void") {
             type = InformationType.VOID;
             // how else better to do this?
             typeNode = null;
         }
         else{
-            typeNode = new TypeNode(inputToken);
+            typeNode = new TypeNode(inputTokens);
             type = typeNode.getType();
         }
     }

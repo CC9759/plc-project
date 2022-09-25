@@ -8,15 +8,12 @@ public class IntegerExpressionNode extends ExpressionNode{
         super();
         Token firstToken = inputTokens.get(0);
         if(firstToken.getTokenType() == TokenType.ID_KEYWORD) {
-            this.children.add(new IDKeywordNode(firstToken));
+            this.children.add(new IDKeywordNode(inputTokens));
             inputTokens.remove(0);
-            //change to this when taking in list, remove strip
-            //this.children.add(new Phase2.IDKeywordNode(inputTokens));
         }
         else if(firstToken.getTokenType() == TokenType.NUMBER) {
-            this.children.add(new ConstantNode(firstToken));
+            this.children.add(new ConstantNode(inputTokens));
             inputTokens.remove(0);
-            //this.children.add(new Phase2.ConstantNode(inputTokens));
         }
         if (inputTokens.size() > 1) {
             Token secondToken = inputTokens.get(0);
@@ -24,9 +21,8 @@ public class IntegerExpressionNode extends ExpressionNode{
             if (secondToken.getTokenType() == TokenType.REL_OP &&
                     "+-/*".contains(secondToken.getToken()) &&
                     isValidStart(thirdToken)) {
-                this.children.add(new RelOpNode(secondToken));
+                this.children.add(new RelOpNode(inputTokens));
                 inputTokens.remove(0);
-                //this.children.add(new Phase2.RelOpNode(inputTokens));
                 this.children.add(new DoubleExpressionNode(inputTokens));
             }
         }

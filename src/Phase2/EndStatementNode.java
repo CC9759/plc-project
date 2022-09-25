@@ -1,10 +1,12 @@
 package Phase2;
 
+import java.util.*;
+
 public class EndStatementNode implements JottTree {
 
     private Token token;
 
-    public EndStatementNode(Token token){this.token = token;}
+    public EndStatementNode(List<Token> inputTokens){this.token = inputTokens.remove(0);}
 
     public String getValue() {return token.getToken();}
     /**

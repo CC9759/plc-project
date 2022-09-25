@@ -1,6 +1,7 @@
 package Phase2;
 
 import java.util.*;
+
 class ExpressionNode implements JottTree{
     List<JottTree> children = new ArrayList<>();
     private InformationType type;

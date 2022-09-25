@@ -1,5 +1,7 @@
 package Phase2;
 
+import java.util.*;
+
 public class ConstantNode implements JottTree {
 
     private final Token token;
@@ -10,8 +12,8 @@ public class ConstantNode implements JottTree {
      * Will output a string of this tree in Jott
      * @return a string representing the Jott code of this tree
      */
-    public ConstantNode(Token inputToken) {
-        this.token = inputToken;
+    public ConstantNode(List<Token> inputTokens) {
+        this.token = inputTokens.remove(0);
         this.value = this.token.getToken();
 
         //Is this a string?

@@ -1,13 +1,15 @@
 package Phase2;
 
+import java.util.List;
+
 /**
  *
  */
 public class IDKeywordNode implements JottTree {
     private Token idKeyword;
 
-    public IDKeywordNode(Token inputToken) {
-        idKeyword = inputToken;
+    public IDKeywordNode(List<Token> inputTokens) {
+        idKeyword = inputTokens.remove(0);
     }
 
     public String getValue() {
