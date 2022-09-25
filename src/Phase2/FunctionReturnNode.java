@@ -1,15 +1,29 @@
-/**
- *
- */
-public class IDKeywordNode implements JottTree {
-    private Token idKeyword;
+package Phase2;
 
-    public IDKeywordNode(Token inputToken) {
-        idKeyword = inputToken;
+public class FunctionReturnNode {
+    private final Token token;
+    private final InformationType type;
+    private final TypeNode typeNode;
+
+    public FunctionReturnNode(Token inputToken) {
+        token = inputToken;
+        if(inputToken.getToken() == "Void") {
+            type = InformationType.VOID;
+            // how else better to do this?
+            typeNode = null;
+        }
+        else{
+            typeNode = new TypeNode(inputToken);
+            type = typeNode.getType();
+        }
     }
 
     public String getValue() {
-        return idKeyword.getToken();
+        return token.getToken();
+    }
+    
+    public InformationType getType() {
+        return type;
     }
 
     /**
@@ -17,7 +31,12 @@ public class IDKeywordNode implements JottTree {
      * @return a string representing the Jott code of this tree
      */
     public String convertToJott() {
-        return idKeyword.getToken();
+        if(type == InformationType.VOID){
+            return "Void";
+        }
+        else{
+            return typeNode.convertToJott();
+        }
     }
 
     /**

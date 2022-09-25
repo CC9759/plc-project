@@ -1,3 +1,5 @@
+package Phase2;
+
 public class TypeNode implements JottTree {
     private final Token token;
     private final String value;

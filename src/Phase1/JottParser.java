@@ -1,9 +1,12 @@
-/**
+package Phase1; /**
  * This class is responsible for paring Jott Tokens
  * into a Jott parse tree.
  *
  * @author
  */
+
+import Phase2.JottTree;
+import Phase2.Token;
 
 import java.util.ArrayList;
 

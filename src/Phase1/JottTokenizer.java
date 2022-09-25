@@ -1,4 +1,4 @@
-/**
+package Phase1; /**
  * This class is responsible for tokenizing Jott code.
  * 
  * @author Jonathon LoTempio, Halle Masaryk, Celina, Kaiming Zhang
@@ -6,6 +6,8 @@
 
 import DFAClasses.DFA;
 import DFAClasses.TokenTree;
+import Phase2.Token;
+import Phase2.TokenType;
 
 import java.io.File;
 import java.io.FileNotFoundException;

@@ -1,3 +1,5 @@
+package Phase2;
+
 /**
  * This represents the types of tokens that can be in Jott.
  */

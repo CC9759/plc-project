@@ -2,7 +2,7 @@
 
 Importing instructions:
 1. extract all files into directory
-2. use import to import JottTokenizer into test files
+2. use import to import Phase1.JottTokenizer into test files
 3. run javac on test program
 4. run java on test program
 

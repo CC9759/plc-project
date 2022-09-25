@@ -1,3 +1,5 @@
+package Phase2;
+
 public class RelOpNode implements JottTree {
     private final Token token;
 

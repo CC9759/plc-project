@@ -1,40 +1,22 @@
-public class FunctionReturnNode {
-    private final Token token;
-    private final InformationType type;
-    private final TypeNode typeNode;
+package Phase2;
 
-    public FunctionReturnNode(Token inputToken) {
+public class OpNode implements JottTree {
+    private final Token token;
+
+    public OpNode(Token inputToken) {
         token = inputToken;
-        if(inputToken.getToken() == "Void") {
-            type = InformationType.VOID;
-            // how else better to do this?
-            typeNode = null;
-        }
-        else{
-            typeNode = new TypeNode(inputToken);
-            type = typeNode.getType();
-        }
     }
 
     public String getValue() {
         return token.getToken();
     }
     
-    public InformationType getType() {
-        return type;
-    }
-
     /**
      * Will output a string of this tree in Jott
      * @return a string representing the Jott code of this tree
      */
     public String convertToJott() {
-        if(type == InformationType.VOID){
-            return "Void";
-        }
-        else{
-            return typeNode.convertToJott();
-        }
+        return token.getToken();
     }
 
     /**

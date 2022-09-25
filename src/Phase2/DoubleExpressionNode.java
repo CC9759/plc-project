@@ -1,3 +1,5 @@
+package Phase2;
+
 import java.util.*;
 public class DoubleExpressionNode extends ExpressionNode {
     public DoubleExpressionNode(List<Token> inputTokens) {
@@ -7,12 +9,12 @@ public class DoubleExpressionNode extends ExpressionNode {
             this.children.add(new IDKeywordNode(firstToken));
             inputTokens.remove(0);
             //change to this when taking in list, remove strip
-            //this.children.add(new IDKeywordNode(inputTokens));
+            //this.children.add(new Phase2.IDKeywordNode(inputTokens));
         }
         else if(firstToken.getTokenType() == TokenType.NUMBER) {
             this.children.add(new ConstantNode(firstToken));
             inputTokens.remove(0);
-            //this.children.add(new ConstantNode(inputTokens));
+            //this.children.add(new Phase2.ConstantNode(inputTokens));
         }
         if (inputTokens.size() > 1) {
             Token secondToken = inputTokens.get(0);
@@ -22,7 +24,7 @@ public class DoubleExpressionNode extends ExpressionNode {
                     isValidStart(thirdToken)) {
                 this.children.add(new RelOpNode(secondToken));
                 inputTokens.remove(0);
-                //this.children.add(new RelOpNode(inputTokens));
+                //this.children.add(new Phase2.RelOpNode(inputTokens));
                 this.children.add(new DoubleExpressionNode(inputTokens));
             }
         }

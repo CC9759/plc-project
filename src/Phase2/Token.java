@@ -1,3 +1,5 @@
+package Phase2;
+
 /**
  * Class representing a token string for the Jott translator
  *

@@ -1,3 +1,5 @@
+package Phase2;
+
 public class EndStatementNode implements JottTree {
 
     private Token token;
