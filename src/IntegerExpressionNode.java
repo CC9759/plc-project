@@ -1,6 +1,8 @@
 import java.util.*;
-public class DoubleExpressionNode extends ExpressionNode {
-    public DoubleExpressionNode(List<Token> inputTokens) {
+
+
+public class IntegerExpressionNode extends ExpressionNode{
+    public IntegerExpressionNode(List<Token> inputTokens) {
         super();
         Token firstToken = inputTokens.get(0);
         if(firstToken.getTokenType() == TokenType.ID_KEYWORD) {
@@ -29,7 +31,7 @@ public class DoubleExpressionNode extends ExpressionNode {
     }
     public static boolean isValidStart(Token thisToken) {
         if (thisToken.getTokenType() == TokenType.NUMBER) {
-            if (thisToken.getToken().contains(".")) {
+            if (!thisToken.getToken().contains(".")) {
                 return true;
             }
         }

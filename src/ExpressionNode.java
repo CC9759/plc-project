@@ -9,7 +9,8 @@ class ExpressionNode implements JottTree{
         //GENERIC EXPRESSIONNODE WILL BE GENERATED
         Token firstToken = inputTokens.get(0);
         if(firstToken.getTokenType() == TokenType.ID_KEYWORD) {
-            //CHECK ID TYPE FROM SYMB TABLE, EMPTY FOR NOW
+            //CHECK ID TYPE FROM SYMBOL TABLE, EMPTY FOR NOW
+            //COULD ALSO BE FUNCTION CALL WITH PARAMS, NOT IMPLEMENTED
             return null;
         }
         else if(firstToken.getTokenType() == TokenType.NUMBER) {
@@ -17,7 +18,7 @@ class ExpressionNode implements JottTree{
                 return new DoubleExpressionNode(inputTokens);
             }
             else {
-                //TODO return new IntegerExpressionNode(inputTokens);
+                return new IntegerExpressionNode(inputTokens);
             }
         }
         else if(firstToken.getToken().equals("True") ||
@@ -41,4 +42,5 @@ class ExpressionNode implements JottTree{
     public String convertToPython() {return null;}
     public boolean validateTree() {return true;}
     public String toString() {return null;}
+
 }
