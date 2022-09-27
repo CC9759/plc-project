@@ -33,7 +33,7 @@ class ExpressionNode implements JottTree{
     public String convertToJott() {
         StringBuilder returnMe = new StringBuilder();
         for(JottTree child : children) {
-            returnMe.append(child);
+            returnMe.append(child.convertToJott());
         }
         return returnMe.toString();
     }
