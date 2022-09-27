@@ -2,13 +2,13 @@ package Phase2;
 
 import java.util.ArrayList;
 
-public class VarDeclaration implements JottTree{
+public class VarDeclarationNode implements JottTree{
     private final TypeNode type;
     private final IDKeywordNode id;
     private final EndStatementNode endStatement;
 
 
-    public VarDeclaration(ArrayList <Token>tokens){
+    public VarDeclarationNode(ArrayList <Token>tokens){
         ArrayList<Token> typeList = new ArrayList<>();
         ArrayList<Token> idList = new ArrayList<>();
         ArrayList<Token> endStatementList = new ArrayList<>();
