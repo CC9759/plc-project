@@ -4,10 +4,9 @@ import java.util.*;
 
 class ExpressionNode implements JottTree{
     List<JottTree> children = new ArrayList<>();
-    private InformationType type;
     public ExpressionNode() {}
 
-    public ExpressionNode ExpressionNode(List<Token> inputTokens) {
+    public static ExpressionNode ParseExpressionNode(List<Token> inputTokens) {
         //TODO ADD THIS WHEN SYMBOL TABLES ARE ADDED
         //GENERIC EXPRESSIONNODE WILL BE GENERATED
         Token firstToken = inputTokens.get(0);
@@ -33,11 +32,11 @@ class ExpressionNode implements JottTree{
     }
 
     public String convertToJott() {
-        String returnMe = "";
-        for(int i = 0; i < children.size(); i++) {
-            returnMe += children.get(i);
+        StringBuilder returnMe = new StringBuilder();
+        for(JottTree child : children) {
+            returnMe.append(child);
         }
-        return returnMe;
+        return returnMe.toString();
     }
 
     public String convertToJava() {return null;}

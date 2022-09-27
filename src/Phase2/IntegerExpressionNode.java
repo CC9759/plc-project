@@ -18,7 +18,7 @@ public class IntegerExpressionNode extends ExpressionNode{
         if (inputTokens.size() > 1) {
             Token secondToken = inputTokens.get(0);
             Token thirdToken = inputTokens.get(1);
-            if (secondToken.getTokenType() == TokenType.REL_OP &&
+            if (secondToken.getTokenType() == TokenType.MATH_OP &&
                     "+-/*".contains(secondToken.getToken()) &&
                     isValidStart(thirdToken)) {
                 this.children.add(new RelOpNode(inputTokens));

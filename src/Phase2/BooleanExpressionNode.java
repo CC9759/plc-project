@@ -1,39 +1,39 @@
 package Phase2;
 
 import java.util.*;
-public class DoubleExpressionNode extends ExpressionNode {
-    public DoubleExpressionNode(List<Token> inputTokens) {
+
+public class BooleanExpressionNode extends ExpressionNode {
+    public BooleanExpressionNode(List<Token> inputTokens) {
         super();
         Token firstToken = inputTokens.get(0);
         if(firstToken.getTokenType() == TokenType.ID_KEYWORD) {
+            if(firstToken.getToken().equals("True") ||
+               firstToken.getToken().equals(("False"))) {
+                this.children.add(new ConstantNode(inputTokens));
+            }
             this.children.add(new IDKeywordNode(inputTokens));
         }
-        else if(firstToken.getTokenType() == TokenType.NUMBER) {
-            this.children.add(new ConstantNode(inputTokens));
-        }
-        if (inputTokens.size() > 1) {
+        if(inputTokens.size() > 1) {
             Token secondToken = inputTokens.get(0);
             Token thirdToken = inputTokens.get(1);
-            if (secondToken.getTokenType() == TokenType.MATH_OP &&
+            if (secondToken.getTokenType() == TokenType.REL_OP &&
                     "+-/*".contains(secondToken.getToken()) &&
                     isValidStart(thirdToken)) {
                 this.children.add(new RelOpNode(inputTokens));
-                this.children.add(new DoubleExpressionNode(inputTokens));
+                this.children.add(new BooleanExpressionNode(inputTokens));
             }
         }
     }
 
     public String convertToJava() {
         StringBuilder returnMe = new StringBuilder();
-        for(JottTree child : children) {
+        for (JottTree child : children) {
             returnMe.append(child.convertToJava());
         }
         return returnMe.toString();
     }
+
     public static boolean isValidStart(Token thisToken) {
-        if(thisToken.getTokenType() == TokenType.NUMBER) {
-            return thisToken.getToken().contains(".");
-        }
         return thisToken.getTokenType() == TokenType.ID_KEYWORD;
     }
 }
