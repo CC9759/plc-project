@@ -25,10 +25,9 @@ class ExpressionNode implements JottTree{
         }
         else if(firstToken.getToken().equals("True") ||
                 firstToken.getToken().equals("False")) {
-            //TODO return new BooleanExpressionNode(inputTokens);
+            return new BooleanExpressionNode(inputTokens);
         }
-        //TODO return new StringExpressionNode(inputTokens);
-        return null;
+        return new StringExpressionNode(inputTokens);
     }
 
     public String convertToJott() {
