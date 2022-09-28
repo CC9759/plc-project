@@ -9,39 +9,39 @@ public class AssignmentNode implements JottTree {
     public AssignmentNode(List<Token> inputTokens) {
         if(inputTokens.get(0).getTokenType() == TokenType.ID_KEYWORD) {
             switch (inputTokens.get(0).getToken()) {
-                case "Boolean" -> {
+                case "Boolean":
                     children.add(new IDKeywordNode(inputTokens));
                     children.add(new IDKeywordNode(inputTokens));
                     children.add(new OpNode(inputTokens));
                     children.add(new BooleanExpressionNode(inputTokens));
                     children.add(new EndStatementNode(inputTokens));
-                }
-                case "Double" -> {
+                    break;
+                case "Double":
                     children.add(new IDKeywordNode(inputTokens));
                     children.add(new IDKeywordNode(inputTokens));
                     children.add(new OpNode(inputTokens));
                     children.add(new DoubleExpressionNode(inputTokens));
                     children.add(new EndStatementNode(inputTokens));
-                }
-                case "Integer" -> {
+                    break;
+                case "Integer":
                     children.add(new IDKeywordNode(inputTokens));
                     children.add(new IDKeywordNode(inputTokens));
                     children.add(new OpNode(inputTokens));
                     children.add(new IntegerExpressionNode(inputTokens));
                     children.add(new EndStatementNode(inputTokens));
-                }
-                case "String" -> {
+                    break;
+                case "String":
                     children.add(new IDKeywordNode(inputTokens));
                     children.add(new IDKeywordNode(inputTokens));
                     children.add(new OpNode(inputTokens));
                     children.add(new StringExpressionNode(inputTokens));
                     children.add(new EndStatementNode(inputTokens));
-                }
-                default -> {
+                    break;
+                default:
                     children.add(new IDKeywordNode(inputTokens));
                     children.add(ExpressionNode.ParseExpressionNode(inputTokens));
                     children.add(new EndStatementNode(inputTokens));
-                }
+                    break;
             }
         }
     }
