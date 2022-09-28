@@ -1,7 +1,10 @@
 package Phase2;
 
+import org.w3c.dom.Node;
+
 import java.util.*;
 public class ParamsTNode implements JottTree {
+    NodeType myType = NodeType.PARAMST;
     List<JottTree> children = new ArrayList<>();
     public ParamsTNode(List<Token> inputTokens) {
         if(inputTokens.get(0).getTokenType() != TokenType.R_BRACKET) {
@@ -17,6 +20,10 @@ public class ParamsTNode implements JottTree {
             returnMe.append(child.convertToJott());
         }
         return returnMe.toString();
+    }
+
+    public NodeType getMyType() {
+        return myType;
     }
 
     public String convertToJava() {return null;}
