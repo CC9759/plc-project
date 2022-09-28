@@ -3,6 +3,7 @@ package Phase2;
 import java.util.*;
 
 public class TypeNode implements JottTree {
+    NodeType myType = NodeType.TYPE;
     private final Token token;
     private final String value;
     private final InformationType type;
@@ -77,5 +78,9 @@ public class TypeNode implements JottTree {
      */
     public boolean validateTree() {
         return true;
+    }
+
+    public NodeType getMyType() {
+        return myType;
     }
 }

@@ -19,13 +19,13 @@ public class ParamsNode implements JottTree {
         return returnMe.toString();
     }
 
-    public NodeType getMyType() {
-        return myType;
-    }
-
     public String convertToJava() {return null;}
     public String convertToC() {return null;}
     public String convertToPython() {return null;}
     public boolean validateTree() {return true;}
     public String toString() {return null;}
+
+    public NodeType getMyType() {
+        return myType;
+    }
 }

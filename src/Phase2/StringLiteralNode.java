@@ -2,6 +2,7 @@ package Phase2;
 
 import java.util.*;
 public class StringLiteralNode implements JottTree {
+    NodeType myType = NodeType.STRINGLITERAL;
 
     private final ConstantNode child;
 
@@ -54,6 +55,10 @@ public class StringLiteralNode implements JottTree {
 
     public String toString() {
         return "\"" + this.child.toString() + "\"";
+    }
+
+    public NodeType getMyType() {
+        return myType;
     }
 
 }

@@ -6,6 +6,7 @@ import java.util.*;
 public class IntegerExpressionNode extends ExpressionNode{
     public IntegerExpressionNode(List<Token> inputTokens) {
         super();
+        this.myType = NodeType.INTEGEREXPRESSION;
         Token firstToken = inputTokens.get(0);
         if(firstToken.getTokenType() == TokenType.ID_KEYWORD) {
             this.children.add(new IDKeywordNode(inputTokens));
@@ -34,5 +35,9 @@ public class IntegerExpressionNode extends ExpressionNode{
             }
         }
         return thisToken.getTokenType() == TokenType.ID_KEYWORD;
+    }
+
+    public NodeType getMyType() {
+        return myType;
     }
 }

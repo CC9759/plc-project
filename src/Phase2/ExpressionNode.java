@@ -3,6 +3,7 @@ package Phase2;
 import java.util.*;
 
 class ExpressionNode implements JottTree{
+    NodeType myType = NodeType.EXPRESSION;
     List<JottTree> children = new ArrayList<>();
     public ExpressionNode() {}
 
@@ -43,5 +44,9 @@ class ExpressionNode implements JottTree{
     public String convertToPython() {return null;}
     public boolean validateTree() {return true;}
     public String toString() {return null;}
+
+    public NodeType getMyType() {
+        return myType;
+    }
 
 }

@@ -3,6 +3,7 @@ package Phase2;
 import java.util.*;
 
 public class ConstantNode implements JottTree {
+    NodeType myType = NodeType.CONSTANT;
 
     private final Token token;
     private InformationType type;
@@ -77,6 +78,10 @@ public class ConstantNode implements JottTree {
 
     public String toString() {
         return this.value;
+    }
+
+    public NodeType getMyType() {
+        return myType;
     }
 
 }

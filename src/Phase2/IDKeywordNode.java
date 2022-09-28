@@ -6,6 +6,7 @@ import java.util.List;
  *
  */
 public class IDKeywordNode implements JottTree {
+    NodeType myType = NodeType.IDKEYWORD;
     private Token idKeyword;
 
     public IDKeywordNode(List<Token> inputTokens) {
@@ -55,5 +56,9 @@ public class IDKeywordNode implements JottTree {
      */
     public boolean validateTree() {
         return true;
+    }
+
+    public NodeType getMyType() {
+        return myType;
     }
 }

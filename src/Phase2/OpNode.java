@@ -3,6 +3,7 @@ package Phase2;
 import java.util.*;
 
 public class OpNode implements JottTree {
+    NodeType myType = NodeType.OP;
     private final Token token;
 
     public OpNode(List<Token> inputTokens) {
@@ -52,5 +53,9 @@ public class OpNode implements JottTree {
      */
     public boolean validateTree() {
         return true;
+    }
+
+    public NodeType getMyType() {
+        return myType;
     }
 }

@@ -3,6 +3,7 @@ package Phase2;
 import java.util.*;
 
 public class EndStatementNode implements JottTree {
+    NodeType myType = NodeType.ENDSTATEEMENT;
 
     private Token token;
 
@@ -47,5 +48,9 @@ public class EndStatementNode implements JottTree {
      */
     public boolean validateTree() {
         return true;
+    }
+
+    public NodeType getMyType() {
+        return myType;
     }
 }

@@ -3,6 +3,7 @@ package Phase2;
 import java.util.*;
 
 public class FunctionReturnNode {
+    NodeType myType = NodeType.FUNCTIONRETURN;
     private final Token token;
     private final InformationType type;
     private final TypeNode typeNode;
@@ -72,5 +73,9 @@ public class FunctionReturnNode {
      */
     public boolean validateTree() {
         return true;
+    }
+
+    public NodeType getMyType() {
+        return myType;
     }
 }

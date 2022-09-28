@@ -4,6 +4,7 @@ import java.util.*;
 public class DoubleExpressionNode extends ExpressionNode {
     public DoubleExpressionNode(List<Token> inputTokens) {
         super();
+        this.myType = NodeType.DOUBLEEXPRESSION;
         Token firstToken = inputTokens.get(0);
         if(firstToken.getTokenType() == TokenType.ID_KEYWORD) {
             this.children.add(new IDKeywordNode(inputTokens));
@@ -35,5 +36,9 @@ public class DoubleExpressionNode extends ExpressionNode {
             return thisToken.getToken().contains(".");
         }
         return thisToken.getTokenType() == TokenType.ID_KEYWORD;
+    }
+
+    public NodeType getMyType() {
+        return myType;
     }
 }

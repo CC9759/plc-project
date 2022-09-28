@@ -1,10 +1,13 @@
 package Phase2;
 
+import org.w3c.dom.Node;
+
 import java.util.*;
 
 public class BooleanExpressionNode extends ExpressionNode {
     public BooleanExpressionNode(List<Token> inputTokens) {
         super();
+        this.myType = NodeType.BOOLEANEXPRESSION;
         Token firstToken = inputTokens.get(0);
         if(firstToken.getTokenType() == TokenType.ID_KEYWORD) {
             if(firstToken.getToken().equals("True") ||
@@ -35,5 +38,10 @@ public class BooleanExpressionNode extends ExpressionNode {
 
     public static boolean isValidStart(Token thisToken) {
         return thisToken.getTokenType() == TokenType.ID_KEYWORD;
+    }
+
+
+    public NodeType getMyType() {
+        return myType;
     }
 }

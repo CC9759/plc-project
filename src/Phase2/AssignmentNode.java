@@ -1,10 +1,12 @@
 package Phase2;
 
+import org.w3c.dom.Node;
+
 import java.util.*;
 
 public class AssignmentNode implements JottTree {
     List<JottTree> children = new ArrayList<>();
-
+    NodeType myType = NodeType.ASSIGNMENT;
     public AssignmentNode() {}
     public AssignmentNode(List<Token> inputTokens) {
         if(inputTokens.get(0).getTokenType() == TokenType.ID_KEYWORD) {
@@ -62,4 +64,8 @@ public class AssignmentNode implements JottTree {
     public String convertToPython() {return null;}
     public boolean validateTree() {return true;}
     public String toString() {return null;}
+
+    public NodeType getMyType() {
+        return myType;
+    }
 }

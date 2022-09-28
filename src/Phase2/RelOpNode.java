@@ -2,6 +2,7 @@ package Phase2;
 import java.util.List;
 
 public class RelOpNode implements JottTree {
+    NodeType myType = NodeType.RELOP;
     private final Token token;
 
     public RelOpNode(List<Token> inputTokens) {
@@ -52,5 +53,9 @@ public class RelOpNode implements JottTree {
      */
     public boolean validateTree() {
         return true;
+    }
+
+    public NodeType getMyType() {
+        return myType;
     }
 }
