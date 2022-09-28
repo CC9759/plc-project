@@ -4,7 +4,12 @@ import java.util.*;
 
 public class ParamsNode implements JottTree {
     List<JottTree> children = new ArrayList<>();
-    public ParamsNode() {}
+    public ParamsNode(List<Token> inputTokens) {
+        if(inputTokens.get(0).getTokenType() != TokenType.R_BRACKET) {
+            children.add(ExpressionNode.ParseExpressionNode(inputTokens));
+            children.add(new ParamsTNode(inputTokens));
+        }
+    }
     public String convertToJott() {
         StringBuilder returnMe = new StringBuilder();
         for(JottTree child : children) {

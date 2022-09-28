@@ -4,6 +4,8 @@ import java.util.*;
 
 public class AssignmentNode implements JottTree {
     List<JottTree> children = new ArrayList<>();
+
+    public AssignmentNode() {}
     public AssignmentNode(List<Token> inputTokens) {
         if(inputTokens.get(0).getTokenType() == TokenType.ID_KEYWORD) {
             switch (inputTokens.get(0).getToken()) {
@@ -43,6 +45,11 @@ public class AssignmentNode implements JottTree {
             }
         }
     }
+
+    public static AssignmentNode ParseAssignmentNode(List<Token> inputList) {
+        return new AssignmentNode(inputList);
+    }
+
     public String convertToJott() {
         StringBuilder returnMe = new StringBuilder();
         for(JottTree child : children) {
