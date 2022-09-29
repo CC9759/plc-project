@@ -5,8 +5,8 @@ package Phase1; /**
  * @author
  */
 
-import Phase2.JottTree;
-import Phase2.Token;
+import Phase2Real.JottTree;
+import Phase2Real.Token;
 
 import java.util.ArrayList;
 

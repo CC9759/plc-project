@@ -9,8 +9,8 @@ package Phase1;/*
  * @author Scott C Johnson (scj@cs.rit.edu)
  */
 
-import Phase2.Token;
-import Phase2.TokenType;
+import Phase2Real.Token;
+import Phase2Real.TokenType;
 
 import java.util.ArrayList;
 
@@ -137,7 +137,7 @@ public class JottTokenizerTester {
     }
 
     private String tokenToString(Token t){
-        return String.format("Phase2.Token %s %s %s:%d", t.getToken(), t.getTokenType().toString(),
+        return String.format("Phase2Real.Token %s %s %s:%d", t.getToken(), t.getTokenType().toString(),
                                                   t.getFilename(), t.getLineNum());
     }
 
