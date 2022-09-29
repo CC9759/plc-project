@@ -1,5 +1,7 @@
 package Phase2;
 
+import org.w3c.dom.Node;
+
 import java.util.*;
 
 public class BooleanExpressionNode extends ExpressionNode {
