@@ -2,7 +2,7 @@ package Phase2;
 
 import java.util.*;
 
-class ExpressionNode implements JottTree{
+public class ExpressionNode implements JottTree{
     NodeType myType = NodeType.EXPRESSION;
     List<JottTree> children = new ArrayList<>();
     public ExpressionNode() {}
