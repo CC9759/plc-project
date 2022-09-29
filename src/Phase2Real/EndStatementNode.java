@@ -2,16 +2,16 @@ package Phase2Real;
 
 import java.util.*;
 
-public class ExpressionNode implements JottTree {
-    public static ExpressionNode parseExpressionNode(ArrayList<Token> inputList) {
-        return null;
+public class EndStatementNode implements JottTree {
+    public EndStatementNode(ArrayList<Token> inputList) {
+        inputList.remove(0);
     }
     /**
      * Will output a string of this tree in Jott
      * @return a string representing the Jott code of this tree
      */
     public String convertToJott() {
-        return null;
+        return ";";
     }
 
     /**
@@ -47,3 +47,4 @@ public class ExpressionNode implements JottTree {
         return true;
     }
 }
+
