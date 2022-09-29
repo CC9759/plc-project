@@ -2,28 +2,36 @@ package Phase2Real;
 
 import java.util.*;
 
-public class ExpressionNode implements JottTree {
-    public static ExpressionNode parseExpressionNode(ArrayList<Token> inputList) {
-        Token firstToken = inputList.get(0);
-        if(firstToken.getTokenType() == TokenType.NUMBER) {
-            if(firstToken.getToken().contains(".")) {
-                return new ExpressionNode_Double(inputList);
-            }
-            return new ExpressionNode_Integer(inputList);
+public class ExpressionNode_String extends ExpressionNode {
+    IDKeywordNode myIDKeywordNode;
+    ConstantNode myConstantNode;
+    //FunctionCallNode myFunctionCallNode;
+
+    public ExpressionNode_String(ArrayList<Token> inputTokens) {
+        if(inputTokens.get(0).getToken().equals("\"")) {
+            inputTokens.remove(0);
+            myConstantNode = new ConstantNode(inputTokens);
+            inputTokens.remove(0);
         }
-        else if(firstToken.getTokenType() == TokenType.STRING) {
-            return new ExpressionNode_String(inputList);
+        else if(inputTokens.get(1).getTokenType() == TokenType.L_BRACKET) {
+            //myFunctionCallNode = new FunctionCallNode(inputTokens);
         }
-        else if(firstToken.getTokenType() == TokenType.ID_KEYWORD) {
-            //TODO UNSURE ABOUT THIS, RETURN GENERIC? RETURN SOMETHING? IDK
+        else {
+            myIDKeywordNode = new IDKeywordNode(inputTokens);
         }
-        return null;
     }
     /**
      * Will output a string of this tree in Jott
      * @return a string representing the Jott code of this tree
      */
     public String convertToJott() {
+        if(myIDKeywordNode != null) {
+            return myIDKeywordNode.convertToJott();
+        }
+        if(myConstantNode != null) {
+            return "\"" + myConstantNode.convertToJott() + "\"";
+        }
+        //return myFunctionCallNode.convertToJott();
         return null;
     }
 
