@@ -9,8 +9,10 @@ public class IDKeywordNode implements JottTree {
     NodeType myType = NodeType.IDKEYWORD;
     private String value;
 
-    public IDKeywordNode(ArrayList<Token> inputTokens) {
-        this.value = inputTokens.remove(0).getToken();
+    public IDKeywordNode(Token token){this.value = token.getToken();}
+    public static IDKeywordNode parseIdKeyWordNode(ArrayList<Token> tokens){
+        Token token = tokens.remove(0);
+        return new IDKeywordNode(token);
     }
 
     /**

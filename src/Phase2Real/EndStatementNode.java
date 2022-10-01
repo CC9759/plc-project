@@ -3,8 +3,10 @@ package Phase2Real;
 import java.util.*;
 
 public class EndStatementNode implements JottTree {
-    public EndStatementNode(ArrayList<Token> inputList) {
-        inputList.remove(0);
+
+    public static EndStatementNode parseEndExpressionNode(ArrayList<Token> tokens){
+        tokens.remove(0);
+        return new EndStatementNode();
     }
     /**
      * Will output a string of this tree in Jott
