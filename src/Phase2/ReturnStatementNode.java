@@ -23,6 +23,10 @@ public class ReturnStatementNode implements JottTree {
         this.expression = ExpressionNode.ParseExpressionNode(expressionList);
         this.endStatement = new EndStatementNode(endStatementList);
     }
+    //TODO implement ParseReturnStatementNode
+    public static ReturnStatementNode ParseReturnStatementNode(ArrayList<Token> inputList) {
+        return null;
+    }
 
     /**
      * Will output a string of this tree in Jott
@@ -54,4 +58,6 @@ public class ReturnStatementNode implements JottTree {
      * @return true if valid Jott code; false otherwise
      */
     public boolean validateTree(){return false;}
+
+    
 }

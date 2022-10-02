@@ -1,7 +1,6 @@
 package Phase2Real;
-;
-import java.util.ArrayList;
-import java.util.List;
+
+import java.util.*;
 
 public class ParamsTNode implements JottTree {
     NodeType myType = NodeType.PARAMST;
