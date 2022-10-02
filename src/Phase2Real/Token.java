@@ -28,6 +28,13 @@ public class Token {
         this.type = type;
     }
 
+    public Token(String token, TokenType type) { //TEST PURPOSES ONLY
+        this.token = token;
+        this.filename = null;
+        this.lineNum = -1;
+        this.type = type;
+    }
+
     /**
      * Getter for the token string
      * @return the token string

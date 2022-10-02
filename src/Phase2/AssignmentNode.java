@@ -1,4 +1,4 @@
-package Phase2;
+/*package Phase2;
 
 import Phase2Real.JottTree;
 import Phase2Real.NodeType;
@@ -71,3 +71,5 @@ public class AssignmentNode implements JottTree {
         return myType;
     }
 }
+
+ */

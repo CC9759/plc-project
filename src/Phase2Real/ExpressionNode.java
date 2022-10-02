@@ -25,7 +25,7 @@ public class ExpressionNode implements JottTree {
      */
     public String convertToJott() {
         //TODO IMPORTANT!!
-        return null;
+        return convertToJott();
     }
 
     /**
