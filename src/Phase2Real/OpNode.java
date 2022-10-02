@@ -6,8 +6,13 @@ public class OpNode implements JottTree {
     NodeType myType = NodeType.OP;
     private final Token token;
 
-    public OpNode(ArrayList<Token> inputTokens) {
-        token = inputTokens.remove(0);
+    public OpNode(Token inputToken) {
+        this.token = inputToken;
+    }
+
+    public static OpNode parseOpNode(ArrayList<Token> inputTokens) {
+        Token inputToken = inputTokens.remove(0);
+        return new OpNode(inputToken);
     }
 
     public String getValue() {

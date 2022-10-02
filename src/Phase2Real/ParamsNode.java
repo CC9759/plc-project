@@ -6,11 +6,22 @@ public class ParamsNode implements JottTree {
     NodeType myType = NodeType.PARAMS;
     ExpressionNode myExpressionNode = null;
     ParamsTNode myParamsTNode = null;
-    public ParamsNode(ArrayList<Token> inputTokens) {
-        if(inputTokens.get(0).getTokenType() != TokenType.R_BRACKET) {
-            myExpressionNode = ExpressionNode.parseExpressionNode(inputTokens);
-            myParamsTNode = new ParamsTNode(inputTokens);
+    /**
+     * < params > -> < expr > < params_t > | 
+     * < params_t > -> ,< expr > < params_t > | 
+     */
+    public ParamsNode(ExpressionNode expressionNode, ParamsTNode paramsTNode) {
+        this.myExpressionNode = expressionNode;
+        this.myParamsTNode = paramsTNode;
+    }
+
+    public static ParamsNode parseParamsNode(ArrayList<Token> tokens) {
+        if(tokens.get(0).getTokenType() != TokenType.R_BRACKET) {
+            ExpressionNode expressionNode = ExpressionNode.parseExpressionNode(tokens);
+            ParamsTNode paramsTNode = ParamsTNode.parseParamsT(tokens);
+            return new ParamsNode(expressionNode, paramsTNode);
         }
+        return null;
     }
     public String convertToJott() {
         return null;

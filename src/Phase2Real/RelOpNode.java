@@ -5,9 +5,13 @@ public class RelOpNode implements JottTree {
     NodeType myType = NodeType.RELOP;
     private final Token token;
 
-    public RelOpNode(ArrayList<Token> inputTokens) {
-        Token inputToken = inputTokens.remove(0);
-        token = inputToken;
+    public RelOpNode(Token inputToken) {
+        this.token = inputToken;
+    }
+    
+    public static RelOpNode parseRelOpNode(ArrayList<Token> tokens){
+        Token inputToken = tokens.remove(0);
+        return new RelOpNode(inputToken);
     }
 
     public String getValue() {
