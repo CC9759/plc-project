@@ -14,7 +14,7 @@ public class ExpressionNode_Boolean extends ExpressionNode {
     public ExpressionNode_Boolean(ArrayList<Token> inputTokens) {
         if(inputTokens.get(1).getTokenType() == TokenType.REL_OP) {
             myFirstExpressionNode_Boolean = new ExpressionNode_Boolean(inputTokens.remove(0));
-            myRelOpNode = new RelOpNode(inputTokens);
+            myRelOpNode = RelOpNode.parseRelOpNode(inputTokens);
             mySecondExpressionNode_Boolean = new ExpressionNode_Boolean(inputTokens);
         }
         if(inputTokens.get(1).getTokenType() == TokenType.L_BRACKET) {
@@ -22,7 +22,7 @@ public class ExpressionNode_Boolean extends ExpressionNode {
             //FunctionCallNode tempFuncCallNode = new FunctionCallNode(inputTokens);
             if(inputTokens.get(0).getTokenType() == TokenType.REL_OP) {
                 //myFirstExpressionNode_Boolean = new ExpressionNode_Boolean(tempFuncCallNode);
-                myRelOpNode = new RelOpNode(inputTokens);
+                myRelOpNode = RelOpNode.parseRelOpNode(inputTokens);
                 mySecondExpressionNode_Boolean = new ExpressionNode_Boolean(inputTokens);
             }
             else {

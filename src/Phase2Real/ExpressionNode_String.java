@@ -17,7 +17,7 @@ public class ExpressionNode_String extends ExpressionNode {
             //myFunctionCallNode = new FunctionCallNode(inputTokens);
         }
         else {
-            myIDKeywordNode = new IDKeywordNode(inputTokens);
+            myIDKeywordNode = IDKeywordNode.parseIdKeyWordNode(inputTokens);
         }
     }
     /**

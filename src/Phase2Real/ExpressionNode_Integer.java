@@ -14,7 +14,7 @@ public class ExpressionNode_Integer extends ExpressionNode {
     public ExpressionNode_Integer(ArrayList<Token> inputTokens) {
         if(inputTokens.get(1).getTokenType() == TokenType.REL_OP) {
             myFirstExpressionNode_Integer = new ExpressionNode_Integer(inputTokens.remove(0));
-            myOpNode = new OpNode(inputTokens);
+            myOpNode = OpNode.parseOpNode(inputTokens);
             mySecondExpressionNode_Integer = new ExpressionNode_Integer(inputTokens);
         }
         if(inputTokens.get(1).getTokenType() == TokenType.L_BRACKET) {
@@ -22,7 +22,7 @@ public class ExpressionNode_Integer extends ExpressionNode {
             //FunctionCallNode tempFuncCallNode = new FunctionCallNode(inputTokens);
             if(inputTokens.get(0).getTokenType() == TokenType.REL_OP) {
                 //myFirstExpressionNode_Integer = new ExpressionNode_Integer(tempFuncCallNode);
-                myOpNode = new OpNode(inputTokens);
+                myOpNode = OpNode.parseOpNode(inputTokens);
                 mySecondExpressionNode_Integer = new ExpressionNode_Integer(inputTokens);
             }
             else {
