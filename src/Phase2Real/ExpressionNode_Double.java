@@ -12,15 +12,23 @@ public class ExpressionNode_Double extends ExpressionNode {
     //FunctionCallNode myFunctionCallNode;
 
     public ExpressionNode_Double(ArrayList<Token> inputTokens) {
-        if(inputTokens.get(1).getTokenType() == TokenType.REL_OP) {
+        if(inputTokens.size() < 2) {
+            if(inputTokens.get(0).getTokenType() == TokenType.ID_KEYWORD) {
+                myIDKeywordNode = IDKeywordNode.parseIdKeyWordNode(inputTokens);
+            }
+            else if(inputTokens.get(0).getTokenType() == TokenType.NUMBER) {
+                myConstantNode = ConstantNode.parseConstantNode(inputTokens);
+            }
+        }
+        else if(inputTokens.get(1).getTokenType() == TokenType.MATH_OP) {
             myFirstExpressionNode_Double = new ExpressionNode_Double(inputTokens.remove(0));
             myOpNode = OpNode.parseOpNode(inputTokens);
             mySecondExpressionNode_Double = new ExpressionNode_Double(inputTokens);
         }
-        if(inputTokens.get(1).getTokenType() == TokenType.L_BRACKET) {
+        else if(inputTokens.get(1).getTokenType() == TokenType.L_BRACKET) {
             //TODO FUNCTION CALL CONSTRUCTOR HERE
             //FunctionCallNode tempFuncCallNode = new FunctionCallNode(inputTokens);
-            if(inputTokens.get(0).getTokenType() == TokenType.REL_OP) {
+            if(inputTokens.get(0).getTokenType() == TokenType.MATH_OP) {
                 //myFirstExpressionNode_Double = new ExpressionNode_Double(tempFuncCallNode);
                 myOpNode = OpNode.parseOpNode(inputTokens);
                 mySecondExpressionNode_Double = new ExpressionNode_Double(inputTokens);
@@ -29,8 +37,22 @@ public class ExpressionNode_Double extends ExpressionNode {
                 //myFunctionCallNode = tempFuncCallNode;
             }
         }
+        else {
+            if(inputTokens.get(0).getTokenType() == TokenType.ID_KEYWORD) {
+                myIDKeywordNode = IDKeywordNode.parseIdKeyWordNode(inputTokens);
+            }
+            else if(inputTokens.get(0).getTokenType() == TokenType.NUMBER) {
+                myConstantNode = ConstantNode.parseConstantNode(inputTokens);
+            }
+        }
     }
     public ExpressionNode_Double(Token inputToken) {
+        if(inputToken.getTokenType() == TokenType.ID_KEYWORD) {
+            myIDKeywordNode = new IDKeywordNode(inputToken);
+        }
+        else if(inputToken.getTokenType() == TokenType.NUMBER) {
+            myConstantNode = new ConstantNode(inputToken);
+        }
 
     }
     /*
@@ -42,10 +64,11 @@ public class ExpressionNode_Double extends ExpressionNode {
      * Will output a string of this tree in Jott
      * @return a string representing the Jott code of this tree
      */
+    @Override
     public String convertToJott() {
         if(myOpNode != null) {
-            return myFirstExpressionNode_Double.convertToJott() +
-                    myOpNode.convertToJott() +
+            return myFirstExpressionNode_Double.convertToJott() + " " +
+                    myOpNode.convertToJott() + " " +
                     mySecondExpressionNode_Double.convertToJott();
         }
         if(myIDKeywordNode != null) {

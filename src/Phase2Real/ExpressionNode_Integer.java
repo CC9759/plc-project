@@ -12,15 +12,23 @@ public class ExpressionNode_Integer extends ExpressionNode {
     //FunctionCallNode myFunctionCallNode;
 
     public ExpressionNode_Integer(ArrayList<Token> inputTokens) {
-        if(inputTokens.get(1).getTokenType() == TokenType.REL_OP) {
+        if(inputTokens.size() < 2) {
+            if(inputTokens.get(0).getTokenType() == TokenType.ID_KEYWORD) {
+                myIDKeywordNode = IDKeywordNode.parseIdKeyWordNode(inputTokens);
+            }
+            else if(inputTokens.get(0).getTokenType() == TokenType.NUMBER) {
+                myConstantNode = ConstantNode.parseConstantNode(inputTokens);
+            }
+        }
+        else if(inputTokens.get(1).getTokenType() == TokenType.MATH_OP) {
             myFirstExpressionNode_Integer = new ExpressionNode_Integer(inputTokens.remove(0));
             myOpNode = OpNode.parseOpNode(inputTokens);
             mySecondExpressionNode_Integer = new ExpressionNode_Integer(inputTokens);
         }
-        if(inputTokens.get(1).getTokenType() == TokenType.L_BRACKET) {
+        else if(inputTokens.get(1).getTokenType() == TokenType.L_BRACKET) {
             //TODO FUNCTION CALL CONSTRUCTOR HERE
             //FunctionCallNode tempFuncCallNode = new FunctionCallNode(inputTokens);
-            if(inputTokens.get(0).getTokenType() == TokenType.REL_OP) {
+            if(inputTokens.get(0).getTokenType() == TokenType.MATH_OP) {
                 //myFirstExpressionNode_Integer = new ExpressionNode_Integer(tempFuncCallNode);
                 myOpNode = OpNode.parseOpNode(inputTokens);
                 mySecondExpressionNode_Integer = new ExpressionNode_Integer(inputTokens);
@@ -29,8 +37,22 @@ public class ExpressionNode_Integer extends ExpressionNode {
                 //myFunctionCallNode = tempFuncCallNode;
             }
         }
+        else {
+            if(inputTokens.get(0).getTokenType() == TokenType.ID_KEYWORD) {
+                myIDKeywordNode = IDKeywordNode.parseIdKeyWordNode(inputTokens);
+            }
+            else if(inputTokens.get(0).getTokenType() == TokenType.NUMBER) {
+                myConstantNode = ConstantNode.parseConstantNode(inputTokens);
+            }
+        }
     }
     public ExpressionNode_Integer(Token inputToken) {
+        if(inputToken.getTokenType() == TokenType.ID_KEYWORD) {
+            myIDKeywordNode = new IDKeywordNode(inputToken);
+        }
+        else if(inputToken.getTokenType() == TokenType.NUMBER) {
+            myConstantNode = new ConstantNode(inputToken);
+        }
 
     }
     /*
@@ -44,8 +66,8 @@ public class ExpressionNode_Integer extends ExpressionNode {
      */
     public String convertToJott() {
         if(myOpNode != null) {
-            return myFirstExpressionNode_Integer.convertToJott() +
-                    myOpNode.convertToJott() +
+            return myFirstExpressionNode_Integer.convertToJott() + " " +
+                    myOpNode.convertToJott() + " " +
                     mySecondExpressionNode_Integer.convertToJott();
         }
         if(myIDKeywordNode != null) {

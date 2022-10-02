@@ -37,9 +37,12 @@ public class AssignmentNode extends StatementNode {
         String returnMe = "";
         if(myType != null) {
             returnMe = returnMe + myType;
+            returnMe = returnMe + " ";
         }
         returnMe = returnMe + myIDKeywordNode.convertToJott();
+        returnMe = returnMe + " ";
         returnMe = returnMe + myExpressionNode.convertToJott();
+        returnMe = returnMe + " ";
         returnMe = returnMe + myEndStatementNode.convertToJott();
         return returnMe;
     }

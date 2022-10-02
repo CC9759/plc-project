@@ -24,7 +24,7 @@ public class FunctionCallNode extends StatementNode{
      * @return a string representing the Jott code of this tree
      */
     //How are we dealing with parameters again?
-    public String convertToJott(){return id.convertToJott() + params.convertToJott();}
+    public String convertToJott(){return id.convertToJott() + "[" + params.convertToJott() + "]";}
 
     /**
      * Will output a string of this tree in Java

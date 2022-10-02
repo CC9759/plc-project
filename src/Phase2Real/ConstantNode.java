@@ -12,11 +12,15 @@ public class ConstantNode implements JottTree {
      * Will output a string of this tree in Jott
      * @return a string representing the Jott code of this tree
      */
-    public ConstantNode(ArrayList<Token> inputTokens) {
-        this.value = inputTokens.get(0).getToken();
+
+    public static ConstantNode parseConstantNode(ArrayList<Token> inputTokens) {
+        return new ConstantNode(inputTokens.remove(0));
+    }
+    public ConstantNode(Token inputToken) {
+        this.value = inputToken.getToken();
 
         //Is this a string?
-        if(inputTokens.get(0).getTokenType() == TokenType.STRING) {
+        if(inputToken.getTokenType() == TokenType.STRING) {
             this.type = InformationType.STRING;
         }
 
@@ -27,7 +31,7 @@ public class ConstantNode implements JottTree {
         }
 
         //Is this an Int/Double?
-        else if(inputTokens.get(0).getTokenType() == TokenType.NUMBER) {
+        else if(inputToken.getTokenType() == TokenType.NUMBER) {
             if(this.value.contains(".")) {
                 this.type = InformationType.DOUBLE;
             }
@@ -35,7 +39,6 @@ public class ConstantNode implements JottTree {
                 this.type = InformationType.INT;
             }
         }
-        inputTokens.remove(0);
     }
 
     public String convertToJott() {

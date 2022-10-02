@@ -10,7 +10,7 @@ public class ExpressionNode_String extends ExpressionNode {
     public ExpressionNode_String(ArrayList<Token> inputTokens) {
         if(inputTokens.get(0).getToken().equals("\"")) {
             inputTokens.remove(0);
-            myConstantNode = new ConstantNode(inputTokens);
+            myConstantNode = ConstantNode.parseConstantNode(inputTokens);
             inputTokens.remove(0);
         }
         else if(inputTokens.get(1).getTokenType() == TokenType.L_BRACKET) {
@@ -29,7 +29,7 @@ public class ExpressionNode_String extends ExpressionNode {
             return myIDKeywordNode.convertToJott();
         }
         if(myConstantNode != null) {
-            return "\"" + myConstantNode.convertToJott() + "\"";
+            return "\"" + myConstantNode.convertToJott() + "\""; //Unsure if quotes are needed
         }
         //return myFunctionCallNode.convertToJott();
         return null;
