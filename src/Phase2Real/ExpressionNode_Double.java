@@ -44,8 +44,8 @@ public class ExpressionNode_Double extends ExpressionNode {
      */
     public String convertToJott() {
         if(myOpNode != null) {
-            return myFirstExpressionNode_Double.convertToJott() +
-                    myOpNode.convertToJott() +
+            return myFirstExpressionNode_Double.convertToJott() + " " +
+                    myOpNode.convertToJott() + " " +
                     mySecondExpressionNode_Double.convertToJott();
         }
         if(myIDKeywordNode != null) {

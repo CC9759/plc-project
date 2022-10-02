@@ -29,7 +29,7 @@ public class ExpressionNode_String extends ExpressionNode {
             return myIDKeywordNode.convertToJott();
         }
         if(myConstantNode != null) {
-            return "\"" + myConstantNode.convertToJott() + "\"";
+            return "\"" + myConstantNode.convertToJott() + "\""; //Unsure if quotes are needed
         }
         //return myFunctionCallNode.convertToJott();
         return null;

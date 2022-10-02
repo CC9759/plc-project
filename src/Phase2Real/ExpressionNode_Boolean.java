@@ -44,8 +44,8 @@ public class ExpressionNode_Boolean extends ExpressionNode {
      */
     public String convertToJott() {
         if(myRelOpNode != null) {
-            return myFirstExpressionNode_Boolean.convertToJott() +
-                    myRelOpNode.convertToJott() +
+            return myFirstExpressionNode_Boolean.convertToJott() + " " +
+                    myRelOpNode.convertToJott() + " " +
                     mySecondExpressionNode_Boolean.convertToJott();
         }
         if(myIDKeywordNode != null) {
