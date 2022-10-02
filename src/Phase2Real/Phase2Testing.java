@@ -55,6 +55,18 @@ public class Phase2Testing {
                 testList.add(new Token("11.7", TokenType.NUMBER));
                 ExpressionNode testExpressionDoubleNode = ExpressionNode.parseExpressionNode(testList);
                 System.out.println(testExpressionDoubleNode.convertToJott());
+                System.out.println("Testing on the double expression 2.3+22.0-doublenumber*66.8/anotherdoublenumber, using an expressionNode.");
+                testList.add(new Token("2.3", TokenType.NUMBER));
+                testList.add(new Token("+", TokenType.MATH_OP));
+                testList.add(new Token("22.0", TokenType.NUMBER));
+                testList.add(new Token("-", TokenType.MATH_OP));
+                testList.add(new Token("doublenumber", TokenType.NUMBER));
+                testList.add(new Token("*", TokenType.MATH_OP));
+                testList.add(new Token("66.8", TokenType.NUMBER));
+                testList.add(new Token("/", TokenType.MATH_OP));
+                testList.add(new Token("anotherdoublenumber", TokenType.NUMBER));
+                ExpressionNode testExpressionDoubleNodeWords = ExpressionNode.parseExpressionNode(testList);
+                System.out.println(testExpressionDoubleNodeWords.convertToJott());
                 break;
             case 5:
                 System.out.println("Testing on the double expression 2, using an expressionNode_Double.");
