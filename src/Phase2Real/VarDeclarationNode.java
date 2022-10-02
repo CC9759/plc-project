@@ -25,7 +25,8 @@ public class VarDeclarationNode extends StatementNode{
      * Will output a string of this tree in Jott
      * @return a string representing the Jott code of this tree
      */
-    public String convertToJott(){return null;}
+    //We should add space correct?
+    public String convertToJott(){return type + " " + id.convertToJott() + endStatement.convertToJott();}
 
     /**
      * Will output a string of this tree in Java
