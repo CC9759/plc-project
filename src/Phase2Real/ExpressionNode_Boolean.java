@@ -9,35 +9,48 @@ public class ExpressionNode_Boolean extends ExpressionNode {
     ExpressionNode_Boolean myFirstExpressionNode_Boolean;
     ExpressionNode_Boolean mySecondExpressionNode_Boolean;
 
-    //FunctionCallNode myFunctionCallNode;
+    FunctionCallNode myFunctionCallNode;
 
     public ExpressionNode_Boolean(ArrayList<Token> inputTokens) {
-        if(inputTokens.get(1).getTokenType() == TokenType.REL_OP) {
+        if(inputTokens.size() < 2) {
+            if(inputTokens.get(0).getTokenType() == TokenType.ID_KEYWORD) {
+                myIDKeywordNode = IDKeywordNode.parseIdKeyWordNode(inputTokens);
+            }
+            else if(inputTokens.get(0).getTokenType() == TokenType.NUMBER) {
+                myConstantNode = ConstantNode.parseConstantNode(inputTokens);
+            }
+        }
+        else if(inputTokens.get(1).getTokenType() == TokenType.REL_OP) {
             myFirstExpressionNode_Boolean = new ExpressionNode_Boolean(inputTokens.remove(0));
             myRelOpNode = RelOpNode.parseRelOpNode(inputTokens);
             mySecondExpressionNode_Boolean = new ExpressionNode_Boolean(inputTokens);
         }
-        if(inputTokens.get(1).getTokenType() == TokenType.L_BRACKET) {
-            //TODO FUNCTION CALL CONSTRUCTOR HERE
-            //FunctionCallNode tempFuncCallNode = new FunctionCallNode(inputTokens);
+        else if(inputTokens.get(1).getTokenType() == TokenType.L_BRACKET) {
+            FunctionCallNode tempFuncCallNode = FunctionCallNode.parseFunctionCallNode(inputTokens);
             if(inputTokens.get(0).getTokenType() == TokenType.REL_OP) {
-                //myFirstExpressionNode_Boolean = new ExpressionNode_Boolean(tempFuncCallNode);
+                myFirstExpressionNode_Boolean = new ExpressionNode_Boolean(tempFuncCallNode);
                 myRelOpNode = RelOpNode.parseRelOpNode(inputTokens);
                 mySecondExpressionNode_Boolean = new ExpressionNode_Boolean(inputTokens);
             }
             else {
-                //myFunctionCallNode = tempFuncCallNode;
+                myFunctionCallNode = tempFuncCallNode;
+            }
+        }
+        else {
+            if(inputTokens.get(0).getTokenType() == TokenType.ID_KEYWORD) {
+                myIDKeywordNode = IDKeywordNode.parseIdKeyWordNode(inputTokens);
+            }
+            else if(inputTokens.get(0).getTokenType() == TokenType.NUMBER) {
+                myConstantNode = ConstantNode.parseConstantNode(inputTokens);
             }
         }
     }
     public ExpressionNode_Boolean(Token inputToken) {
         
     }
-    /*
     public ExpressionNode_Boolean(FunctionCallNode inputNode) {
         myFunctionCallNode = inputNode;
     }
-     */
     /**
      * Will output a string of this tree in Jott
      * @return a string representing the Jott code of this tree
@@ -54,7 +67,7 @@ public class ExpressionNode_Boolean extends ExpressionNode {
         if(myConstantNode != null) {
             return myConstantNode.convertToJott();
         }
-        return null; //return myFunctionCallNode.convertToJott();
+        return myFunctionCallNode.convertToJott();
     }
 
     /**

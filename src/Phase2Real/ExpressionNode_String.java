@@ -5,7 +5,7 @@ import java.util.*;
 public class ExpressionNode_String extends ExpressionNode {
     IDKeywordNode myIDKeywordNode;
     ConstantNode myConstantNode;
-    //FunctionCallNode myFunctionCallNode;
+    FunctionCallNode myFunctionCallNode;
 
     public ExpressionNode_String(ArrayList<Token> inputTokens) {
         if(inputTokens.get(0).getToken().equals("\"")) {
@@ -14,7 +14,7 @@ public class ExpressionNode_String extends ExpressionNode {
             inputTokens.remove(0);
         }
         else if(inputTokens.get(1).getTokenType() == TokenType.L_BRACKET) {
-            //myFunctionCallNode = new FunctionCallNode(inputTokens);
+            myFunctionCallNode = FunctionCallNode.parseFunctionCallNode(inputTokens);
         }
         else {
             myIDKeywordNode = IDKeywordNode.parseIdKeyWordNode(inputTokens);
@@ -31,8 +31,7 @@ public class ExpressionNode_String extends ExpressionNode {
         if(myConstantNode != null) {
             return "\"" + myConstantNode.convertToJott() + "\""; //Unsure if quotes are needed
         }
-        //return myFunctionCallNode.convertToJott();
-        return null;
+        return myFunctionCallNode.convertToJott();
     }
 
     /**

@@ -9,7 +9,7 @@ public class ExpressionNode_Double extends ExpressionNode {
     ExpressionNode_Double myFirstExpressionNode_Double;
     ExpressionNode_Double mySecondExpressionNode_Double;
 
-    //FunctionCallNode myFunctionCallNode;
+    FunctionCallNode myFunctionCallNode;
 
     public ExpressionNode_Double(ArrayList<Token> inputTokens) {
         if(inputTokens.size() < 2) {
@@ -26,15 +26,14 @@ public class ExpressionNode_Double extends ExpressionNode {
             mySecondExpressionNode_Double = new ExpressionNode_Double(inputTokens);
         }
         else if(inputTokens.get(1).getTokenType() == TokenType.L_BRACKET) {
-            //TODO FUNCTION CALL CONSTRUCTOR HERE
-            //FunctionCallNode tempFuncCallNode = new FunctionCallNode(inputTokens);
+            FunctionCallNode tempFuncCallNode = FunctionCallNode.parseFunctionCallNode(inputTokens);
             if(inputTokens.get(0).getTokenType() == TokenType.MATH_OP) {
-                //myFirstExpressionNode_Double = new ExpressionNode_Double(tempFuncCallNode);
+                myFirstExpressionNode_Double = new ExpressionNode_Double(tempFuncCallNode);
                 myOpNode = OpNode.parseOpNode(inputTokens);
                 mySecondExpressionNode_Double = new ExpressionNode_Double(inputTokens);
             }
             else {
-                //myFunctionCallNode = tempFuncCallNode;
+                myFunctionCallNode = tempFuncCallNode;
             }
         }
         else {
@@ -55,11 +54,9 @@ public class ExpressionNode_Double extends ExpressionNode {
         }
 
     }
-    /*
     public ExpressionNode_Double(FunctionCallNode inputNode) {
         myFunctionCallNode = inputNode;
     }
-     */
     /**
      * Will output a string of this tree in Jott
      * @return a string representing the Jott code of this tree
@@ -77,7 +74,7 @@ public class ExpressionNode_Double extends ExpressionNode {
         if(myConstantNode != null) {
             return myConstantNode.convertToJott();
         }
-        return null; //return myFunctionCallNode.convertToJott();
+        return myFunctionCallNode.convertToJott();
     }
 
     /**
