@@ -5,6 +5,7 @@ import java.util.ArrayList;
 public abstract class StatementNode extends BodyStatementNode{
 
     public static StatementNode parseStatementNode(ArrayList<Token> tokens){
+        StatementNode result;
         Token firstToken = tokens.get(0);
         String firstTokenValue = firstToken.getToken();
         Token secondToken = tokens.get(1);
@@ -14,13 +15,15 @@ public abstract class StatementNode extends BodyStatementNode{
         boolean b = firstTokenValue.equals("Boolean") || firstTokenValue.equals("Integer") ||
                 firstTokenValue.equals("String") || firstTokenValue.equals("Double");
         if (b && thirdTokenValue.equals(";")){
-                return VarDeclarationNode.parseVariableDeclarationNode(tokens);
+                result =  VarDeclarationNode.parseVariableDeclarationNode(tokens);
 
         } else if ((b && thirdTokenValue.equals("=")) || secondTokenValue.equals("=")){
-            return AssignmentNode.pasrseAssignmentNode(tokens);
+            result = AssignmentNode.pasrseAssignmentNode(tokens);
         }else{
-            return FunctionCallNode.parseFunctionCallNode(tokens);
+            result = FunctionCallNode.parseFunctionCallNode(tokens);
         }
+        tokens.remove(0); //;
+        return result;
     }
 
     /**

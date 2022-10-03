@@ -7,6 +7,6 @@ import java.util.*;
  * < body_stmt > -> < if_stmt > | < while_loop > | < stmt >
  */
 public class BodyNode {
-    List<JottTree> children = new ArrayList<>();
-    
+//    List<JottTree> children = new ArrayList<>();
+//
 }
