@@ -24,7 +24,12 @@ public class ParamsNode implements JottTree {
         return null;
     }
     public String convertToJott() {
-        return null;
+        String result = myExpressionNode.convertToJott();
+        if (myParamsTNode != null) {
+            result +=",";
+            result += myParamsTNode.convertToJott();
+        }
+        return result;
     }
 
     /**
