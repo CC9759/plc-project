@@ -4,12 +4,12 @@ import java.util.ArrayList;
 
 public class FunctionDefNode implements JottTree{
     IDKeywordNode myIDKeywordNode;
-    ParamsNode myParamsNode;
+    FunctionDefParamsNode myFunctionDefParamsNode;
     FunctionReturnNode myReturnNode;
     BodyNode myBodyNode;
-    public FunctionDefNode(IDKeywordNode myIDKeywordNode, ParamsNode myParamsNode, FunctionReturnNode myReturnNode, BodyNode myBodyNode) {
+    public FunctionDefNode(IDKeywordNode myIDKeywordNode, FunctionDefParamsNode myFunctionDefParamsNode, FunctionReturnNode myReturnNode, BodyNode myBodyNode) {
         this.myIDKeywordNode = myIDKeywordNode;
-        this.myParamsNode = myParamsNode;
+        this.myFunctionDefParamsNode = myFunctionDefParamsNode;
         this.myReturnNode = myReturnNode;
         this.myBodyNode = myBodyNode;
     }
@@ -17,20 +17,20 @@ public class FunctionDefNode implements JottTree{
         IDKeywordNode myIDKeywordNode = IDKeywordNode.parseIdKeyWordNode(inputTokens);
         //TODO check that types are correct
         inputTokens.remove(0); // [
-        ParamsNode myParamsNode = ParamsNode.parseParamsNode(inputTokens);
+        FunctionDefParamsNode myFunctionDefParamsNode = FunctionDefParamsNode.parseFunctionDefParamsNode(inputTokens);
         inputTokens.remove(0); // ]
         inputTokens.remove(0); // :
         FunctionReturnNode myReturnNode = FunctionReturnNode.parseFunctionReturnNode(inputTokens);
         inputTokens.remove(0); // {
         BodyNode myBodyNode = BodyNode.parseBodyNode(inputTokens);
-        return new FunctionDefNode(myIDKeywordNode,myParamsNode,myReturnNode,myBodyNode);
+        return new FunctionDefNode(myIDKeywordNode,myFunctionDefParamsNode,myReturnNode,myBodyNode);
     }
     @Override
     public String convertToJott() {
         String result = "";
         result += myIDKeywordNode.convertToJott();
         result += "[";
-        result += myParamsNode.convertToJott();
+        result += myFunctionDefParamsNode.convertToJott();
         result += "]:";
         result += myReturnNode.convertToJott();
         result += "{";
