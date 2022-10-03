@@ -9,18 +9,17 @@ import java.util.*;
  * < stmt > -> < asmt > | < var_dec > | < func_call > < end_stmt >
  *  
  */
-public abstract class BodyStatementNode {
+public abstract class BodyStatementNode implements JottTree{
     public static BodyStatementNode parseBodyStatementNode(ArrayList<Token> tokens){
         Token check = tokens.get(0);
-        String start = check.getToken().split(" ")[0];
-        if(start.equals("if")){
+        if(check.getToken().equals("if")){
             return null; //insert if statement node parse here
         }
-        else if(start.equals("while")){
+        else if(check.getToken().equals("while")){
             return null; //insert while loop parse node
         }
         else{
-            return null; //insert statement node parse here
+            return StatementNode.parseStatementNode(tokens); //insert statement node parse here
         }
     }
 

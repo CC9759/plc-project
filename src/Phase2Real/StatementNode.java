@@ -1,9 +1,8 @@
 package Phase2Real;
 
 import java.util.ArrayList;
-import java.util.List;
 
-public abstract class StatementNode implements JottTree{
+public abstract class StatementNode extends BodyStatementNode{
 
     public static StatementNode parseStatementNode(ArrayList<Token> tokens){
         Token firstToken = tokens.get(0);
