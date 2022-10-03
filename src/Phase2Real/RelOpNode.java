@@ -5,7 +5,7 @@ public class RelOpNode implements JottTree {
     NodeType myType = NodeType.RELOP;
     private final Token token;
 
-    public RelOpNode(Token inputToken) {
+    private RelOpNode(Token inputToken) {
         this.token = inputToken;
     }
     

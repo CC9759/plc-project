@@ -7,7 +7,7 @@ public class FunctionDefNode implements JottTree{
     FunctionDefParamsNode myFunctionDefParamsNode;
     FunctionReturnNode myReturnNode;
     BodyNode myBodyNode;
-    public FunctionDefNode(IDKeywordNode myIDKeywordNode, FunctionDefParamsNode myFunctionDefParamsNode, FunctionReturnNode myReturnNode, BodyNode myBodyNode) {
+    private FunctionDefNode(IDKeywordNode myIDKeywordNode, FunctionDefParamsNode myFunctionDefParamsNode, FunctionReturnNode myReturnNode, BodyNode myBodyNode) {
         this.myIDKeywordNode = myIDKeywordNode;
         this.myFunctionDefParamsNode = myFunctionDefParamsNode;
         this.myReturnNode = myReturnNode;

@@ -12,7 +12,7 @@ public class BodyNode implements JottTree {
     ArrayList<BodyStatementNode> bodyStatements;
     ReturnStatementNode returnStatement;
 
-    public BodyNode() {
+    private BodyNode() {
         bodyStatements = new ArrayList<BodyStatementNode>();
         returnStatement = null;
     }
@@ -44,15 +44,15 @@ public class BodyNode implements JottTree {
      * @return a string representing the Jott code of this tree
      */
     public String convertToJott() {
-        String finalString = "";
+        StringBuilder finalString = new StringBuilder();
 
         for(BodyStatementNode i: bodyStatements){
-            finalString += i.convertToJott();
+            finalString.append(i.convertToJott());
         }
         if(returnStatement != null){
-            finalString += returnStatement.convertToJott();
+            finalString.append(returnStatement.convertToJott());
         }
-        return finalString;
+        return finalString.toString();
     }
 
     /**

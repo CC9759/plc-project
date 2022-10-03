@@ -6,7 +6,7 @@ public class OpNode implements JottTree {
     NodeType myType = NodeType.OP;
     private final Token token;
 
-    public OpNode(Token inputToken) {
+    private OpNode(Token inputToken) {
         this.token = inputToken;
     }
 

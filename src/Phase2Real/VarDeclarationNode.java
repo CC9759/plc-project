@@ -8,7 +8,7 @@ public class VarDeclarationNode extends StatementNode{
     private final EndStatementNode endStatement;
 
 
-    public VarDeclarationNode(Token typeToken, IDKeywordNode idKeywordNode, EndStatementNode endStatementNode){
+    private VarDeclarationNode(Token typeToken, IDKeywordNode idKeywordNode, EndStatementNode endStatementNode){
         this.type = typeToken.getToken();
         this.id = idKeywordNode;
         this.endStatement = endStatementNode;

@@ -4,9 +4,9 @@ import java.util.*;
 
 public class ParamsTNode implements JottTree {
     NodeType myType = NodeType.PARAMST;
-    ExpressionNode myExpressionNode = null;
-    ParamsTNode myParamsTNode = null;
-    public ParamsTNode(ExpressionNode expression, ParamsTNode paramsTNode) {
+    ExpressionNode myExpressionNode;
+    ParamsTNode myParamsTNode;
+    private ParamsTNode(ExpressionNode expression, ParamsTNode paramsTNode) {
         this.myExpressionNode = expression;
         this.myParamsTNode = paramsTNode;
     }

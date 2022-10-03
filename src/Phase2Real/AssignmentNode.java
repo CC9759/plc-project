@@ -3,11 +3,11 @@ package Phase2Real;
 import java.util.*;
 
 public class AssignmentNode extends StatementNode {
-    String myType = null;
+    String myType;
     IDKeywordNode myIDKeywordNode;
     ExpressionNode myExpressionNode;
     EndStatementNode myEndStatementNode;
-    public AssignmentNode(Token type, IDKeywordNode id, ExpressionNode expression, EndStatementNode endStatement){
+    private AssignmentNode(Token type, IDKeywordNode id, ExpressionNode expression, EndStatementNode endStatement){
         this.myType = type.getToken();
         this.myIDKeywordNode = id;
         this.myExpressionNode = expression;

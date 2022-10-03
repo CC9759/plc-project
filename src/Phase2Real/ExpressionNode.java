@@ -24,8 +24,8 @@ public class ExpressionNode implements JottTree {
      * @return a string representing the Jott code of this tree
      */
     public String convertToJott() {
-        //TODO IMPORTANT!!
-        return convertToJott();
+        //Should be fully overwritten
+        return "If you are seeing this, the specific expression node is not correctly overriding expressionNode.";
     }
 
     /**

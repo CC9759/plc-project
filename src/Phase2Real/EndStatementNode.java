@@ -5,8 +5,11 @@ import java.util.*;
 public class EndStatementNode implements JottTree {
 
     public static EndStatementNode parseEndExpressionNode(ArrayList<Token> tokens){
-        tokens.remove(0);
-        return new EndStatementNode();
+        return new EndStatementNode(tokens.remove(0));
+    }
+
+    private EndStatementNode(Token inputToken) {
+        //doesn't actually have any information that can be changed.
     }
     /**
      * Will output a string of this tree in Jott

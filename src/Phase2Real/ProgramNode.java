@@ -4,7 +4,7 @@ import java.util.ArrayList;
 public class ProgramNode implements JottTree{
     private ArrayList<FunctionDefNode> functionDefs;
 
-    public ProgramNode(ArrayList<FunctionDefNode> functionDefs) {
+    private ProgramNode(ArrayList<FunctionDefNode> functionDefs) {
         this.functionDefs = functionDefs;
     }
 
@@ -18,11 +18,11 @@ public class ProgramNode implements JottTree{
 
     @Override
     public String convertToJott() {
-        String result = "";
+        StringBuilder result = new StringBuilder();
         for(FunctionDefNode functionDef: functionDefs) {
-            result += functionDef.convertToJott();
+            result.append(functionDef.convertToJott());
         }
-        return result;
+        return result.toString();
     }
 
     @Override

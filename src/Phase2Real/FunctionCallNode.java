@@ -1,7 +1,6 @@
 package Phase2Real;
 
 import java.util.ArrayList;
-import java.util.List;
 
 public class FunctionCallNode extends StatementNode{
 
@@ -9,7 +8,7 @@ public class FunctionCallNode extends StatementNode{
     private final ParamsNode params;
 
 
-    public FunctionCallNode(IDKeywordNode idKeywordNode, ParamsNode paramsNode){
+    private FunctionCallNode(IDKeywordNode idKeywordNode, ParamsNode paramsNode){
         this.id = idKeywordNode;
         this.params = paramsNode;
     }

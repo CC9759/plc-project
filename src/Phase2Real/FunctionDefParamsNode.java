@@ -6,7 +6,7 @@ public class FunctionDefParamsNode implements JottTree{
     private ArrayList<IDKeywordNode> paramIDs;
     private ArrayList<Token> paramTypes;
 
-    public FunctionDefParamsNode(ArrayList<IDKeywordNode> paramIDs, ArrayList<Token> paramTypes) {
+    private FunctionDefParamsNode(ArrayList<IDKeywordNode> paramIDs, ArrayList<Token> paramTypes) {
         this.paramIDs = paramIDs;
         this.paramTypes = paramTypes;
     }
@@ -23,16 +23,16 @@ public class FunctionDefParamsNode implements JottTree{
 
     @Override
     public String convertToJott() {
-        String result = "";
+        StringBuilder result = new StringBuilder();
         for (int i = 0; i < paramIDs.size(); i++) {
-            result += paramIDs.get(i).convertToJott();
-            result += ":";
-            result += paramTypes.get(i).getToken();
+            result.append(paramIDs.get(i).convertToJott());
+            result.append(":");
+            result.append(paramTypes.get(i).getToken());
             if(i < paramIDs.size() - 1) {
-                result += ",";
+                result.append(",");
             }
         }
-        return result;
+        return result.toString();
     }
 
     @Override

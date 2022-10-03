@@ -5,7 +5,7 @@ import java.util.ArrayList;
 public class FunctionReturnNode implements JottTree{
     Token returnToken;
 
-    public FunctionReturnNode(Token returnToken) {
+    private FunctionReturnNode(Token returnToken) {
         this.returnToken = returnToken;
     }
 

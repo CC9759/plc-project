@@ -4,13 +4,13 @@ import java.util.*;
 
 public class ParamsNode implements JottTree {
     NodeType myType = NodeType.PARAMS;
-    ExpressionNode myExpressionNode = null;
-    ParamsTNode myParamsTNode = null;
+    ExpressionNode myExpressionNode;
+    ParamsTNode myParamsTNode;
     /**
      * < params > -> < expr > < params_t > | 
      * < params_t > -> ,< expr > < params_t > | 
      */
-    public ParamsNode(ExpressionNode expressionNode, ParamsTNode paramsTNode) {
+    private ParamsNode(ExpressionNode expressionNode, ParamsTNode paramsTNode) {
         this.myExpressionNode = expressionNode;
         this.myParamsTNode = paramsTNode;
     }

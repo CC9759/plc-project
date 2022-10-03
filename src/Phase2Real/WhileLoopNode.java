@@ -7,7 +7,7 @@ public class WhileLoopNode extends BodyStatementNode{
     private final ExpressionNode boolExpression;
     private final BodyNode body;
 
-    public WhileLoopNode(ExpressionNode boolExpressionNode, BodyNode bodyNode){
+    private WhileLoopNode(ExpressionNode boolExpressionNode, BodyNode bodyNode){
         this.boolExpression = boolExpressionNode;
         this.body = bodyNode;
     }
