@@ -13,10 +13,10 @@ public abstract class BodyStatementNode implements JottTree{
     public static BodyStatementNode parseBodyStatementNode(ArrayList<Token> tokens){
         Token check = tokens.get(0);
         if(check.getToken().equals("if")){
-            return null; //insert if statement node parse here
+            return IfStatementNode.parseIfStatementNode(tokens);
         }
         else if(check.getToken().equals("while")){
-            return null; //insert while loop parse node
+            return WhileLoopNode.parseWhileLoopNode(tokens);
         }
         else{
             return StatementNode.parseStatementNode(tokens); //insert statement node parse here
