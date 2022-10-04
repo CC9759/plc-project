@@ -13,10 +13,12 @@ public class ElseNode implements JottTree {
         ElseNode elseNode;
         
         if(inputList.get(0).getToken().equals("else")){
-            // remove else and right bracket
+            // remove else and right brace
             inputList.remove(0);
             inputList.remove(0);
             elseNode = new ElseNode(inputList);
+            // remove left brace
+            inputList.remove(0);
         }
         else{
             elseNode = null;
