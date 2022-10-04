@@ -21,7 +21,9 @@ public class WhileLoopNode extends BodyStatementNode{
         tokens.remove(0); //remove right bracket
         tokens.remove(0); //remove left brace ask about right brace
         BodyNode bodyNode = BodyNode.parseBodyNode(tokens);
-         return new WhileLoopNode(boolExpressionNode, bodyNode);
+        tokens.remove(0);
+        return new WhileLoopNode(boolExpressionNode, bodyNode);
+
 
     }
 

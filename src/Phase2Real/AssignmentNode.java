@@ -6,12 +6,12 @@ public class AssignmentNode extends StatementNode {
     String myType;
     IDKeywordNode myIDKeywordNode;
     ExpressionNode myExpressionNode;
-    EndStatementNode myEndStatementNode;
-    private AssignmentNode(Token type, IDKeywordNode id, ExpressionNode expression, EndStatementNode endStatement){
+    //EndStatementNode myEndStatementNode;
+    private AssignmentNode(Token type, IDKeywordNode id, ExpressionNode expression){//}, EndStatementNode endStatement){
         this.myType = type.getToken();
         this.myIDKeywordNode = id;
         this.myExpressionNode = expression;
-        this.myEndStatementNode = endStatement;
+        //this.myEndStatementNode = endStatement;
     }
 
     static AssignmentNode pasrseAssignmentNode(ArrayList<Token> tokens){
@@ -26,8 +26,9 @@ public class AssignmentNode extends StatementNode {
 
         IDKeywordNode idKeywordNode = IDKeywordNode.parseIdKeyWordNode(tokens);
         ExpressionNode expressionNode = ExpressionNode.parseExpressionNode(tokens);
-        EndStatementNode endStatementNode = EndStatementNode.parseEndExpressionNode(tokens);
-        return new AssignmentNode(typeToken, idKeywordNode, expressionNode, endStatementNode);
+        return new AssignmentNode(typeToken, idKeywordNode, expressionNode);
+        //EndStatementNode endStatementNode = EndStatementNode.parseEndExpressionNode(tokens);
+        //return new AssignmentNode(typeToken, idKeywordNode, expressionNode, endStatementNode);
     }
     /**
      * Will output a string of this tree in Jott
@@ -43,7 +44,7 @@ public class AssignmentNode extends StatementNode {
         returnMe = returnMe + " ";
         returnMe = returnMe + myExpressionNode.convertToJott();
         returnMe = returnMe + " ";
-        returnMe = returnMe + myEndStatementNode.convertToJott();
+        returnMe = returnMe + ";";//myEndStatementNode.convertToJott();
         return returnMe;
     }
 
