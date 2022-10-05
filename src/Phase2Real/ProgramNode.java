@@ -13,7 +13,7 @@ public class ProgramNode implements JottTree{
         while (!tokens.isEmpty()) {
             functionDefs.add(FunctionDefNode.parseFunctionDefNode(tokens));
         }
-        return  new ProgramNode(functionDefs);
+        return new ProgramNode(functionDefs);
     }
 
     @Override
