@@ -13,11 +13,12 @@ public class ElseNode implements JottTree {
         ElseNode elseNode;
         
         if(inputList.get(0).getToken().equals("else")){
-            // remove else and right brace
+            // remove else and left brace
             inputList.remove(0);
-            inputList.remove(0);
+            ParserUtils.removeToken(inputList,TokenType.L_BRACE);
             elseNode = new ElseNode(inputList);
-            // remove left brace
+            // remove right brace
+            ParserUtils.removeToken(inputList,TokenType.R_BRACE);
             inputList.remove(0);
         }
         else{

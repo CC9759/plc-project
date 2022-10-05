@@ -14,7 +14,7 @@ public class ElseIfNode implements JottTree {
         ParserUtils.removeToken(inputList, TokenType.L_BRACE);
         this.bodyNode = BodyNode.parseBodyNode(inputList);
         // remove right brace
-        inputList.remove(0);
+        ParserUtils.removeToken(inputList,TokenType.R_BRACE);
         this.elseIfNode = ElseIfNode.parseElseIfNode(inputList);
     }
 

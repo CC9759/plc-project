@@ -18,12 +18,12 @@ public class IfStatementNode extends BodyStatementNode{
     }
     public static IfStatementNode parseIfStatementNode(ArrayList<Token> tokens){
         tokens.remove(0); //remove if
-        tokens.remove(0); //remove left bracket
+        ParserUtils.removeToken(tokens,TokenType.L_BRACKET);
         ExpressionNode boolExpressionNode = ExpressionNode.parseExpressionNode(tokens);
-        tokens.remove(0); //remove right bracket
-        tokens.remove(0); //remove left brace
+        ParserUtils.removeToken(tokens, TokenType.R_BRACKET);
+        ParserUtils.removeToken(tokens, TokenType.L_BRACE);
         BodyNode bodyNode = BodyNode.parseBodyNode(tokens);
-        tokens.remove(0); //remove right brace
+        ParserUtils.removeToken(tokens, TokenType.R_BRACE);
 
         ElseIfNode elseIfNode = null;
         if(!tokens.isEmpty()){
