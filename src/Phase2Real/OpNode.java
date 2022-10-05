@@ -10,7 +10,7 @@ public class OpNode implements JottTree {
         this.token = inputToken;
     }
 
-    public static OpNode parseOpNode(ArrayList<Token> inputTokens) {
+    public static OpNode parseOpNode(ArrayList<Token> inputTokens) throws Exception {
         Token inputToken = inputTokens.remove(0);
         return new OpNode(inputToken);
     }

@@ -7,7 +7,8 @@ public class ExpressionNode_String extends ExpressionNode {
     ConstantNode myConstantNode;
     FunctionCallNode myFunctionCallNode;
 
-    public ExpressionNode_String(ArrayList<Token> inputTokens) {
+    public ExpressionNode_String(ArrayList<Token> inputTokens) throws Exception {
+        super(null,null,null);
         if(inputTokens.get(0).getToken().equals("\"")) {
             inputTokens.remove(0);
             myConstantNode = ConstantNode.parseConstantNode(inputTokens);

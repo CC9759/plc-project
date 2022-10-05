@@ -9,7 +9,7 @@ public class FunctionReturnNode implements JottTree{
         this.returnToken = returnToken;
     }
 
-    public static FunctionReturnNode parseFunctionReturnNode(ArrayList<Token> inputtokens) {
+    public static FunctionReturnNode parseFunctionReturnNode(ArrayList<Token> inputtokens) throws Exception {
         return new FunctionReturnNode(inputtokens.remove(0));
     }
     @Override

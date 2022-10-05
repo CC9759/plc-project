@@ -11,7 +11,7 @@ public class FunctionDefParamsNode implements JottTree{
         this.paramTypes = paramTypes;
     }
 
-    public static FunctionDefParamsNode parseFunctionDefParamsNode(ArrayList<Token> inputTokens) {
+    public static FunctionDefParamsNode parseFunctionDefParamsNode(ArrayList<Token> inputTokens) throws Exception{
         ArrayList<IDKeywordNode> paramIDs = new ArrayList<>();
         ArrayList<Token> paramTypes = new ArrayList<>();
         while(inputTokens.get(0).getTokenType() != TokenType.R_BRACKET) {
@@ -21,6 +21,7 @@ public class FunctionDefParamsNode implements JottTree{
             if(inputTokens.get(0).getTokenType() == TokenType.COMMA) {
                 inputTokens.remove(0); // ,
             }
+
         }
         return new FunctionDefParamsNode(paramIDs,paramTypes);
     }

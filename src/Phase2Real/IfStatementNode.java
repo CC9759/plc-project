@@ -10,13 +10,13 @@ public class IfStatementNode extends BodyStatementNode{
 
     private final ElseIfNode elsIf;
     private final ElseNode elseStatement;
-    public IfStatementNode(ExpressionNode boolExpressionNode, BodyNode bodyNode, ElseIfNode elseIfNode, ElseNode elseNode){
+    public IfStatementNode(ExpressionNode boolExpressionNode, BodyNode bodyNode, ElseIfNode elseIfNode, ElseNode elseNode) throws Exception{
         this.boolExpressoin = boolExpressionNode;
         this.body = bodyNode;
         this.elsIf = elseIfNode;
         this.elseStatement = elseNode;
     }
-    public static IfStatementNode parseIfStatementNode(ArrayList<Token> tokens){
+    public static IfStatementNode parseIfStatementNode(ArrayList<Token> tokens) throws Exception{
         tokens.remove(0); //remove if
         ParserUtils.removeToken(tokens,TokenType.L_BRACKET);
         ExpressionNode boolExpressionNode = ExpressionNode.parseExpressionNode(tokens);

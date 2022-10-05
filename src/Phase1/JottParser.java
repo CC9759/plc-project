@@ -6,6 +6,7 @@ package Phase1; /**
  */
 
 import Phase2Real.JottTree;
+import Phase2Real.ProgramNode;
 import Phase2Real.Token;
 
 import java.util.ArrayList;
@@ -19,6 +20,6 @@ public class JottParser {
      *         or null upon an error in parsing.
      */
     public static JottTree parse(ArrayList<Token> tokens){
-		return null;
+      return ProgramNode.parseProgramNode(tokens);
     }
 }

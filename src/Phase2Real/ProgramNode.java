@@ -10,10 +10,15 @@ public class ProgramNode implements JottTree{
 
     public static ProgramNode parseProgramNode(ArrayList<Token> tokens) {
         ArrayList<FunctionDefNode> functionDefs = new ArrayList<>();
-        while (!tokens.isEmpty()) {
-            functionDefs.add(FunctionDefNode.parseFunctionDefNode(tokens));
+        try {
+            while (!tokens.isEmpty()) {
+                functionDefs.add(FunctionDefNode.parseFunctionDefNode(tokens));
+            }
+            return new ProgramNode(functionDefs);
+        } catch(Exception e) {
+          System.err.println(e);
+          return null;
         }
-        return  new ProgramNode(functionDefs);
     }
 
     @Override

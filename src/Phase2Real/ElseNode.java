@@ -5,11 +5,11 @@ import java.util.*;
 public class ElseNode implements JottTree {
     private final BodyNode bodyNode;
 
-    public ElseNode(ArrayList<Token> inputList){
+    public ElseNode(ArrayList<Token> inputList) throws Exception{
         this.bodyNode = BodyNode.parseBodyNode(inputList);
     }
 
-    public static ElseNode parseElseNode(ArrayList<Token> inputList){
+    public static ElseNode parseElseNode(ArrayList<Token> inputList) throws Exception{
         ElseNode elseNode;
         
         if(inputList.get(0).getToken().equals("else")){

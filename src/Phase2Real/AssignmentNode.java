@@ -14,7 +14,7 @@ public class AssignmentNode implements JottTree {
         //this.myEndStatementNode = endStatement;
     }
 
-    static AssignmentNode pasrseAssignmentNode(ArrayList<Token> tokens){
+    static AssignmentNode pasrseAssignmentNode(ArrayList<Token> tokens) throws Exception{
         String firstTokenAsString = tokens.get(0).getToken();
         Token typeToken = null;
         if(firstTokenAsString.equals("Boolean") ||
@@ -42,7 +42,7 @@ public class AssignmentNode implements JottTree {
             returnMe = returnMe + " ";
         }
         returnMe = returnMe + myIDKeywordNode.convertToJott();
-        returnMe = returnMe + " ";
+        returnMe = returnMe + " = ";
         returnMe = returnMe + myExpressionNode.convertToJott();
         returnMe = returnMe + " ";
         returnMe = returnMe;//myEndStatementNode.convertToJott();

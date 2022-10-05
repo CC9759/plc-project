@@ -13,7 +13,7 @@ public class ConstantNode implements JottTree {
      * @return a string representing the Jott code of this tree
      */
 
-    public static ConstantNode parseConstantNode(ArrayList<Token> inputTokens) {
+    public static ConstantNode parseConstantNode(ArrayList<Token> inputTokens) throws Exception {
         return new ConstantNode(inputTokens.remove(0));
     }
     public ConstantNode(Token inputToken) {

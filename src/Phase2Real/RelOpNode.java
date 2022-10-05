@@ -9,7 +9,7 @@ public class RelOpNode implements JottTree {
         this.token = inputToken;
     }
     
-    public static RelOpNode parseRelOpNode(ArrayList<Token> tokens){
+    public static RelOpNode parseRelOpNode(ArrayList<Token> tokens) throws Exception{
         Token inputToken = tokens.remove(0);
         return new RelOpNode(inputToken);
     }

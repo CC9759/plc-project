@@ -13,7 +13,7 @@ public class WhileLoopNode extends BodyStatementNode{
     }
 
 
-    public static WhileLoopNode parseWhileLoopNode(ArrayList<Token> tokens){
+    public static WhileLoopNode parseWhileLoopNode(ArrayList<Token> tokens) throws Exception{
         //ask about the braces
         tokens.remove(0); //removes while
         ParserUtils.removeToken(tokens, TokenType.L_BRACKET);

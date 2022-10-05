@@ -14,7 +14,7 @@ public class VarDeclarationNode implements JottTree{
         //this.endStatement = endStatementNode;
     }
 
-    static VarDeclarationNode parseVariableDeclarationNode(ArrayList<Token> tokens){
+    static VarDeclarationNode parseVariableDeclarationNode(ArrayList<Token> tokens) throws Exception{
         Token typeToken = tokens.remove(0);
         IDKeywordNode idNode = IDKeywordNode.parseIdKeyWordNode(tokens);
         return new VarDeclarationNode(typeToken, idNode);

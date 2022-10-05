@@ -10,7 +10,7 @@ import java.util.*;
  *  
  */
 public abstract class BodyStatementNode implements JottTree{
-    public static BodyStatementNode parseBodyStatementNode(ArrayList<Token> tokens){
+    public static BodyStatementNode parseBodyStatementNode(ArrayList<Token> tokens) throws Exception{
         Token check = tokens.get(0);
         if(check.getToken().equals("if")){
             return IfStatementNode.parseIfStatementNode(tokens);
