@@ -15,7 +15,7 @@ public class ExpressionNode implements JottTree {
             return new ExpressionNode_String(inputList);
         }
         else if(firstToken.getTokenType() == TokenType.ID_KEYWORD) {
-            //TODO UNSURE ABOUT THIS, RETURN GENERIC? RETURN SOMETHING? IDK
+
         }
         return null;
     }

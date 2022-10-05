@@ -73,7 +73,7 @@ public class Phase2Testing {
                 System.out.println(testExpressionDoubleNodeWords.convertToJott());
                 break;
             case 5:
-                System.out.println("Testing on the double expression 2, using an expressionNode_Double.");
+                System.out.println("Testing on the double expression 2, using an expressionNode_Int.");
                 testList.add(new Token("2", TokenType.NUMBER));
                 ExpressionNode_Double testExpressionIntegerNodeShortShort = new ExpressionNode_Double(testList);
                 System.out.println(testExpressionIntegerNodeShortShort.convertToJott());
@@ -81,7 +81,7 @@ public class Phase2Testing {
                 testList.add(new Token("2", TokenType.NUMBER));
                 testList.add(new Token("+", TokenType.MATH_OP));
                 testList.add(new Token("22", TokenType.NUMBER));
-                ExpressionNode_Double testExpressionIntegerNodeShort = new ExpressionNode_Double(testList);
+                ExpressionNode_Integer testExpressionIntegerNodeShort = new ExpressionNode_Integer(testList);
                 System.out.println(testExpressionIntegerNodeShort.convertToJott());
                 System.out.println("Testing on the double expression 2+22-46*66/11, using an expressionNode.");
                 testList.add(new Token("2", TokenType.NUMBER));

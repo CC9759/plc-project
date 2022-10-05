@@ -6,7 +6,8 @@ public class ExpressionNode_Integer extends ExpressionNode {
     IDKeywordNode myIDKeywordNode;
     ConstantNode myConstantNode;
     OpNode myOpNode;
-    ExpressionNode_Integer myExpressionNode_Integer;
+    ExpressionNode_Integer myFirstExpressionNode_Integer;
+    ExpressionNode_Integer mySecondExpressionNode_Integer;
 
     FunctionCallNode myFunctionCallNode;
 
@@ -31,23 +32,36 @@ public class ExpressionNode_Integer extends ExpressionNode {
         if(inputTokens.get(0).getTokenType() == TokenType.ID_KEYWORD) {
             if(inputTokens.get(1).getTokenType() == TokenType.L_BRACKET) {
                 //<func_call>-><id>[params]
-                myFunctionCallNode = FunctionCallNode.parseFunctionCallNode(inputTokens);
-            }
-            else {
-                //Starts with an id but is not a func call:<id>, <id><math_op><integer_exp>
-                myIDKeywordNode = IDKeywordNode.parseIdKeyWordNode(inputTokens);
-                if(inputTokens.get(1).getTokenType() == TokenType.MATH_OP) {
+                myFirstExpressionNode_Integer = new ExpressionNode_Integer(FunctionCallNode.parseFunctionCallNode(inputTokens));
+                if(inputTokens.get(0).getTokenType() == TokenType.MATH_OP) {
                     myOpNode = OpNode.parseOpNode(inputTokens);
-                    if(inputTokens.size() == 2) {
+                    if(inputTokens.size() == 0) {
                         System.err.println("ExpressionNode_Integer recieved a MATH_OP without a third field.");
                     }
-                    //[3,infty)
                     else if(!(inputTokens.get(2).getTokenType() == TokenType.ID_KEYWORD) ||
                             inputTokens.get(2).getTokenType() == TokenType.NUMBER) {
                         System.err.println("ExpressionNode_Integer expected ID_KEYWORD or NUMBER in third field, but recieved" + inputTokens.get(1).getTokenType() + ".");
                     } else {
                         //third node is correct start
-                        myExpressionNode_Integer = new ExpressionNode_Integer(inputTokens);
+                        mySecondExpressionNode_Integer = new ExpressionNode_Integer(inputTokens);
+                    }
+                }
+            }
+            else {
+                //Starts with an id but is not a func call:<id>, <id><math_op><integer_exp>
+                myFirstExpressionNode_Integer = new ExpressionNode_Integer(inputTokens.remove(0));
+                if(inputTokens.get(0).getTokenType() == TokenType.MATH_OP) {
+                    myOpNode = OpNode.parseOpNode(inputTokens);
+                    if(inputTokens.size() == 0) {
+                        System.err.println("ExpressionNode_Integer recieved a MATH_OP without a third field.");
+                    }
+                    //[3,infty)
+                    else if(!(inputTokens.get(0).getTokenType() == TokenType.ID_KEYWORD) ||
+                            inputTokens.get(0).getTokenType() == TokenType.NUMBER) {
+                        System.err.println("ExpressionNode_Integer expected ID_KEYWORD or NUMBER in third field, but recieved" + inputTokens.get(1).getTokenType() + ".");
+                    } else {
+                        //third node is correct start
+                        mySecondExpressionNode_Integer = new ExpressionNode_Integer(inputTokens);
                     }
                 }
             }
@@ -55,22 +69,35 @@ public class ExpressionNode_Integer extends ExpressionNode {
         //starts with a number
         //<number>, <number><math_op><integer_exp>
         else if(inputTokens.get(0).getTokenType() == TokenType.NUMBER) {
-            myConstantNode = ConstantNode.parseConstantNode(inputTokens);
-            if(inputTokens.get(1).getTokenType() == TokenType.MATH_OP) {
+            myFirstExpressionNode_Integer = new ExpressionNode_Integer(inputTokens.remove(0));
+            if(inputTokens.get(0).getTokenType() == TokenType.MATH_OP) {
                 myOpNode = OpNode.parseOpNode(inputTokens);
-                if (inputTokens.size() == 2) {
+                if (inputTokens.size() == 0) {
                     System.err.println("ExpressionNode_Integer recieved a MATH_OP without a third field.");
                 }
                 //[3,infty)
-                else if (!(inputTokens.get(2).getTokenType() == TokenType.ID_KEYWORD) ||
-                        inputTokens.get(2).getTokenType() == TokenType.NUMBER) {
+                else if ((inputTokens.get(0).getTokenType() != TokenType.ID_KEYWORD) &&
+                        inputTokens.get(0).getTokenType() != TokenType.NUMBER) {
                     System.err.println("ExpressionNode_Integer expected ID_KEYWORD or NUMBER in third field, but recieved" + inputTokens.get(1).getTokenType() + ".");
                 } else {
                     //third node is correct start
-                    myExpressionNode_Integer = new ExpressionNode_Integer(inputTokens);
+                    mySecondExpressionNode_Integer = new ExpressionNode_Integer(inputTokens);
                 }
             }
         }
+    }
+
+    public ExpressionNode_Integer(Token inputToken) {
+        if(inputToken.getTokenType() == TokenType.ID_KEYWORD) {
+            myIDKeywordNode = new IDKeywordNode(inputToken);
+        }
+        else {
+            myConstantNode = new ConstantNode(inputToken);
+        }
+    }
+
+    public ExpressionNode_Integer(FunctionCallNode inputNode) {
+        myFunctionCallNode = inputNode;
     }
     /**
      * Will output a string of this tree in Jott
@@ -78,22 +105,24 @@ public class ExpressionNode_Integer extends ExpressionNode {
      */
     @Override
     public String convertToJott() {
-        if(myFunctionCallNode != null) {
-            return myFunctionCallNode.convertToJott();
+        String returnMe = "";
+        if(myFirstExpressionNode_Integer != null) {
+            returnMe = returnMe + myFirstExpressionNode_Integer.convertToJott();
         }
-        String returnMe = null;
+        if(myOpNode != null) {
+            returnMe = returnMe + myOpNode.convertToJott();
+        }
+        if(mySecondExpressionNode_Integer != null) {
+            returnMe = returnMe + mySecondExpressionNode_Integer.convertToJott();
+        }
         if(myIDKeywordNode != null) {
-            returnMe = myIDKeywordNode.convertToJott();
+            returnMe = returnMe + myIDKeywordNode.convertToJott();
         }
-        else {
-            returnMe = myConstantNode.convertToJott();
+        if(myFunctionCallNode != null) {
+            returnMe = returnMe + myFunctionCallNode.convertToJott();
         }
-
-        if(myOpNode == null) {
-            return returnMe;
-        }
-        else {
-            returnMe = returnMe + " " + myOpNode.convertToJott() + myExpressionNode_Integer.convertToJott();
+        if(myConstantNode != null) {
+            returnMe = returnMe + myConstantNode.convertToJott();
         }
         return returnMe;
     }
