@@ -22,9 +22,7 @@ public abstract class StatementNode extends BodyStatementNode{
         }else{
             result = FunctionCallNode.parseFunctionCallNode(tokens);
         }
-        if(tokens.get(0).getTokenType() == TokenType.SEMICOLON){
-            tokens.remove(0); //;
-        }
+        ParserUtils.removeToken(tokens,TokenType.SEMICOLON);
         return result;
     }
 
