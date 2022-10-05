@@ -89,6 +89,7 @@ public class ExpressionNode_Integer extends ExpressionNode {
     }
 
     public ExpressionNode_Integer(Token inputToken) {
+        super(null,null,null);
         if(inputToken.getTokenType() == TokenType.ID_KEYWORD) {
             myIDKeywordNode = new IDKeywordNode(inputToken);
         }
@@ -98,6 +99,7 @@ public class ExpressionNode_Integer extends ExpressionNode {
     }
 
     public ExpressionNode_Integer(FunctionCallNode inputNode) {
+        super(null,null,null);
         myFunctionCallNode = inputNode;
     }
     /**
