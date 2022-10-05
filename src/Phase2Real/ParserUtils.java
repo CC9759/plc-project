@@ -7,6 +7,7 @@ public class ParserUtils {
         if(tokens.remove(0).getTokenType() != type) {
             System.err.println("error!");
             //System.exit(0);
+            throw new Exception();
         }
     }
 }

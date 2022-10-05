@@ -1,38 +1,29 @@
-package Phase2;
-
-import Phase2Real.JottTree;
-import Phase2Real.Token;
+package Phase2Real;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class ReturnStatementNode implements JottTree {
-
     private final ExpressionNode expression;
 
-    private final EndStatementNode endStatement;
 
 
-    public ReturnStatementNode(List<Token> tokens) {
-        ArrayList<Token> expressionList = (ArrayList<Token>) tokens;
-        expressionList.remove(expressionList.size() -1);
-
-        ArrayList<Token> endStatementList = new ArrayList<>();
-        endStatementList.add(tokens.get(tokens.size()-1));
-
-        this.expression = ExpressionNode.ParseExpressionNode(expressionList);
-        this.endStatement = new EndStatementNode(endStatementList);
+    public ReturnStatementNode(ExpressionNode expressionNode) throws Exception {
+        this.expression = expressionNode;
     }
     //TODO implement ParseReturnStatementNode
-    public static ReturnStatementNode ParseReturnStatementNode(ArrayList<Token> inputList) {
-        return null;
+    public static ReturnStatementNode ParseReturnStatementNode(ArrayList<Token> inputList) throws Exception {
+        inputList.remove(0);
+        ExpressionNode expressionNode = ExpressionNode.parseExpressionNode(inputList);
+        ParserUtils.removeToken(inputList,TokenType.SEMICOLON);
+        return new ReturnStatementNode(expressionNode);
     }
 
     /**
      * Will output a string of this tree in Jott
      * @return a string representing the Jott code of this tree
      */
-    public String convertToJott(){return "return" + expression.convertToJott() + endStatement.convertToJott();}
+    public String convertToJott(){return "return " + expression.convertToJott() + ";";}
 
     /**
      * Will output a string of this tree in Java

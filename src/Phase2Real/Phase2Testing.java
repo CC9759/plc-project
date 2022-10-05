@@ -98,9 +98,14 @@ public class Phase2Testing {
 
             case 7:
                 System.out.println("testing on the function definition in phase1Example");
-                ArrayList<Token> tokens =  JottTokenizer.tokenize("parserTestCases/whileKeyword.jott");
+                ArrayList<Token> tokens =  JottTokenizer.tokenize("parserTestCases/helloWorld.jott");
                 ProgramNode result = ProgramNode.parseProgramNode(tokens);
-                System.out.println(result.convertToJott());
+                if(result != null) {
+                    System.out.println(result.convertToJott());
+                }
+                else {
+                    System.out.println("result is null, exception thrown");
+                }
         }
     }
 }
