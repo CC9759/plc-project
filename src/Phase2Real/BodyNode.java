@@ -27,7 +27,6 @@ public class BodyNode implements JottTree {
                 break;
             }
             else if(token.getTokenType() == TokenType.R_BRACE){
-                inputList.remove(0);
                 break;
                 //return null;
             }

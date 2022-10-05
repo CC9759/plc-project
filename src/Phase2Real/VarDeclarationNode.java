@@ -5,20 +5,21 @@ import java.util.ArrayList;
 public class VarDeclarationNode extends StatementNode{
     private final String type;
     private final IDKeywordNode id;
-    private final EndStatementNode endStatement;
+    //private final EndStatementNode endStatement;
 
 
-    private VarDeclarationNode(Token typeToken, IDKeywordNode idKeywordNode, EndStatementNode endStatementNode){
+    private VarDeclarationNode(Token typeToken, IDKeywordNode idKeywordNode){ //EndStatementNode endStatementNode){
         this.type = typeToken.getToken();
         this.id = idKeywordNode;
-        this.endStatement = endStatementNode;
+        //this.endStatement = endStatementNode;
     }
 
     static VarDeclarationNode parseVariableDeclarationNode(ArrayList<Token> tokens){
         Token typeToken = tokens.remove(0);
         IDKeywordNode idNode = IDKeywordNode.parseIdKeyWordNode(tokens);
-        EndStatementNode endStatementNode = EndStatementNode.parseEndExpressionNode(tokens);
-        return new VarDeclarationNode(typeToken, idNode, endStatementNode);
+        return new VarDeclarationNode(typeToken, idNode);
+        //EndStatementNode endStatementNode = EndStatementNode.parseEndExpressionNode(tokens);
+        //return new VarDeclarationNode(typeToken, idNode, endStatementNode);
     }
 
     /**
@@ -26,7 +27,7 @@ public class VarDeclarationNode extends StatementNode{
      * @return a string representing the Jott code of this tree
      */
     //We should add space correct?
-    public String convertToJott(){return type + " " + id.convertToJott() + endStatement.convertToJott();}
+    public String convertToJott(){return type + " " + id.convertToJott() + " ;";}
 
     /**
      * Will output a string of this tree in Java

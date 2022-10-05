@@ -16,12 +16,14 @@ public class WhileLoopNode extends BodyStatementNode{
     public static WhileLoopNode parseWhileLoopNode(ArrayList<Token> tokens){
         //ask about the braces
         tokens.remove(0); //removes while
-        tokens.remove(0); //remove left bracket
+        ParserUtils.removeToken(tokens, TokenType.L_BRACKET);
         ExpressionNode boolExpressionNode = ExpressionNode.parseExpressionNode(tokens);
-        tokens.remove(0); //remove right bracket
-        tokens.remove(0); //remove left brace ask about right brace
+        ParserUtils.removeToken(tokens,TokenType.R_BRACKET);
+        ParserUtils.removeToken(tokens,TokenType.L_BRACE);
         BodyNode bodyNode = BodyNode.parseBodyNode(tokens);
-         return new WhileLoopNode(boolExpressionNode, bodyNode);
+        ParserUtils.removeToken(tokens,TokenType.R_BRACE);
+        return new WhileLoopNode(boolExpressionNode, bodyNode);
+
 
     }
 

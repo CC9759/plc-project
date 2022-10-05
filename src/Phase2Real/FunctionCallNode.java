@@ -14,9 +14,9 @@ public class FunctionCallNode extends StatementNode{
     }
     public static FunctionCallNode parseFunctionCallNode(ArrayList<Token> tokens){
         IDKeywordNode idKeywordNode = IDKeywordNode.parseIdKeyWordNode(tokens);
-        tokens.remove(0); // [
+        ParserUtils.removeToken(tokens,TokenType.L_BRACKET);
         ParamsNode paramsNode = ParamsNode.parseParamsNode(tokens);
-        tokens.remove(0);
+        ParserUtils.removeToken(tokens,TokenType.R_BRACKET);
         return new FunctionCallNode(idKeywordNode, paramsNode);
     }
 
