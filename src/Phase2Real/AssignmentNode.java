@@ -42,7 +42,7 @@ public class AssignmentNode implements JottTree {
             returnMe = returnMe + " ";
         }
         returnMe = returnMe + myIDKeywordNode.convertToJott();
-        returnMe = returnMe + " ";
+        returnMe = returnMe + " = ";
         returnMe = returnMe + myExpressionNode.convertToJott();
         returnMe = returnMe + " ";
         returnMe = returnMe;//myEndStatementNode.convertToJott();
