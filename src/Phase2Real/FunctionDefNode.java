@@ -14,7 +14,7 @@ public class FunctionDefNode implements JottTree{
         this.myReturnNode = myReturnNode;
         this.myBodyNode = myBodyNode;
     }
-    public static FunctionDefNode parseFunctionDefNode(ArrayList<Token> inputTokens) {
+    public static FunctionDefNode parseFunctionDefNode(ArrayList<Token> inputTokens) throws Exception {
         IDKeywordNode myIDKeywordNode = IDKeywordNode.parseIdKeyWordNode(inputTokens);
         //TODO check that types are correct
         ParserUtils.removeToken(inputTokens, TokenType.L_BRACKET);

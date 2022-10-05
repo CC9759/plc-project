@@ -10,7 +10,8 @@ public class ExpressionNode_Double extends ExpressionNode {
 
     FunctionCallNode myFunctionCallNode;
 
-    public ExpressionNode_Double(ArrayList<Token> inputTokens) {
+    public ExpressionNode_Double(ArrayList<Token> inputTokens) throws Exception {
+        super(null,null,null);
         if(inputTokens.size() == 0) {
             System.err.println("ExpressionNode_Double constructor got an input list of 0 tokens.");
             return;

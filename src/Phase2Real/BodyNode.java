@@ -17,7 +17,7 @@ public class BodyNode implements JottTree {
         returnStatement = null;
     }
 
-    public static BodyNode parseBodyNode(ArrayList<Token> inputList){
+    public static BodyNode parseBodyNode(ArrayList<Token> inputList) throws Exception{
         BodyNode bodyNode = new BodyNode();
         while (true){
             Token token = inputList.get(0);

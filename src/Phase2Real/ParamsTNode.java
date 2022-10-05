@@ -11,7 +11,7 @@ public class ParamsTNode implements JottTree {
         this.myParamsTNode = paramsTNode;
     }
 
-    public static ParamsTNode parseParamsT(ArrayList<Token> tokens){
+    public static ParamsTNode parseParamsT(ArrayList<Token> tokens) throws Exception{
 
         if(tokens.get(0).getTokenType() != TokenType.R_BRACKET) {
             ParserUtils.removeToken(tokens,TokenType.COMMA);

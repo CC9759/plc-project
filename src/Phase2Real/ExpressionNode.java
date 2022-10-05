@@ -3,7 +3,16 @@ package Phase2Real;
 import java.util.*;
 
 public class ExpressionNode implements JottTree {
-    public static ExpressionNode parseExpressionNode(ArrayList<Token> inputList) {
+    IDKeywordNode idKeywordNode;
+    Token operator;
+    ExpressionNode node;
+
+    public ExpressionNode(IDKeywordNode idKeywordNode, Token operator, ExpressionNode node) {
+        this.idKeywordNode = idKeywordNode;
+        this.operator = operator;
+        this.node = node;
+    }
+    public static ExpressionNode parseExpressionNode(ArrayList<Token> inputList) throws Exception {
         Token firstToken = inputList.get(0);
         if(firstToken.getTokenType() == TokenType.NUMBER) {
             if(firstToken.getToken().contains(".")) {
@@ -15,6 +24,15 @@ public class ExpressionNode implements JottTree {
             return new ExpressionNode_String(inputList);
         }
         else if(firstToken.getTokenType() == TokenType.ID_KEYWORD) {
+            IDKeywordNode idKeywordNode = IDKeywordNode.parseIdKeyWordNode(inputList);
+            if(inputList.get(0).getTokenType() == TokenType.REL_OP || inputList.get(0).getTokenType() == TokenType.MATH_OP) {
+                Token operator = inputList.remove(0);
+                ExpressionNode node = ExpressionNode.parseExpressionNode(inputList);
+                return new ExpressionNode(idKeywordNode,operator, node);
+            }
+            else {
+                return new ExpressionNode(idKeywordNode, null, null);
+            }
             //TODO UNSURE ABOUT THIS, RETURN GENERIC? RETURN SOMETHING? IDK
         }
         return null;
@@ -25,7 +43,13 @@ public class ExpressionNode implements JottTree {
      */
     public String convertToJott() {
         //Should be fully overwritten
-        return "If you are seeing this, the specific expression node is not correctly overriding expressionNode.";
+        String result = idKeywordNode.convertToJott();
+        if (operator != null) {
+            result += operator.getToken();
+            result += node.convertToJott();
+        }
+
+        return result;
     }
 
     /**

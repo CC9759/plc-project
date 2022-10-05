@@ -15,7 +15,7 @@ public class ParamsNode implements JottTree {
         this.myParamsTNode = paramsTNode;
     }
 
-    public static ParamsNode parseParamsNode(ArrayList<Token> tokens) {
+    public static ParamsNode parseParamsNode(ArrayList<Token> tokens) throws Exception {
         if(tokens.get(0).getTokenType() != TokenType.R_BRACKET) {
             ExpressionNode expressionNode = ExpressionNode.parseExpressionNode(tokens);
             ParamsTNode paramsTNode = ParamsTNode.parseParamsT(tokens);

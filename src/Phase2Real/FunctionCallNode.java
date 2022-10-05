@@ -12,7 +12,7 @@ public class FunctionCallNode implements JottTree{
         this.id = idKeywordNode;
         this.params = paramsNode;
     }
-    public static FunctionCallNode parseFunctionCallNode(ArrayList<Token> tokens){
+    public static FunctionCallNode parseFunctionCallNode(ArrayList<Token> tokens) throws Exception{
         IDKeywordNode idKeywordNode = IDKeywordNode.parseIdKeyWordNode(tokens);
         ParserUtils.removeToken(tokens,TokenType.L_BRACKET);
         ParamsNode paramsNode = ParamsNode.parseParamsNode(tokens);

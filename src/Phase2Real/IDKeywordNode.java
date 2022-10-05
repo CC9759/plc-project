@@ -10,7 +10,7 @@ public class IDKeywordNode implements JottTree {
     private String value;
 
     public IDKeywordNode(Token token){this.value = token.getToken();}
-    public static IDKeywordNode parseIdKeyWordNode(ArrayList<Token> tokens){
+    public static IDKeywordNode parseIdKeyWordNode(ArrayList<Token> tokens) throws Exception{
         Token token = tokens.remove(0);
         return new IDKeywordNode(token);
     }

@@ -10,7 +10,8 @@ public class ExpressionNode_Boolean extends ExpressionNode {
 
     FunctionCallNode myFunctionCallNode;
 
-    public ExpressionNode_Boolean(ArrayList<Token> inputTokens) {
+    public ExpressionNode_Boolean(ArrayList<Token> inputTokens) throws Exception {
+        super(null,null,null);
         if(inputTokens.size() == 0) {
             System.err.println("ExpressionNode_Boolean constructor got an input list of 0 tokens.");
             return;
