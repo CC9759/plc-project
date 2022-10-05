@@ -5,69 +5,97 @@ import java.util.*;
 public class ExpressionNode_Boolean extends ExpressionNode {
     IDKeywordNode myIDKeywordNode;
     ConstantNode myConstantNode;
-    RelOpNode myRelOpNode;
-    ExpressionNode_Boolean myFirstExpressionNode_Boolean;
-    ExpressionNode_Boolean mySecondExpressionNode_Boolean;
+    OpNode myOpNode;
+    ExpressionNode_Boolean myExpressionNode_Boolean;
 
     FunctionCallNode myFunctionCallNode;
 
     public ExpressionNode_Boolean(ArrayList<Token> inputTokens) {
-        if(inputTokens.size() < 2) {
+        if(inputTokens.size() == 0) {
+            System.err.println("ExpressionNode_Boolean constructor got an input list of 0 tokens.");
+            return;
+        }
+        //[1,infty)
+        if(inputTokens.size() == 1) {
             if(inputTokens.get(0).getTokenType() == TokenType.ID_KEYWORD) {
                 myIDKeywordNode = IDKeywordNode.parseIdKeyWordNode(inputTokens);
             }
             else if(inputTokens.get(0).getTokenType() == TokenType.NUMBER) {
                 myConstantNode = ConstantNode.parseConstantNode(inputTokens);
             }
+            return;
         }
-        else if(inputTokens.get(1).getTokenType() == TokenType.REL_OP) {
-            myFirstExpressionNode_Boolean = new ExpressionNode_Boolean(inputTokens.remove(0));
-            myRelOpNode = RelOpNode.parseRelOpNode(inputTokens);
-            mySecondExpressionNode_Boolean = new ExpressionNode_Boolean(inputTokens);
-        }
-        else if(inputTokens.get(1).getTokenType() == TokenType.L_BRACKET) {
-            FunctionCallNode tempFuncCallNode = FunctionCallNode.parseFunctionCallNode(inputTokens);
-            if(inputTokens.get(0).getTokenType() == TokenType.REL_OP) {
-                myFirstExpressionNode_Boolean = new ExpressionNode_Boolean(tempFuncCallNode);
-                myRelOpNode = RelOpNode.parseRelOpNode(inputTokens);
-                mySecondExpressionNode_Boolean = new ExpressionNode_Boolean(inputTokens);
+        //[2,infty)
+        //starts with an id
+        //<id>, <func_call>-><id>[params], <id><rel_op><boolean_exp>
+        if(inputTokens.get(0).getTokenType() == TokenType.ID_KEYWORD) {
+            if(inputTokens.get(1).getTokenType() == TokenType.L_BRACKET) {
+                //<func_call>-><id>[params]
+                myFunctionCallNode = FunctionCallNode.parseFunctionCallNode(inputTokens);
             }
             else {
-                myFunctionCallNode = tempFuncCallNode;
-            }
-        }
-        else {
-            if(inputTokens.get(0).getTokenType() == TokenType.ID_KEYWORD) {
+                //Starts with an id but is not a func call:<id>, <id><rel_op><boolean_exp>
                 myIDKeywordNode = IDKeywordNode.parseIdKeyWordNode(inputTokens);
-            }
-            else if(inputTokens.get(0).getTokenType() == TokenType.NUMBER) {
-                myConstantNode = ConstantNode.parseConstantNode(inputTokens);
+                if(inputTokens.get(1).getTokenType() == TokenType.REL_OP) {
+                    myOpNode = OpNode.parseOpNode(inputTokens);
+                    if(inputTokens.size() == 2) {
+                        System.err.println("ExpressionNode_Boolean recieved a REL_OP without a third field.");
+                    }
+                    //[3,infty)
+                    else if(!(inputTokens.get(2).getTokenType() == TokenType.ID_KEYWORD) ||
+                            inputTokens.get(2).getTokenType() == TokenType.NUMBER) {
+                        System.err.println("ExpressionNode_Boolean expected ID_KEYWORD or NUMBER in third field, but recieved" + inputTokens.get(1).getTokenType() + ".");
+                    } else {
+                        //third node is correct start
+                        myExpressionNode_Boolean = new ExpressionNode_Boolean(inputTokens);
+                    }
+                }
             }
         }
-    }
-    public ExpressionNode_Boolean(Token inputToken) {
-        
-    }
-    public ExpressionNode_Boolean(FunctionCallNode inputNode) {
-        myFunctionCallNode = inputNode;
+        //starts with a number
+        //<number>, <number><rel_op><boolean_exp>
+        else if(inputTokens.get(0).getTokenType() == TokenType.NUMBER) {
+            myConstantNode = ConstantNode.parseConstantNode(inputTokens);
+            if(inputTokens.get(1).getTokenType() == TokenType.REL_OP) {
+                myOpNode = OpNode.parseOpNode(inputTokens);
+                if (inputTokens.size() == 2) {
+                    System.err.println("ExpressionNode_Boolean recieved a REL_OP without a third field.");
+                }
+                //[3,infty)
+                else if (!(inputTokens.get(2).getTokenType() == TokenType.ID_KEYWORD) ||
+                        inputTokens.get(2).getTokenType() == TokenType.NUMBER) {
+                    System.err.println("ExpressionNode_Boolean expected ID_KEYWORD or NUMBER in third field, but recieved" + inputTokens.get(1).getTokenType() + ".");
+                } else {
+                    //third node is correct start
+                    myExpressionNode_Boolean = new ExpressionNode_Boolean(inputTokens);
+                }
+            }
+        }
     }
     /**
      * Will output a string of this tree in Jott
      * @return a string representing the Jott code of this tree
      */
+    @Override
     public String convertToJott() {
-        if(myRelOpNode != null) {
-            return myFirstExpressionNode_Boolean.convertToJott() + " " +
-                    myRelOpNode.convertToJott() + " " +
-                    mySecondExpressionNode_Boolean.convertToJott();
+        if(myFunctionCallNode != null) {
+            return myFunctionCallNode.convertToJott();
         }
+        String returnMe = null;
         if(myIDKeywordNode != null) {
-            return myIDKeywordNode.convertToJott();
+            returnMe = myIDKeywordNode.convertToJott();
         }
-        if(myConstantNode != null) {
-            return myConstantNode.convertToJott();
+        else {
+            returnMe = myConstantNode.convertToJott();
         }
-        return myFunctionCallNode.convertToJott();
+
+        if(myOpNode == null) {
+            return returnMe;
+        }
+        else {
+            returnMe = returnMe + " " + myOpNode.convertToJott() + myExpressionNode_Boolean.convertToJott();
+        }
+        return returnMe;
     }
 
     /**

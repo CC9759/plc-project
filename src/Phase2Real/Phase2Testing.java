@@ -16,6 +16,7 @@ public class Phase2Testing {
         System.out.println("5: ExpressionNode_Integer");
         System.out.println("6: ExpressionNode_String");
         System.out.println("7: FunctionDefNode");
+        System.out.println("8: Phase 2 test cases");
 
         String input = in.nextLine();
 
@@ -94,13 +95,20 @@ public class Phase2Testing {
                 testList.add(new Token("11", TokenType.NUMBER));
                 ExpressionNode testExpressionIntegerNode = ExpressionNode.parseExpressionNode(testList);
                 System.out.println(testExpressionIntegerNode.convertToJott());
+                break;
             case 6:
 
             case 7:
                 System.out.println("testing on the function definition in phase1Example");
-                ArrayList<Token> tokens =  JottTokenizer.tokenize("C:\\Users\\jlote\\IdeaProjects\\plc-project\\tokenizerTestCases\\phase1Example.jott");
+                ArrayList<Token> tokens = JottTokenizer.tokenize("C:\\Users\\15164\\IdeaProjects\\plc-project\\tokenizerTestCases\\phase1Example.jott");
                 ProgramNode result = ProgramNode.parseProgramNode(tokens);
                 System.out.println(result.convertToJott());
+                break;
+            case 8:
+                ArrayList<Token> tokens2 = JottTokenizer.tokenize("C:\\Users\\15164\\IdeaProjects\\plc-project\\parserTestCases\\providedExample5.jott");
+                ProgramNode result2 = ProgramNode.parseProgramNode(tokens2);
+                System.out.println(result2.convertToJott());
+
         }
     }
 }
