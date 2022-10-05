@@ -41,6 +41,7 @@ public class DFA {
         State current_state = start_state;
         Tokens = new ArrayList<>();
         StringBuilder currentString = new StringBuilder();
+        input = input.strip();
         try {
             for (int i = 0; i < input.length(); i++) {
                 State previous_state = current_state;
