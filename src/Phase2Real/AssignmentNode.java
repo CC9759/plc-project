@@ -2,7 +2,7 @@ package Phase2Real;
 
 import java.util.*;
 
-public class AssignmentNode extends StatementNode {
+public class AssignmentNode implements JottTree {
     String myType;
     IDKeywordNode myIDKeywordNode;
     ExpressionNode myExpressionNode;
@@ -25,6 +25,7 @@ public class AssignmentNode extends StatementNode {
         }
 
         IDKeywordNode idKeywordNode = IDKeywordNode.parseIdKeyWordNode(tokens);
+        ParserUtils.removeToken(tokens, TokenType.ASSIGN);
         ExpressionNode expressionNode = ExpressionNode.parseExpressionNode(tokens);
         return new AssignmentNode(typeToken, idKeywordNode, expressionNode);
         //EndStatementNode endStatementNode = EndStatementNode.parseEndExpressionNode(tokens);
@@ -44,7 +45,7 @@ public class AssignmentNode extends StatementNode {
         returnMe = returnMe + " ";
         returnMe = returnMe + myExpressionNode.convertToJott();
         returnMe = returnMe + " ";
-        returnMe = returnMe + ";";//myEndStatementNode.convertToJott();
+        returnMe = returnMe;//myEndStatementNode.convertToJott();
         return returnMe;
     }
 

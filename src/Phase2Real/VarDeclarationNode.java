@@ -2,7 +2,7 @@ package Phase2Real;
 
 import java.util.ArrayList;
 
-public class VarDeclarationNode extends StatementNode{
+public class VarDeclarationNode implements JottTree{
     private final String type;
     private final IDKeywordNode id;
     //private final EndStatementNode endStatement;
@@ -27,7 +27,7 @@ public class VarDeclarationNode extends StatementNode{
      * @return a string representing the Jott code of this tree
      */
     //We should add space correct?
-    public String convertToJott(){return type + " " + id.convertToJott() + " ;";}
+    public String convertToJott(){return type + " " + id.convertToJott();}
 
     /**
      * Will output a string of this tree in Java

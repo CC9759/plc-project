@@ -2,7 +2,7 @@ package Phase2Real;
 
 import java.util.ArrayList;
 
-public class FunctionCallNode extends StatementNode{
+public class FunctionCallNode implements JottTree{
 
     private final IDKeywordNode id;
     private final ParamsNode params;

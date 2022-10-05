@@ -1,11 +1,16 @@
 package Phase2Real;
 
+import Phase1.JottTokenizer;
+
 import java.util.ArrayList;
 
-public abstract class StatementNode extends BodyStatementNode{
-
+public class StatementNode extends BodyStatementNode{
+    JottTree node;
+    public StatementNode(JottTree node) {
+        this.node = node;
+    }
     public static StatementNode parseStatementNode(ArrayList<Token> tokens){
-        StatementNode result;
+        JottTree result;
         Token firstToken = tokens.get(0);
         String firstTokenValue = firstToken.getToken();
         Token secondToken = tokens.get(1);
@@ -23,38 +28,46 @@ public abstract class StatementNode extends BodyStatementNode{
             result = FunctionCallNode.parseFunctionCallNode(tokens);
         }
         ParserUtils.removeToken(tokens,TokenType.SEMICOLON);
-        return result;
+        return new StatementNode(result);
     }
 
     /**
      * Will output a string of this tree in Jott
      * @return a string representing the Jott code of this tree
      */
-    public abstract String convertToJott();
+    public String convertToJott() {
+        return node.convertToJott() + ";";
+    }
 
 
     /**
      * Will output a string of this tree in Java
      * @return a string representing the Java code of this tree
      */
-    public abstract String convertToJava();
+    public String convertToJava() {        return null;
+    }
 
     /**
      * Will output a string of this tree in C
      * @return a string representing the C code of this tree
      */
-    public abstract String convertToC();
+    public String convertToC() {        return null;
+    }
 
     /**
      * Will output a string of this tree in Python
      * @return a string representing the Python code of this tree
      */
-    public abstract String convertToPython();
+    public String convertToPython() {
+        return null;
+    }
 
     /**
      * This will validate that the tree follows the semantic rules of Jott
      * Errors validating will be reported to System.err
      * @return true if valid Jott code; false otherwise
      */
-    public abstract boolean validateTree();
+    public boolean validateTree() {
+        return true;
+    }
 }
