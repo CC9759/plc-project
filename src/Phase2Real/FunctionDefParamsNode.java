@@ -16,7 +16,11 @@ public class FunctionDefParamsNode implements JottTree{
         ArrayList<Token> paramTypes = new ArrayList<>();
         while(inputTokens.get(0).getTokenType() != TokenType.R_BRACKET) {
             paramIDs.add(IDKeywordNode.parseIdKeyWordNode(inputTokens));
+            ParserUtils.removeToken(inputTokens,TokenType.COLON);
             paramTypes.add(inputTokens.remove(0));
+            if(inputTokens.get(0).getTokenType() == TokenType.COMMA) {
+                inputTokens.remove(0); // ,
+            }
         }
         return new FunctionDefParamsNode(paramIDs,paramTypes);
     }

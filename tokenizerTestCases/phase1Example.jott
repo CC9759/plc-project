@@ -1,6 +1,7 @@
 #this is an example
-main[]:Integer{
-    print[5];
+main[saying: String, x: Double, randomValue: Integer]:Integer{
+    print[5, "hello"];
     #this is a comment
     print[ "foo bar" ];
 }
+#this is hello world in Jott

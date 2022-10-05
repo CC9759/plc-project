@@ -10,8 +10,8 @@ public class ElseIfNode implements JottTree {
     public ElseIfNode(ArrayList<Token> inputList){
         bExpr = ExpressionNode.parseExpressionNode(inputList);
         // remove right bracket and left brace
-        inputList.remove(0);
-        inputList.remove(0);
+        ParserUtils.removeToken(inputList, TokenType.R_BRACKET);
+        ParserUtils.removeToken(inputList, TokenType.L_BRACE);
         this.bodyNode = BodyNode.parseBodyNode(inputList);
         // remove right brace
         inputList.remove(0);

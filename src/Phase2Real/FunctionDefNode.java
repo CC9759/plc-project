@@ -1,5 +1,6 @@
 package Phase2Real;
 
+import javax.swing.text.html.parser.Parser;
 import java.util.ArrayList;
 
 public class FunctionDefNode implements JottTree{
@@ -16,13 +17,14 @@ public class FunctionDefNode implements JottTree{
     public static FunctionDefNode parseFunctionDefNode(ArrayList<Token> inputTokens) {
         IDKeywordNode myIDKeywordNode = IDKeywordNode.parseIdKeyWordNode(inputTokens);
         //TODO check that types are correct
-        inputTokens.remove(0); // [
+        ParserUtils.removeToken(inputTokens, TokenType.L_BRACKET);
         FunctionDefParamsNode myFunctionDefParamsNode = FunctionDefParamsNode.parseFunctionDefParamsNode(inputTokens);
-        inputTokens.remove(0); // ]
-        inputTokens.remove(0); // :
+        ParserUtils.removeToken(inputTokens, TokenType.R_BRACKET);
+        ParserUtils.removeToken(inputTokens, TokenType.COLON);
         FunctionReturnNode myReturnNode = FunctionReturnNode.parseFunctionReturnNode(inputTokens);
-        inputTokens.remove(0); // {
+        ParserUtils.removeToken(inputTokens,TokenType.L_BRACE);
         BodyNode myBodyNode = BodyNode.parseBodyNode(inputTokens);
+        ParserUtils.removeToken(inputTokens, TokenType.R_BRACE);
         return new FunctionDefNode(myIDKeywordNode,myFunctionDefParamsNode,myReturnNode,myBodyNode);
     }
     @Override
