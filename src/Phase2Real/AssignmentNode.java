@@ -8,7 +8,9 @@ public class AssignmentNode implements JottTree {
     ExpressionNode myExpressionNode;
     //EndStatementNode myEndStatementNode;
     private AssignmentNode(Token type, IDKeywordNode id, ExpressionNode expression){//}, EndStatementNode endStatement){
-        this.myType = type.getToken();
+        if(type != null) {
+            this.myType = type.getToken();
+        }
         this.myIDKeywordNode = id;
         this.myExpressionNode = expression;
         //this.myEndStatementNode = endStatement;
