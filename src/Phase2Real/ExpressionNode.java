@@ -3,12 +3,12 @@ package Phase2Real;
 import java.util.*;
 
 public class ExpressionNode implements JottTree {
-    IDKeywordNode idKeywordNode;
+    JottTree expNode;
     Token operator;
     ExpressionNode node;
 
-    public ExpressionNode(IDKeywordNode idKeywordNode, Token operator, ExpressionNode node) {
-        this.idKeywordNode = idKeywordNode;
+    public ExpressionNode(JottTree expNode, Token operator, ExpressionNode node) {
+        this.expNode = expNode;
         this.operator = operator;
         this.node = node;
     }
@@ -24,14 +24,20 @@ public class ExpressionNode implements JottTree {
             return new ExpressionNode_String(inputList);
         }
         else if(firstToken.getTokenType() == TokenType.ID_KEYWORD) {
-            IDKeywordNode idKeywordNode = IDKeywordNode.parseIdKeyWordNode(inputList);
+            JottTree expNode;
+            if(inputList.get(1).getTokenType() == TokenType.L_BRACKET) {
+                expNode = FunctionCallNode.parseFunctionCallNode(inputList);
+            }
+            else {
+                expNode = IDKeywordNode.parseIdKeyWordNode(inputList);
+            }
             if(inputList.get(0).getTokenType() == TokenType.REL_OP || inputList.get(0).getTokenType() == TokenType.MATH_OP) {
                 Token operator = inputList.remove(0);
                 ExpressionNode node = ExpressionNode.parseExpressionNode(inputList);
-                return new ExpressionNode(idKeywordNode,operator, node);
+                return new ExpressionNode(expNode,operator, node);
             }
             else {
-                return new ExpressionNode(idKeywordNode, null, null);
+                return new ExpressionNode(expNode, null, null);
             }
             //TODO UNSURE ABOUT THIS, RETURN GENERIC? RETURN SOMETHING? IDK
         }
@@ -43,7 +49,7 @@ public class ExpressionNode implements JottTree {
      */
     public String convertToJott() {
         //Should be fully overwritten
-        String result = idKeywordNode.convertToJott();
+        String result = expNode.convertToJott();
         if (operator != null) {
             result += operator.getToken();
             result += node.convertToJott();
