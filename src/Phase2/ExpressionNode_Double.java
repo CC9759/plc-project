@@ -52,16 +52,15 @@ public class ExpressionNode_Double extends ExpressionNode {
                 //Starts with an id but is not a func call:<id>, <id><math_op><double_exp>
                 myFirstExpressionNode_Double = new ExpressionNode_Double(inputTokens.remove(0));
                 if(inputTokens.get(0).getTokenType() == TokenType.MATH_OP) {
+                    Token testToken = inputTokens.get(0);
                     myOpNode = OpNode.parseOpNode(inputTokens);
                     if(inputTokens.size() == 0) {
-                        System.err.println("ExpressionNode_Double recieved a MATH_OP without a third field.");
-                        throw new Exception();
+                        throw new ParserException(testToken, "ExpressionNode_Double recieved a MATH_OP without a third field.");
                     }
                     //[3,infty)
                     else if(!(inputTokens.get(0).getTokenType() == TokenType.ID_KEYWORD) ||
                             inputTokens.get(0).getTokenType() == TokenType.NUMBER) {
-                        System.err.println("ExpressionNode_Double expected ID_KEYWORD or NUMBER in third field, but recieved" + inputTokens.get(0).getTokenType() + ".");
-                        throw new Exception();
+                        throw new ParserException(inputTokens.get(0), "ExpressionNode_Double expected ID_KEYWORD or NUMBER in third field, but recieved" + inputTokens.get(0).getTokenType() + ".");
                     } else {
                         //third node is correct start
                         mySecondExpressionNode_Double = new ExpressionNode_Double(inputTokens);
@@ -74,16 +73,15 @@ public class ExpressionNode_Double extends ExpressionNode {
         else if(inputTokens.get(0).getTokenType() == TokenType.NUMBER) {
             myFirstExpressionNode_Double = new ExpressionNode_Double(inputTokens.remove(0));
             if(inputTokens.get(0).getTokenType() == TokenType.MATH_OP) {
+                Token testToken = inputTokens.get(0);
                 myOpNode = OpNode.parseOpNode(inputTokens);
                 if (inputTokens.size() == 0) {
-                    System.err.println("ExpressionNode_Double recieved a MATH_OP without a third field.");
-                    throw new Exception();
+                    throw new ParserException(testToken, "ExpressionNode_Double recieved a MATH_OP without a third field.");
                 }
                 //[3,infty)
                 else if ((inputTokens.get(0).getTokenType() != TokenType.ID_KEYWORD) &&
                         inputTokens.get(0).getTokenType() != TokenType.NUMBER) {
-                    System.err.println("ExpressionNode_Double expected ID_KEYWORD or NUMBER in third field, but recieved" + inputTokens.get(0).getTokenType() + ".");
-                    throw new Exception();
+                    throw new ParserException(inputTokens.get(0), "ExpressionNode_Double expected ID_KEYWORD or NUMBER in third field, but recieved" + inputTokens.get(0).getTokenType() + ".");
                 } else {
                     //third node is correct start
                     mySecondExpressionNode_Double = new ExpressionNode_Double(inputTokens);
