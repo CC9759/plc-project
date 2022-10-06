@@ -14,8 +14,8 @@ public class ExpressionNode_Boolean extends ExpressionNode {
     public ExpressionNode_Boolean(ArrayList<Token> inputTokens) throws Exception {
         super(null,null,null);
         if(inputTokens.size() == 0) {
-            System.err.println("ExpressionNode_Boolean constructor got an input list of 0 tokens.");
-            throw new Exception();
+            Token testToken = inputTokens.get(0);
+            throw new ParserException(testToken, "ExpressionNode_Boolean constructor got an input list of 0 tokens.");
         }
         //[1,infty)
         if(inputTokens.size() == 1) {
