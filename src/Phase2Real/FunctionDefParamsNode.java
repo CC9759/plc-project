@@ -20,6 +20,8 @@ public class FunctionDefParamsNode implements JottTree{
             paramTypes.add(inputTokens.remove(0));
             if(inputTokens.get(0).getTokenType() == TokenType.COMMA) {
                 inputTokens.remove(0); // ,
+            } else if (inputTokens.get(0).getTokenType() != TokenType.R_BRACKET) {
+                throw new Exception();
             }
 
         }
