@@ -16,7 +16,7 @@ public class AssignmentNode implements JottTree {
         //this.myEndStatementNode = endStatement;
     }
 
-    static AssignmentNode pasrseAssignmentNode(ArrayList<Token> tokens) throws Exception{
+    static AssignmentNode parseAssignmentNode(ArrayList<Token> tokens) throws Exception{
         String firstTokenAsString = tokens.get(0).getToken();
         Token typeToken = null;
         if(firstTokenAsString.equals("Boolean") ||
