@@ -7,8 +7,8 @@
 
 import Phase1.JottParser;
 import Phase1.JottTokenizer;
-import Phase2Real.JottTree;
-import Phase2Real.Token;
+import Phase2.JottTree;
+import Phase2.Token;
 
 import java.io.FileWriter;
 import java.io.IOException;
