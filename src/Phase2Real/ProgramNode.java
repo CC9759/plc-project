@@ -16,7 +16,7 @@ public class ProgramNode implements JottTree{
             }
             return new ProgramNode(functionDefs);
         } catch(Exception e) {
-          System.err.println(e);
+          System.err.println(e.getMessage());
           return null;
         }
     }
