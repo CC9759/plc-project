@@ -22,13 +22,13 @@ public class FunctionDefParamsNode implements JottTree{
             ParserUtils.removeToken(inputTokens,TokenType.COLON);
             if(!validType(inputTokens.get(0))) {
                 // not a valid type;
-                throw new Exception();
+                throw new ParserException(inputTokens.get(0), "not a valid type");
             }
             paramTypes.add(inputTokens.remove(0));
             if(inputTokens.get(0).getTokenType() == TokenType.COMMA) {
                 inputTokens.remove(0); // ,
             } else if (inputTokens.get(0).getTokenType() != TokenType.R_BRACKET) {
-                throw new Exception();
+                throw new ParserException(inputTokens.get(0),"Expected \"]\"");
             }
 
         }
