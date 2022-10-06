@@ -44,7 +44,6 @@ public class ExpressionNode implements JottTree {
             else {
                 return new ExpressionNode(expNode, null, null);
             }
-            //TODO UNSURE ABOUT THIS, RETURN GENERIC? RETURN SOMETHING? IDK
         }
         Token errorToken = inputList.get(0);
         throw new ParserException(errorToken, "Invalid Expression");
