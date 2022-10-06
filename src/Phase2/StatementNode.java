@@ -21,7 +21,7 @@ public class StatementNode extends BodyStatementNode{
                 result =  VarDeclarationNode.parseVariableDeclarationNode(tokens);
 
         } else if ((b && thirdTokenValue.equals("=")) || secondTokenValue.equals("=")){
-            result = AssignmentNode.pasrseAssignmentNode(tokens);
+            result = AssignmentNode.parseAssignmentNode(tokens);
         }else{
             result = FunctionCallNode.parseFunctionCallNode(tokens);
         }
