@@ -10,13 +10,20 @@ public class FunctionDefParamsNode implements JottTree{
         this.paramIDs = paramIDs;
         this.paramTypes = paramTypes;
     }
-
+    public static boolean validType(Token token) {
+        String type = token.getToken();
+        return type.equals("Boolean") || type.equals("Double") || type.equals("Integer") || type.equals("String");
+    }
     public static FunctionDefParamsNode parseFunctionDefParamsNode(ArrayList<Token> inputTokens) throws Exception{
         ArrayList<IDKeywordNode> paramIDs = new ArrayList<>();
         ArrayList<Token> paramTypes = new ArrayList<>();
         while(inputTokens.get(0).getTokenType() != TokenType.R_BRACKET) {
             paramIDs.add(IDKeywordNode.parseIdKeyWordNode(inputTokens));
             ParserUtils.removeToken(inputTokens,TokenType.COLON);
+            if(!validType(inputTokens.get(0))) {
+                // not a valid type;
+                throw new Exception();
+            }
             paramTypes.add(inputTokens.remove(0));
             if(inputTokens.get(0).getTokenType() == TokenType.COMMA) {
                 inputTokens.remove(0); // ,

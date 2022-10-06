@@ -98,7 +98,7 @@ public class Phase2Testing {
 
             case 7:
                 System.out.println("testing on the function definition in phase1Example");
-                ArrayList<Token> tokens =  JottTokenizer.tokenize("parserTestCases/helloWorld.jott");
+                ArrayList<Token> tokens =  JottTokenizer.tokenize("parserTestCases/mainReturnNotInt.jott");
                 ProgramNode result = ProgramNode.parseProgramNode(tokens);
                 if(result != null) {
                     System.out.println(result.convertToJott());
