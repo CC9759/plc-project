@@ -6,8 +6,8 @@ package Phase1; /**
 
 import DFAClasses.DFA;
 import DFAClasses.TokenTree;
-import Phase2Real.Token;
-import Phase2Real.TokenType;
+import Phase2.Token;
+import Phase2.TokenType;
 
 import java.io.File;
 import java.io.FileNotFoundException;

@@ -9,8 +9,8 @@ package Phase1;/*
  * @author Scott C Johnson (scj@cs.rit.edu)
  */
 
-import Phase2Real.Token;
-import Phase2Real.TokenType;
+import Phase2.Token;
+import Phase2.TokenType;
 
 import java.util.ArrayList;
 
