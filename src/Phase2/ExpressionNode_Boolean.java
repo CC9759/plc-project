@@ -50,11 +50,6 @@ public class ExpressionNode_Boolean extends ExpressionNode {
             myConstantNode = new ConstantNode(inputToken);
         }
     }
-
-    public ExpressionNode_Boolean(FunctionCallNode inputNode) {
-        super(null,null,null);
-        myFunctionCallNode = inputNode;
-    }
     /**
      * Will output a string of this tree in Jott
      * @return a string representing the Jott code of this tree
