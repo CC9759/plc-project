@@ -3,10 +3,10 @@ package Phase2;
 import java.util.ArrayList;
 
 public class FunctionDefNode implements JottTree{
-    IDKeywordNode myIDKeywordNode;
-    FunctionDefParamsNode myFunctionDefParamsNode;
-    FunctionReturnNode myReturnNode;
-    BodyNode myBodyNode;
+    final IDKeywordNode myIDKeywordNode;
+    final FunctionDefParamsNode myFunctionDefParamsNode;
+    final FunctionReturnNode myReturnNode;
+    final BodyNode myBodyNode;
     private FunctionDefNode(IDKeywordNode myIDKeywordNode, FunctionDefParamsNode myFunctionDefParamsNode, FunctionReturnNode myReturnNode, BodyNode myBodyNode) {
         this.myIDKeywordNode = myIDKeywordNode;
         this.myFunctionDefParamsNode = myFunctionDefParamsNode;

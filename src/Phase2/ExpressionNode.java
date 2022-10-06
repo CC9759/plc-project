@@ -3,9 +3,9 @@ package Phase2;
 import java.util.*;
 
 public class ExpressionNode implements JottTree {
-    JottTree expNode;
-    Token operator;
-    ExpressionNode node;
+    final JottTree expNode;
+    final Token operator;
+    final ExpressionNode node;
 
     public ExpressionNode(JottTree expNode, Token operator, ExpressionNode node) {
         this.expNode = expNode;

@@ -3,7 +3,7 @@ package Phase2;
 import java.util.ArrayList;
 
 public class StatementNode extends BodyStatementNode{
-    JottTree node;
+    final JottTree node;
     public StatementNode(JottTree node) {
         this.node = node;
     }

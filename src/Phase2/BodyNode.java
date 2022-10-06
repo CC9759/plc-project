@@ -8,7 +8,7 @@ import java.util.*;
  * < body > -> < body_stmt > < body > | < return_stmt > | e
  */
 public class BodyNode implements JottTree { 
-    ArrayList<BodyStatementNode> bodyStatements;
+    final ArrayList<BodyStatementNode> bodyStatements;
     ReturnStatementNode returnStatement;
 
     private BodyNode() {

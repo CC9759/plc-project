@@ -4,7 +4,7 @@ package Phase2;
 import java.util.*;
 
 public class ConstantNode implements JottTree {
-    NodeType myType = NodeType.CONSTANT;
+    final NodeType myType = NodeType.CONSTANT;
     private InformationType type;
     private final String value;
 

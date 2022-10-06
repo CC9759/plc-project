@@ -1,8 +1,8 @@
 package Phase2;
 
 public class ParserException extends Exception{
-    Token token;
-    String errorMessage;
+    final Token token;
+    final String errorMessage;
 
     public ParserException(Token token, String errorMessage) {
        this.token = token;

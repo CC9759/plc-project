@@ -3,8 +3,8 @@ package Phase2;
 import java.util.ArrayList;
 
 public class FunctionDefParamsNode implements JottTree{
-    private ArrayList<IDKeywordNode> paramIDs;
-    private ArrayList<Token> paramTypes;
+    private final ArrayList<IDKeywordNode> paramIDs;
+    private final ArrayList<Token> paramTypes;
 
     private FunctionDefParamsNode(ArrayList<IDKeywordNode> paramIDs, ArrayList<Token> paramTypes) {
         this.paramIDs = paramIDs;

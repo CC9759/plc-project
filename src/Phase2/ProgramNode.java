@@ -2,7 +2,7 @@ package Phase2;
 
 import java.util.ArrayList;
 public class ProgramNode implements JottTree{
-    private ArrayList<FunctionDefNode> functionDefs;
+    private final ArrayList<FunctionDefNode> functionDefs;
 
     private ProgramNode(ArrayList<FunctionDefNode> functionDefs) {
         this.functionDefs = functionDefs;

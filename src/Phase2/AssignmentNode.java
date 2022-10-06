@@ -4,8 +4,8 @@ import java.util.*;
 
 public class AssignmentNode implements JottTree {
     String myType;
-    IDKeywordNode myIDKeywordNode;
-    ExpressionNode myExpressionNode;
+    final IDKeywordNode myIDKeywordNode;
+    final ExpressionNode myExpressionNode;
     private AssignmentNode(Token type, IDKeywordNode id, ExpressionNode expression){//}, EndStatementNode endStatement){
         if(type != null) {
             this.myType = type.getToken();
