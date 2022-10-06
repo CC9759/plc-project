@@ -61,8 +61,7 @@ public class ExpressionNode_Integer extends ExpressionNode {
                     //[3,infty)
                     else if(!(inputTokens.get(0).getTokenType() == TokenType.ID_KEYWORD) ||
                             inputTokens.get(0).getTokenType() == TokenType.NUMBER) {
-                        System.err.println("ExpressionNode_Integer expected ID_KEYWORD or NUMBER in third field, but recieved" + inputTokens.get(0).getTokenType() + ".");
-                        throw new Exception();
+                        throw new ParserException(testToken, "ExpressionNode_Integer expected ID_KEYWORD or NUMBER in third field, but recieved"+inputTokens.get(0).getTokenType() + ".");
                     } else {
                         //third node is correct start
                         mySecondExpressionNode_Integer = new ExpressionNode_Integer(inputTokens);
@@ -75,16 +74,15 @@ public class ExpressionNode_Integer extends ExpressionNode {
         else if(inputTokens.get(0).getTokenType() == TokenType.NUMBER) {
             myFirstExpressionNode_Integer = new ExpressionNode_Integer(inputTokens.remove(0));
             if(inputTokens.get(0).getTokenType() == TokenType.MATH_OP) {
+                Token testToken = inputTokens.get(0);
                 myOpNode = OpNode.parseOpNode(inputTokens);
                 if (inputTokens.size() == 0) {
-                    System.err.println("ExpressionNode_Integer recieved a MATH_OP without a third field.");
-                    throw new Exception();
+                    throw new ParserException(testToken, "ExpressionNode_Integer recieved a MATH_OP without a third field.");
                 }
                 //[3,infty)
                 else if ((inputTokens.get(0).getTokenType() != TokenType.ID_KEYWORD) &&
                         inputTokens.get(0).getTokenType() != TokenType.NUMBER) {
-                    System.err.println("ExpressionNode_Integer expected ID_KEYWORD or NUMBER in third field, but recieved" + inputTokens.get(0).getTokenType() + ".");
-                    throw new Exception();
+                    throw new ParserException(testToken, "ExpressionNode_Integer expected ID_KEYWORD or NUMBER in third field, but recieved" + inputTokens.get(0).getTokenType() + ".");
                 } else {
                     //third node is correct start
                     mySecondExpressionNode_Integer = new ExpressionNode_Integer(inputTokens);
