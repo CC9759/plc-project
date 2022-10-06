@@ -41,7 +41,7 @@ public class ExpressionNode implements JottTree {
             }
             //TODO UNSURE ABOUT THIS, RETURN GENERIC? RETURN SOMETHING? IDK
         }
-        return null;
+        throw new Exception();
     }
     /**
      * Will output a string of this tree in Jott
