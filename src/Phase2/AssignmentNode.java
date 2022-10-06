@@ -6,14 +6,12 @@ public class AssignmentNode implements JottTree {
     String myType;
     IDKeywordNode myIDKeywordNode;
     ExpressionNode myExpressionNode;
-    //EndStatementNode myEndStatementNode;
     private AssignmentNode(Token type, IDKeywordNode id, ExpressionNode expression){//}, EndStatementNode endStatement){
         if(type != null) {
             this.myType = type.getToken();
         }
         this.myIDKeywordNode = id;
         this.myExpressionNode = expression;
-        //this.myEndStatementNode = endStatement;
     }
 
     static AssignmentNode parseAssignmentNode(ArrayList<Token> tokens) throws Exception{
@@ -30,8 +28,6 @@ public class AssignmentNode implements JottTree {
         ParserUtils.removeToken(tokens, TokenType.ASSIGN);
         ExpressionNode expressionNode = ExpressionNode.parseExpressionNode(tokens);
         return new AssignmentNode(typeToken, idKeywordNode, expressionNode);
-        //EndStatementNode endStatementNode = EndStatementNode.parseEndExpressionNode(tokens);
-        //return new AssignmentNode(typeToken, idKeywordNode, expressionNode, endStatementNode);
     }
     /**
      * Will output a string of this tree in Jott
