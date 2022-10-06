@@ -1,14 +1,12 @@
 package Phase2;
+/**
+ * This class is responsible for parsing and translating a Body Statement Node in the JottTree
+ *
+ * @author Jonathon LoTempio, Halle Masaryk, Celina Chen, Kaiming Zhang
+ **/
 
 import java.util.*;
 
-/*
- * < body_stmt > -> < if_stmt > | < while_loop > | < stmt >
- * < if_stmt > -> if [ b_expr ]{ < body > } < elseif_lst > < else >
- * < while_loop > -> while [ b_expr ]{ < body> }
- * < stmt > -> < asmt > | < var_dec > | < func_call > < end_stmt >
- *  
- */
 public abstract class BodyStatementNode implements JottTree{
     public static BodyStatementNode parseBodyStatementNode(ArrayList<Token> tokens) throws Exception{
         Token check = tokens.get(0);

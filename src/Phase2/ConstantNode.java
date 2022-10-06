@@ -1,5 +1,9 @@
 package Phase2;
-
+/**
+ * This class is responsible for parsing and translating a Constant Node in the JottTree
+ *
+ * @author Jonathon LoTempio, Halle Masaryk, Celina Chen, Kaiming Zhang
+ **/
 
 import java.util.*;
 

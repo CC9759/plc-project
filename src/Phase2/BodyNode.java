@@ -1,12 +1,12 @@
 package Phase2;
+/**
+ * This class is responsible for parsing and translating a Body Node in the JottTree
+ *
+ * @author Jonathon LoTempio, Halle Masaryk, Celina Chen, Kaiming Zhang
+ **/
 
 import java.util.*;
 
-/*
- *  body_stmt > -> < if_stmt > | < while_loop > | < stmt >
- * < return_stmt > -> return < expr > < end_stmt >
- * < body > -> < body_stmt > < body > | < return_stmt > | e
- */
 public class BodyNode implements JottTree { 
     final ArrayList<BodyStatementNode> bodyStatements;
     ReturnStatementNode returnStatement;

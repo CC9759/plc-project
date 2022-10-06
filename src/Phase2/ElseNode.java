@@ -1,4 +1,9 @@
 package Phase2;
+/**
+ * This class is responsible for parsing and translating an Else Node in the JottTree
+ *
+ * @author Jonathon LoTempio, Halle Masaryk, Celina Chen, Kaiming Zhang
+ **/
 
 import java.util.*;
 

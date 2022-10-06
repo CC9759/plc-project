@@ -1,4 +1,9 @@
 package Phase2;
+/**
+ * This class is responsible for parsing and translating a Program Node in the JottTree
+ *
+ * @author Jonathon LoTempio, Halle Masaryk, Celina Chen, Kaiming Zhang
+ **/
 
 import java.util.ArrayList;
 public class ProgramNode implements JottTree{
