@@ -3,9 +3,9 @@ package Phase2;
 import java.util.*;
 
 public class ParamsNode implements JottTree {
-    NodeType myType = NodeType.PARAMS;
-    ExpressionNode myExpressionNode;
-    ParamsTNode myParamsTNode;
+    final NodeType myType = NodeType.PARAMS;
+    final ExpressionNode myExpressionNode;
+    final ParamsTNode myParamsTNode;
     /**
      * < params > -> < expr > < params_t > | 
      * < params_t > -> ,< expr > < params_t > | 

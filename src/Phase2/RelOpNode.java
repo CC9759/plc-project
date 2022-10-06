@@ -2,7 +2,7 @@ package Phase2;
 import java.util.*;
 
 public class RelOpNode implements JottTree {
-    NodeType myType = NodeType.RELOP;
+    final NodeType myType = NodeType.RELOP;
     private final Token token;
 
     private RelOpNode(Token inputToken) {

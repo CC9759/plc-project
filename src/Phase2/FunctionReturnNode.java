@@ -3,7 +3,7 @@ package Phase2;
 import java.util.ArrayList;
 
 public class FunctionReturnNode implements JottTree{
-    Token returnToken;
+    final Token returnToken;
 
     private FunctionReturnNode(Token returnToken) {
         this.returnToken = returnToken;

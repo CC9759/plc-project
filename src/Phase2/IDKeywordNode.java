@@ -6,8 +6,8 @@ import java.util.*;
  *
  */
 public class IDKeywordNode implements JottTree {
-    NodeType myType = NodeType.IDKEYWORD;
-    private String value;
+    final NodeType myType = NodeType.IDKEYWORD;
+    private final String value;
 
     public IDKeywordNode(Token token){this.value = token.getToken();}
     public static IDKeywordNode parseIdKeyWordNode(ArrayList<Token> tokens) throws Exception{

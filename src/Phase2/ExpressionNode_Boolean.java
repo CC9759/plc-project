@@ -20,8 +20,8 @@ public class ExpressionNode_Boolean extends ExpressionNode {
         //[1,infty)
         if(inputTokens.size() == 1) {
             if(inputTokens.get(0).getTokenType() == TokenType.ID_KEYWORD) {
-                if(inputTokens.get(0).getToken() == "True" ||
-                   inputTokens.get(0).getToken() == "False") {
+                if(inputTokens.get(0).getToken().equals("True") ||
+                        inputTokens.get(0).getToken().equals("False")) {
                     myConstantNode = ConstantNode.parseConstantNode(inputTokens);
                 }
                 else {
@@ -30,8 +30,8 @@ public class ExpressionNode_Boolean extends ExpressionNode {
             }
             return;
         }
-        if(inputTokens.get(0).getToken() == "True" ||
-                inputTokens.get(0).getToken() == "False") {
+        if(inputTokens.get(0).getToken().equals("True") ||
+                inputTokens.get(0).getToken().equals("False")) {
             myConstantNode = ConstantNode.parseConstantNode(inputTokens);
         }
         else {
