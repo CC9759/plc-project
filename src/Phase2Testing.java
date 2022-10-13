@@ -1,7 +1,5 @@
-package Phase2;
-
+import Phase2.*;
 import Phase1.JottTokenizer;
-
 import java.util.*;
 
 public class Phase2Testing {
