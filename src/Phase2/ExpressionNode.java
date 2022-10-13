@@ -69,8 +69,11 @@ public class ExpressionNode implements JottTree {
         else if(inputList.get(0).getTokenType() == TokenType.NUMBER) {
             firstExpression = new ExpressionNode(ConstantNode.parseConstantNode(inputList));
         }
+        else if(inputList.get(0).getTokenType() == TokenType.STRING) {
+            firstExpression = new ExpressionNode(ConstantNode.parseConstantNode(inputList));
+        }
         else {
-            throw new Exception("Invalid start of expression.");
+            throw new Exception("Invalid start of expression. Expected ID or Number but got " + inputList.get(0).getTokenType());
         }
 
         if(inputList.get(0).getTokenType() == TokenType.MATH_OP) {
