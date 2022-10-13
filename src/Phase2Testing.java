@@ -33,7 +33,7 @@ public class Phase2Testing {
             case 2:
             case 3:
             case 4:
-                System.out.println("Testing on the double expression 2.3, using an expressionNode_Double.");
+                /*System.out.println("Testing on the double expression 2.3, using an expressionNode_Double.");
                 testList.add(new Token("2.3", TokenType.NUMBER));
                 ExpressionNode_Double testExpressionDoubleNodeShortShort = new ExpressionNode_Double(testList);
                 System.out.println(testExpressionDoubleNodeShortShort.convertToJott());
@@ -67,9 +67,11 @@ public class Phase2Testing {
                 testList.add(new Token("anotherdoublenumber", TokenType.NUMBER));
                 ExpressionNode testExpressionDoubleNodeWords = ExpressionNode.parseExpressionNode(testList);
                 System.out.println(testExpressionDoubleNodeWords.convertToJott());
+
+                 */
                 break;
             case 5:
-                System.out.println("Testing on the double expression 2, using an expressionNode_Int.");
+                /*System.out.println("Testing on the double expression 2, using an expressionNode_Int.");
                 testList.add(new Token("2", TokenType.NUMBER));
                 ExpressionNode_Double testExpressionIntegerNodeShortShort = new ExpressionNode_Double(testList);
                 System.out.println(testExpressionIntegerNodeShortShort.convertToJott());
@@ -91,6 +93,8 @@ public class Phase2Testing {
                 testList.add(new Token("11", TokenType.NUMBER));
                 ExpressionNode testExpressionIntegerNode = ExpressionNode.parseExpressionNode(testList);
                 System.out.println(testExpressionIntegerNode.convertToJott());
+
+                 */
             case 6:
 
             case 7:
