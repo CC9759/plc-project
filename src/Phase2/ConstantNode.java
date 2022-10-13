@@ -86,8 +86,8 @@ public class ConstantNode implements JottTree {
         return this.value;
     }
 
-    public NodeType getMyType() {
-        return myType;
+    public InformationType getMyType() {
+        return type;
     }
 
 }

@@ -5,62 +5,106 @@ package Phase2;
  * @author Jonathon LoTempio, Halle Masaryk, Celina, Kaiming Zhang
  **/
 
+import java.beans.Expression;
 import java.util.*;
 
 public class ExpressionNode implements JottTree {
-    final JottTree expNode;
-    final Token operator;
-    final ExpressionNode node;
+    ExpressionNode firstExpressionNode;
+    ExpressionNode secondExpressionNode;
+    JottTree operationNode;
+    FunctionCallNode functionCallNode;
+    IDKeywordNode idKeywordNode;
+    ConstantNode constantNode;
+    public InformationType WhatAmI() throws Exception {
+        if(idKeywordNode != null) {
+            return InformationType.VOID; //TODO PHASE 3 SYMBOL TABLE
+        }
+        if(functionCallNode != null) {
+            return InformationType.VOID; //TODO SAME AS ABOVE
+        }
+        if(constantNode != null) {
+            return constantNode.getMyType();
+        }
+        if(firstExpressionNode.WhatAmI() != secondExpressionNode.WhatAmI()) {
+            throw new Exception("Invalid expression types joined by operation");
+        }
+        return firstExpressionNode.WhatAmI();
+    }
 
-    public ExpressionNode(JottTree expNode, Token operator, ExpressionNode node) {
-        this.expNode = expNode;
-        this.operator = operator;
-        this.node = node;
+    public ExpressionNode(FunctionCallNode input) {
+        functionCallNode = input;
     }
+
+    public ExpressionNode(IDKeywordNode input) {
+        idKeywordNode = input;
+    }
+
+    public ExpressionNode(ConstantNode input) {
+        constantNode = input;
+    }
+
+    public ExpressionNode(ExpressionNode first, JottTree op, ExpressionNode second) {
+        firstExpressionNode = first;
+        operationNode = op;
+        secondExpressionNode = second;
+    }
+
     public static ExpressionNode parseExpressionNode(ArrayList<Token> inputList) throws Exception {
-        Token firstToken = inputList.get(0);
-        if(firstToken.getTokenType() == TokenType.NUMBER) {
-            if(firstToken.getToken().contains(".")) {
-                return new ExpressionNode_Double(inputList);
-            }
-            return new ExpressionNode_Integer(inputList);
-        }
-        else if(firstToken.getTokenType() == TokenType.STRING) {
-            return new ExpressionNode_String(inputList);
-        }
-        else if(firstToken.getTokenType() == TokenType.ID_KEYWORD) {
-            JottTree expNode;
+        ExpressionNode firstExpression = null;
+        JottTree op = null;
+        ExpressionNode secondExpression = null;
+
+        if(inputList.get(0).getTokenType() == TokenType.ID_KEYWORD) {
             if(inputList.get(1).getTokenType() == TokenType.L_BRACKET) {
-                expNode = FunctionCallNode.parseFunctionCallNode(inputList);
+                firstExpression = new ExpressionNode(FunctionCallNode.parseFunctionCallNode(inputList));
+            }
+            else if(inputList.get(0).getToken().equals("True") ||
+                    inputList.get(0).getToken().equals("False")) {
+                firstExpression = new ExpressionNode(ConstantNode.parseConstantNode(inputList));
             }
             else {
-                expNode = IDKeywordNode.parseIdKeyWordNode(inputList);
-            }
-            if(inputList.get(0).getTokenType() == TokenType.REL_OP || inputList.get(0).getTokenType() == TokenType.MATH_OP) {
-                Token operator = inputList.remove(0);
-                ExpressionNode node = ExpressionNode.parseExpressionNode(inputList);
-                return new ExpressionNode(expNode,operator, node);
-            }
-            else {
-                return new ExpressionNode(expNode, null, null);
+                firstExpression = new ExpressionNode(IDKeywordNode.parseIdKeyWordNode(inputList));
             }
         }
-        Token errorToken = inputList.get(0);
-        throw new ParserException(errorToken, "Invalid Expression");
+        else if(inputList.get(0).getTokenType() == TokenType.NUMBER) {
+            firstExpression = new ExpressionNode(ConstantNode.parseConstantNode(inputList));
+        }
+        else if(inputList.get(0).getTokenType() == TokenType.STRING) {
+            firstExpression = new ExpressionNode(ConstantNode.parseConstantNode(inputList));
+        }
+        else {
+            throw new Exception("Invalid start of expression. Expected ID or Number but got " + inputList.get(0).getTokenType());
+        }
+
+        if(inputList.get(0).getTokenType() == TokenType.MATH_OP) {
+            op = OpNode.parseOpNode(inputList);
+        }
+        else if(inputList.get(0).getTokenType() == TokenType.REL_OP) {
+            op = RelOpNode.parseRelOpNode(inputList);
+        }
+        else {
+            return firstExpression;
+        }
+
+        secondExpression = ExpressionNode.parseExpressionNode(inputList);
+        return new ExpressionNode(firstExpression, op, secondExpression);
     }
+
     /**
      * Will output a string of this tree in Jott
      * @return a string representing the Jott code of this tree
      */
     public String convertToJott() {
-        //Should be fully overwritten
-        String result = expNode.convertToJott();
-        if (operator != null) {
-            result += operator.getToken();
-            result += node.convertToJott();
+        if(idKeywordNode != null) {
+            return " " + idKeywordNode.convertToJott() + " ";
         }
-
-        return result;
+        if(constantNode != null) {
+            return " " + constantNode.convertToJott() + " ";
+        }
+        if(functionCallNode != null) {
+            return " " + functionCallNode.convertToJott() + " ";
+        }
+        return firstExpressionNode.convertToJott() + " " + operationNode.convertToJott() + " " + secondExpressionNode.convertToJott();
     }
 
     /**
