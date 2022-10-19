@@ -55,5 +55,5 @@ public class FunctionCallNode implements JottTree{
      * Errors validating will be reported to System.err
      * @return true if valid Jott code; false otherwise
      */
-    public boolean validateTree(){return false;}
+    public boolean validateTree(){return (id.validateTree() && params.validateTree());}
 }

@@ -99,7 +99,15 @@ public class IfStatementNode extends BodyStatementNode{
      * @return true if valid Jott code; false otherwise
      */
     public boolean validateTree() {
-        return true;
+        Boolean expressionBool = boolExpressoin.validateTree();
+        Boolean bodyBool = body.validateTree();
+        Boolean elseIfBool = true;
+        Boolean elseBool = true;
+
+        if(elsIf!= null){elseIfBool = elsIf.validateTree();}
+        if(elseStatement!=null){ elseBool = elseStatement.validateTree();}
+
+        return (expressionBool && bodyBool && elseIfBool && elseBool);
     }
 
 }

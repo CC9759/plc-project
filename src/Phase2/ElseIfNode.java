@@ -56,6 +56,18 @@ public class ElseIfNode implements JottTree {
     }
 
     public boolean validateTree() {
-        return false;
-    }   
+        Boolean expressionBool = bExpr.validateTree();
+        Boolean bodyBool = bodyNode.validateTree();
+        Boolean elseIfBool = true;
+
+        if(elseIfNode!= null){elseIfBool = elseIfNode.validateTree();}
+
+        return (expressionBool && bodyBool && elseIfBool);
+    }
+
+    /**
+     *     private final BodyNode bodyNode;
+     *     private final ExpressionNode bExpr;
+     *     private final ElseIfNode elseIfNode;
+     */
 }

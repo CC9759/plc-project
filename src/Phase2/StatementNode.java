@@ -71,6 +71,6 @@ public class StatementNode extends BodyStatementNode{
      * @return true if valid Jott code; false otherwise
      */
     public boolean validateTree() {
-        return true;
+        return node.validateTree();
     }
 }
