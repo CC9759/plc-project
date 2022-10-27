@@ -40,6 +40,10 @@ public class FunctionDefParamsNode implements JottTree{
         return new FunctionDefParamsNode(paramIDs,paramTypes);
     }
 
+    public ArrayList<Token> getParamTypes(){
+        return this.paramTypes;
+    }
+
     @Override
     public String convertToJott() {
         StringBuilder result = new StringBuilder();

@@ -16,12 +16,12 @@ public class ParamsTNode implements JottTree {
         this.myParamsTNode = paramsTNode;
     }
 
-    public static ParamsTNode parseParamsT(ArrayList<Token> tokens) throws Exception{
+    public static ParamsTNode parseParamsT(ArrayList<Token> tokens, HashMap<String, String> localSymbolTable) throws Exception{
 
         if(tokens.get(0).getTokenType() != TokenType.R_BRACKET) {
             ParserUtils.removeToken(tokens,TokenType.COMMA);
-            ExpressionNode expressionNode = ExpressionNode.parseExpressionNode(tokens);
-            ParamsTNode paramsTNode = parseParamsT(tokens);
+            ExpressionNode expressionNode = ExpressionNode.parseExpressionNode(tokens, localSymbolTable);
+            ParamsTNode paramsTNode = parseParamsT(tokens, localSymbolTable);
             return new ParamsTNode(expressionNode, paramsTNode);
         }
         return null;

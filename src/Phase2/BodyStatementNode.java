@@ -8,16 +8,16 @@ package Phase2;
 import java.util.*;
 
 public abstract class BodyStatementNode implements JottTree{
-    public static BodyStatementNode parseBodyStatementNode(ArrayList<Token> tokens) throws Exception{
+    public static BodyStatementNode parseBodyStatementNode(ArrayList<Token> tokens, HashMap<String, String> localSymbolTable) throws Exception{
         Token check = tokens.get(0);
         if(check.getToken().equals("if")){
-            return IfStatementNode.parseIfStatementNode(tokens);
+            return IfStatementNode.parseIfStatementNode(tokens, localSymbolTable);
         }
         else if(check.getToken().equals("while")){
-            return WhileLoopNode.parseWhileLoopNode(tokens);
+            return WhileLoopNode.parseWhileLoopNode(tokens, localSymbolTable);
         }
         else{
-            return StatementNode.parseStatementNode(tokens); //insert statement node parse here
+            return StatementNode.parseStatementNode(tokens, localSymbolTable); //insert statement node parse here
         }
     }
 

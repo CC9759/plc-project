@@ -6,25 +6,23 @@ package Phase2;
  **/
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 public class VarDeclarationNode implements JottTree{
     private final String type;
     private final IDKeywordNode id;
-    //private final EndStatementNode endStatement;
 
 
-    private VarDeclarationNode(Token typeToken, IDKeywordNode idKeywordNode){ //EndStatementNode endStatementNode){
+    private VarDeclarationNode(Token typeToken, IDKeywordNode idKeywordNode){
         this.type = typeToken.getToken();
         this.id = idKeywordNode;
-        //this.endStatement = endStatementNode;
     }
 
-    static VarDeclarationNode parseVariableDeclarationNode(ArrayList<Token> tokens) throws Exception{
+    static VarDeclarationNode parseVariableDeclarationNode(ArrayList<Token> tokens, HashMap<String, String> localSymbolTable) throws Exception{
         Token typeToken = tokens.remove(0);
         IDKeywordNode idNode = IDKeywordNode.parseIdKeyWordNode(tokens);
+        localSymbolTable.put(idNode.value, typeToken.getToken());
         return new VarDeclarationNode(typeToken, idNode);
-        //EndStatementNode endStatementNode = EndStatementNode.parseEndExpressionNode(tokens);
-        //return new VarDeclarationNode(typeToken, idNode, endStatementNode);
     }
 
     /**

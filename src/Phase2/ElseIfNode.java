@@ -12,25 +12,25 @@ public class ElseIfNode implements JottTree {
     private final ExpressionNode bExpr;
     private final ElseIfNode elseIfNode;
 
-    public ElseIfNode(ArrayList<Token> inputList) throws Exception{
-        bExpr = ExpressionNode.parseExpressionNode(inputList);
+    public ElseIfNode(ArrayList<Token> inputList, HashMap<String, String> localSymbolTable) throws Exception{
+        bExpr = ExpressionNode.parseExpressionNode(inputList, localSymbolTable);
         // remove right bracket and left brace
         ParserUtils.removeToken(inputList, TokenType.R_BRACKET);
         ParserUtils.removeToken(inputList, TokenType.L_BRACE);
-        this.bodyNode = BodyNode.parseBodyNode(inputList);
+        this.bodyNode = BodyNode.parseBodyNode(inputList, localSymbolTable);
         // remove right brace
         ParserUtils.removeToken(inputList,TokenType.R_BRACE);
-        this.elseIfNode = ElseIfNode.parseElseIfNode(inputList);
+        this.elseIfNode = ElseIfNode.parseElseIfNode(inputList, localSymbolTable);
     }
 
-    public static ElseIfNode parseElseIfNode(ArrayList<Token> inputList) throws Exception{
+    public static ElseIfNode parseElseIfNode(ArrayList<Token> inputList, HashMap<String, String> localSymbolTable) throws Exception{
         ElseIfNode elseIfNode;
         
         if(inputList.get(0).getToken().equals("elseif")){
             // remove elseif and left bracket
             inputList.remove(0);
             inputList.remove(0);
-            elseIfNode = new ElseIfNode(inputList);
+            elseIfNode = new ElseIfNode(inputList, localSymbolTable);
         }
         else{
             return null;
@@ -64,10 +64,4 @@ public class ElseIfNode implements JottTree {
 
         return (expressionBool && bodyBool && elseIfBool);
     }
-
-    /**
-     *     private final BodyNode bodyNode;
-     *     private final ExpressionNode bExpr;
-     *     private final ElseIfNode elseIfNode;
-     */
 }

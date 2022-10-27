@@ -6,6 +6,7 @@ package Phase2;
  **/
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 public class WhileLoopNode extends BodyStatementNode{
 
@@ -18,14 +19,14 @@ public class WhileLoopNode extends BodyStatementNode{
     }
 
 
-    public static WhileLoopNode parseWhileLoopNode(ArrayList<Token> tokens) throws Exception{
+    public static WhileLoopNode parseWhileLoopNode(ArrayList<Token> tokens, HashMap<String, String> localSymbolTable) throws Exception{
         //ask about the braces
         tokens.remove(0); //removes while
         ParserUtils.removeToken(tokens, TokenType.L_BRACKET);
-        ExpressionNode boolExpressionNode = ExpressionNode.parseExpressionNode(tokens);
+        ExpressionNode boolExpressionNode = ExpressionNode.parseExpressionNode(tokens, localSymbolTable);
         ParserUtils.removeToken(tokens,TokenType.R_BRACKET);
         ParserUtils.removeToken(tokens,TokenType.L_BRACE);
-        BodyNode bodyNode = BodyNode.parseBodyNode(tokens);
+        BodyNode bodyNode = BodyNode.parseBodyNode(tokens, localSymbolTable);
         ParserUtils.removeToken(tokens,TokenType.R_BRACE);
         return new WhileLoopNode(boolExpressionNode, bodyNode);
 

@@ -6,6 +6,7 @@ package Phase2;
  **/
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 public class FunctionCallNode implements JottTree{
 
@@ -17,10 +18,10 @@ public class FunctionCallNode implements JottTree{
         this.id = idKeywordNode;
         this.params = paramsNode;
     }
-    public static FunctionCallNode parseFunctionCallNode(ArrayList<Token> tokens) throws Exception{
+    public static FunctionCallNode parseFunctionCallNode(ArrayList<Token> tokens, HashMap<String, String> localSymbolTable) throws Exception{
         IDKeywordNode idKeywordNode = IDKeywordNode.parseIdKeyWordNode(tokens);
         ParserUtils.removeToken(tokens,TokenType.L_BRACKET);
-        ParamsNode paramsNode = ParamsNode.parseParamsNode(tokens);
+        ParamsNode paramsNode = ParamsNode.parseParamsNode(tokens, localSymbolTable);
         ParserUtils.removeToken(tokens,TokenType.R_BRACKET);
         return new FunctionCallNode(idKeywordNode, paramsNode);
     }
@@ -55,5 +56,6 @@ public class FunctionCallNode implements JottTree{
      * Errors validating will be reported to System.err
      * @return true if valid Jott code; false otherwise
      */
-    public boolean validateTree(){return (id.validateTree() && params.validateTree());}
+    public boolean validateTree(){return (
+            id.validateTree() && params.validateTree());}
 }

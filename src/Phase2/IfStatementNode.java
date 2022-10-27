@@ -6,6 +6,7 @@ package Phase2;
  **/
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 public class IfStatementNode extends BodyStatementNode{
 
@@ -21,13 +22,13 @@ public class IfStatementNode extends BodyStatementNode{
         this.elsIf = elseIfNode;
         this.elseStatement = elseNode;
     }
-    public static IfStatementNode parseIfStatementNode(ArrayList<Token> tokens) throws Exception{
+    public static IfStatementNode parseIfStatementNode(ArrayList<Token> tokens, HashMap<String, String> localSymbolTable) throws Exception{
         tokens.remove(0); //remove if
         ParserUtils.removeToken(tokens,TokenType.L_BRACKET);
-        ExpressionNode boolExpressionNode = ExpressionNode.parseExpressionNode(tokens);
+        ExpressionNode boolExpressionNode = ExpressionNode.parseExpressionNode(tokens, localSymbolTable);
         ParserUtils.removeToken(tokens, TokenType.R_BRACKET);
         ParserUtils.removeToken(tokens, TokenType.L_BRACE);
-        BodyNode bodyNode = BodyNode.parseBodyNode(tokens);
+        BodyNode bodyNode = BodyNode.parseBodyNode(tokens, localSymbolTable);
         ParserUtils.removeToken(tokens, TokenType.R_BRACE);
 
         ElseIfNode elseIfNode = null;
@@ -36,7 +37,7 @@ public class IfStatementNode extends BodyStatementNode{
 
             if(elseifToken.getToken().equals("elseif")) {
                 tokens.remove(0);
-                elseIfNode = ElseIfNode.parseElseIfNode(tokens);
+                elseIfNode = ElseIfNode.parseElseIfNode(tokens, localSymbolTable);
             }
         }
 
@@ -46,7 +47,7 @@ public class IfStatementNode extends BodyStatementNode{
 
             if (elseToken.getToken().equals("else")){
                 tokens.remove(0);
-                elseNode = ElseNode.parseElseNode(tokens);
+                elseNode = ElseNode.parseElseNode(tokens, localSymbolTable);
             }
         }
 

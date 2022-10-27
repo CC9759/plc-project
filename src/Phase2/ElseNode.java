@@ -10,18 +10,18 @@ import java.util.*;
 public class ElseNode implements JottTree {
     private final BodyNode bodyNode;
 
-    public ElseNode(ArrayList<Token> inputList) throws Exception{
-        this.bodyNode = BodyNode.parseBodyNode(inputList);
+    public ElseNode(ArrayList<Token> inputList, HashMap<String, String> localSymbolTable) throws Exception{
+        this.bodyNode = BodyNode.parseBodyNode(inputList, localSymbolTable);
     }
 
-    public static ElseNode parseElseNode(ArrayList<Token> inputList) throws Exception{
+    public static ElseNode parseElseNode(ArrayList<Token> inputList, HashMap<String, String> localSymbolTable) throws Exception{
         ElseNode elseNode;
         
         if(inputList.get(0).getToken().equals("else")){
             // remove else and left brace
             inputList.remove(0);
             ParserUtils.removeToken(inputList,TokenType.L_BRACE);
-            elseNode = new ElseNode(inputList);
+            elseNode = new ElseNode(inputList, localSymbolTable);
             // remove right brace
             ParserUtils.removeToken(inputList,TokenType.R_BRACE);
             inputList.remove(0);

@@ -16,13 +16,13 @@ public class BodyNode implements JottTree {
         returnStatement = null;
     }
 
-    public static BodyNode parseBodyNode(ArrayList<Token> inputList) throws Exception{
+    public static BodyNode parseBodyNode(ArrayList<Token> inputList, HashMap<String, String> localSymbolTable) throws Exception{
         BodyNode bodyNode = new BodyNode();
         while (true){
             Token token = inputList.get(0);
     
             if(token.getToken().equals("return")){
-                bodyNode.returnStatement = ReturnStatementNode.ParseReturnStatementNode(inputList);
+                bodyNode.returnStatement = ReturnStatementNode.ParseReturnStatementNode(inputList, localSymbolTable);
                 break;
             }
             else if(token.getTokenType() == TokenType.R_BRACE){
@@ -30,7 +30,8 @@ public class BodyNode implements JottTree {
                 //return null;
             }
             else{
-                bodyNode.bodyStatements.add(BodyStatementNode.parseBodyStatementNode(inputList));
+                bodyNode.bodyStatements.add(BodyStatementNode.parseBodyStatementNode(inputList, localSymbolTable));
+
             }
 
         }
