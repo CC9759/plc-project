@@ -10,6 +10,8 @@ import java.util.HashMap;
 
 public class WhileLoopNode extends BodyStatementNode{
 
+    public final boolean isStatement = false;
+
     private final ExpressionNode boolExpression;
     private final BodyNode body;
 
@@ -69,4 +71,6 @@ public class WhileLoopNode extends BodyStatementNode{
      *     private final ExpressionNode boolExpression;
      *     private final BodyNode body;
      */
+
+    public boolean returnable() {return body.returnable();}
 }

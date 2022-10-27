@@ -86,5 +86,18 @@ public class BodyNode implements JottTree {
     public boolean validateTree() {
         return true;
     }
+
+    public boolean returnable() {
+        if(returnStatement != null) {
+            return true;
+        }
+        boolean returnable = false;
+        for(int i = 0; i < bodyStatements.size(); i ++) {
+            if(!bodyStatements.get(i).isStatement) {
+                returnable = bodyStatements.get(i).returnable();
+            }
+        }
+        return returnable;
+    }
 }
 

@@ -79,4 +79,8 @@ public class FunctionDefNode implements JottTree{
         return (this.myIDKeywordNode.validateTree() && this.myFunctionDefParamsNode.validateTree() &&
         this.myReturnNode.validateTree() && this.myBodyNode.validateTree());
     }
+
+    public boolean returnable() {
+        return myBodyNode.returnable();
+    }
 }

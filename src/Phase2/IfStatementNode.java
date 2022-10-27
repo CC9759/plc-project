@@ -10,6 +10,7 @@ import java.util.HashMap;
 
 public class IfStatementNode extends BodyStatementNode{
 
+    public final boolean isStatement = false;
 
     private final ExpressionNode boolExpressoin;
     private final BodyNode body;
@@ -109,6 +110,22 @@ public class IfStatementNode extends BodyStatementNode{
         if(elseStatement!=null){ elseBool = elseStatement.validateTree();}
 
         return (expressionBool && bodyBool && elseIfBool && elseBool);
+    }
+
+    public boolean returnable() {
+        boolean bodyReturnable = false;
+        boolean elifReturnable = false;
+        boolean elseReturnable = false;
+        if(body != null) {
+            bodyReturnable = body.returnable();
+        }
+        if(elsIf != null) {
+            elifReturnable = elsIf.returnable();
+        }
+        if(elseStatement != null) {
+            elseReturnable = elseStatement.returnable();
+        }
+        return bodyReturnable && (elifReturnable || elseReturnable);
     }
 
 }

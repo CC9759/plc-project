@@ -57,4 +57,8 @@ public class ElseNode implements JottTree {
     public boolean validateTree() {
         return bodyNode.validateTree();
     }
+
+    public boolean returnable() {
+        return true;
+    }
 }

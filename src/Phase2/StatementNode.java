@@ -9,6 +9,8 @@ import java.util.ArrayList;
 import java.util.HashMap;
 
 public class StatementNode extends BodyStatementNode{
+
+    public final boolean isStatement = true;
     final JottTree node;
     public StatementNode(JottTree node) {
         this.node = node;
@@ -73,5 +75,9 @@ public class StatementNode extends BodyStatementNode{
      */
     public boolean validateTree() {
         return node.validateTree();
+    }
+
+    public boolean returnable() {
+        return false;
     }
 }

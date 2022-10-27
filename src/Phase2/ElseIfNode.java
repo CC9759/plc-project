@@ -64,4 +64,17 @@ public class ElseIfNode implements JottTree {
 
         return (expressionBool && bodyBool && elseIfBool);
     }
+
+    /**
+     *     private final BodyNode bodyNode;
+     *     private final ExpressionNode bExpr;
+     *     private final ElseIfNode elseIfNode;
+     */
+
+    public boolean returnable() {
+        if(elseIfNode == null) {
+            return bodyNode.returnable();
+        }
+        return elseIfNode.returnable() && bodyNode.returnable();
+    }
 }
