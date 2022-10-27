@@ -6,13 +6,14 @@ package Phase2;
  **/
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 public class StatementNode extends BodyStatementNode{
     final JottTree node;
     public StatementNode(JottTree node) {
         this.node = node;
     }
-    public static StatementNode parseStatementNode(ArrayList<Token> tokens) throws Exception{
+    public static StatementNode parseStatementNode(ArrayList<Token> tokens, HashMap<String, String> localSymbolTable) throws Exception{
         JottTree result;
         Token firstToken = tokens.get(0);
         String firstTokenValue = firstToken.getToken();
@@ -23,12 +24,12 @@ public class StatementNode extends BodyStatementNode{
         boolean b = firstTokenValue.equals("Boolean") || firstTokenValue.equals("Integer") ||
                 firstTokenValue.equals("String") || firstTokenValue.equals("Double");
         if (b && thirdTokenValue.equals(";")){
-                result =  VarDeclarationNode.parseVariableDeclarationNode(tokens);
+                result =  VarDeclarationNode.parseVariableDeclarationNode(tokens, localSymbolTable);
 
         } else if ((b && thirdTokenValue.equals("=")) || secondTokenValue.equals("=")){
-            result = AssignmentNode.parseAssignmentNode(tokens);
+            result = AssignmentNode.parseAssignmentNode(tokens, localSymbolTable);
         }else{
-            result = FunctionCallNode.parseFunctionCallNode(tokens);
+            result = FunctionCallNode.parseFunctionCallNode(tokens, localSymbolTable);
         }
         ParserUtils.removeToken(tokens,TokenType.SEMICOLON);
         return new StatementNode(result);

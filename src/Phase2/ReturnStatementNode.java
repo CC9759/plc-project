@@ -6,6 +6,7 @@ package Phase2;
  **/
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 public class ReturnStatementNode implements JottTree {
     private final ExpressionNode expression;
@@ -16,9 +17,9 @@ public class ReturnStatementNode implements JottTree {
         this.expression = expressionNode;
     }
     //TODO implement ParseReturnStatementNode
-    public static ReturnStatementNode ParseReturnStatementNode(ArrayList<Token> inputList) throws Exception {
+    public static ReturnStatementNode ParseReturnStatementNode(ArrayList<Token> inputList, HashMap<String, String> localSymbolTable) throws Exception {
         inputList.remove(0);
-        ExpressionNode expressionNode = ExpressionNode.parseExpressionNode(inputList);
+        ExpressionNode expressionNode = ExpressionNode.parseExpressionNode(inputList, localSymbolTable);
         ParserUtils.removeToken(inputList,TokenType.SEMICOLON);
         return new ReturnStatementNode(expressionNode);
     }

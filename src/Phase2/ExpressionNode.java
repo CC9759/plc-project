@@ -49,14 +49,14 @@ public class ExpressionNode implements JottTree {
         secondExpressionNode = second;
     }
 
-    public static ExpressionNode parseExpressionNode(ArrayList<Token> inputList) throws Exception {
+    public static ExpressionNode parseExpressionNode(ArrayList<Token> inputList, HashMap<String, String> localSymbolTable) throws Exception {
         ExpressionNode firstExpression = null;
         JottTree op = null;
         ExpressionNode secondExpression = null;
 
         if(inputList.get(0).getTokenType() == TokenType.ID_KEYWORD) {
             if(inputList.get(1).getTokenType() == TokenType.L_BRACKET) {
-                firstExpression = new ExpressionNode(FunctionCallNode.parseFunctionCallNode(inputList));
+                firstExpression = new ExpressionNode(FunctionCallNode.parseFunctionCallNode(inputList, localSymbolTable));
             }
             else if(inputList.get(0).getToken().equals("True") ||
                     inputList.get(0).getToken().equals("False")) {
@@ -86,7 +86,7 @@ public class ExpressionNode implements JottTree {
             return firstExpression;
         }
 
-        secondExpression = ExpressionNode.parseExpressionNode(inputList);
+        secondExpression = ExpressionNode.parseExpressionNode(inputList, localSymbolTable);
         return new ExpressionNode(firstExpression, op, secondExpression);
     }
 

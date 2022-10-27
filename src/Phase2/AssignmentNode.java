@@ -20,7 +20,7 @@ public class AssignmentNode implements JottTree {
         this.myExpressionNode = expression;
     }
 
-    static AssignmentNode parseAssignmentNode(ArrayList<Token> tokens) throws Exception{
+    static AssignmentNode parseAssignmentNode(ArrayList<Token> tokens, HashMap<String, String> localSymbolTable) throws Exception{
         String firstTokenAsString = tokens.get(0).getToken();
         Token typeToken = null;
         if(firstTokenAsString.equals("Boolean") ||
@@ -31,8 +31,9 @@ public class AssignmentNode implements JottTree {
         }
 
         IDKeywordNode idKeywordNode = IDKeywordNode.parseIdKeyWordNode(tokens);
+        localSymbolTable.put(idKeywordNode.value, typeToken.getToken());
         ParserUtils.removeToken(tokens, TokenType.ASSIGN);
-        ExpressionNode expressionNode = ExpressionNode.parseExpressionNode(tokens);
+        ExpressionNode expressionNode = ExpressionNode.parseExpressionNode(tokens, localSymbolTable);
         return new AssignmentNode(typeToken, idKeywordNode, expressionNode);
     }
     /**

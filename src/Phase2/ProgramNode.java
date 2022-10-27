@@ -6,20 +6,30 @@ package Phase2;
  **/
 
 import java.util.ArrayList;
+import java.util.HashMap;
+
 public class ProgramNode implements JottTree{
     private final ArrayList<FunctionDefNode> functionDefs;
 
-    private ProgramNode(ArrayList<FunctionDefNode> functionDefs) {
+    public HashMap<String, FunctionDefNode> globalSymbolTable;
+
+    private ProgramNode(ArrayList<FunctionDefNode> functionDefs, HashMap<String, FunctionDefNode> table) {
         this.functionDefs = functionDefs;
+        this.globalSymbolTable = table;
     }
 
     public static ProgramNode parseProgramNode(ArrayList<Token> tokens) {
         ArrayList<FunctionDefNode> functionDefs = new ArrayList<>();
+        HashMap<String, FunctionDefNode> newTable = new HashMap<>();
         try {
             while (!tokens.isEmpty()) {
-                functionDefs.add(FunctionDefNode.parseFunctionDefNode(tokens));
+
+                FunctionDefNode function = FunctionDefNode.parseFunctionDefNode(tokens);
+                functionDefs.add(function);
+                newTable.put(function.myIDKeywordNode.value, function);
+
             }
-            return new ProgramNode(functionDefs);
+            return new ProgramNode(functionDefs, newTable);
         } catch(Exception e) {
           System.err.println(e.getMessage());
           return null;

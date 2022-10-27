@@ -20,10 +20,10 @@ public class ParamsNode implements JottTree {
         this.myParamsTNode = paramsTNode;
     }
 
-    public static ParamsNode parseParamsNode(ArrayList<Token> tokens) throws Exception {
+    public static ParamsNode parseParamsNode(ArrayList<Token> tokens, HashMap<String, String> localSymbolTable) throws Exception {
         if(tokens.get(0).getTokenType() != TokenType.R_BRACKET) {
-            ExpressionNode expressionNode = ExpressionNode.parseExpressionNode(tokens);
-            ParamsTNode paramsTNode = ParamsTNode.parseParamsT(tokens);
+            ExpressionNode expressionNode = ExpressionNode.parseExpressionNode(tokens, localSymbolTable);
+            ParamsTNode paramsTNode = ParamsTNode.parseParamsT(tokens, localSymbolTable);
             return new ParamsNode(expressionNode, paramsTNode);
         }
         return null;
