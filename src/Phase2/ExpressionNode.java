@@ -1,11 +1,10 @@
 package Phase2;
-/**
- * This class is responsible for parsing and translating an Expression NodeIf Node in the JottTree
- *
- * @author Jonathon LoTempio, Halle Masaryk, Celina, Kaiming Zhang
- **/
+/*
+  This class is responsible for parsing and translating an Expression Node in the JottTree
 
-import java.beans.Expression;
+  @author Jonathon LoTempio, Halle Masaryk, Celina, Kaiming Zhang
+ */
+
 import java.util.*;
 
 public class ExpressionNode implements JottTree {
@@ -50,9 +49,9 @@ public class ExpressionNode implements JottTree {
     }
 
     public static ExpressionNode parseExpressionNode(ArrayList<Token> inputList, HashMap<String, String> localSymbolTable) throws Exception {
-        ExpressionNode firstExpression = null;
-        JottTree op = null;
-        ExpressionNode secondExpression = null;
+        ExpressionNode firstExpression;
+        JottTree op;
+        ExpressionNode secondExpression;
 
         if(inputList.get(0).getTokenType() == TokenType.ID_KEYWORD) {
             if(inputList.get(1).getTokenType() == TokenType.L_BRACKET) {
