@@ -44,15 +44,19 @@ public class ElseIfNode implements JottTree {
     }
 
     public String convertToJava() {
-        return null;
+        return "else if (" + bExpr.convertToJava() + "){" + bodyNode.convertToJava() + "}" + elseIfNode.convertToJava(); 
     }
 
     public String convertToC() {
-        return null;
+        return "else if (" + bExpr.convertToC() + "){" + bodyNode.convertToC() + "}" + elseIfNode.convertToC(); 
     }
 
     public String convertToPython() {
-        return null;
+        String finalString = "elif (" + bExpr.convertToPython() + "):\n\t";
+        
+        finalString += bodyNode.convertToPython().replace("\n", "\n\t");
+        finalString += "\n" + elseIfNode.convertToPython();
+        return finalString;
     }
 
     public boolean validateTree() {

@@ -41,17 +41,16 @@ public class AssignmentNode implements JottTree {
      * @return a string representing the Jott code of this tree
      */
     public String convertToJott() {
-        String returnMe = "";
+        StringBuilder finalString = new StringBuilder();
         if(myType != null) {
-            returnMe = returnMe + myType;
-            returnMe = returnMe + " ";
+            finalString.append(myType);
+            finalString.append(" ");
         }
-        returnMe = returnMe + myIDKeywordNode.convertToJott();
-        returnMe = returnMe + " = ";
-        returnMe = returnMe + myExpressionNode.convertToJott();
-        returnMe = returnMe + " ";
-        returnMe = returnMe;//myEndStatementNode.convertToJott();
-        return returnMe;
+        finalString.append(myIDKeywordNode.convertToJott());
+        finalString.append(" = ");
+        finalString.append(myExpressionNode.convertToJott());
+        finalString.append(" ");
+        return finalString.toString();
     }
 
     /**
@@ -59,7 +58,16 @@ public class AssignmentNode implements JottTree {
      * @return a string representing the Java code of this tree
      */
     public String convertToJava() {
-        return null;
+        StringBuilder finalString = new StringBuilder();
+        if(myType != null) {
+            finalString.append(myType);
+            finalString.append(" ");
+        }
+        finalString.append(myIDKeywordNode.convertToJava());
+        finalString.append(" = ");
+        finalString.append(myExpressionNode.convertToJava());
+        finalString.append(" ");
+        return finalString.toString();
     }
 
     /**
@@ -67,7 +75,16 @@ public class AssignmentNode implements JottTree {
      * @return a string representing the C code of this tree
      */
     public String convertToC() {
-        return null;
+        StringBuilder finalString = new StringBuilder();
+        if(myType != null) {
+            finalString.append(myType);
+            finalString.append(" ");
+        }
+        finalString.append(myIDKeywordNode.convertToC());
+        finalString.append(" = ");
+        finalString.append(myExpressionNode.convertToC());
+        finalString.append(" ");
+        return finalString.toString();
     }
 
     /**
@@ -75,7 +92,12 @@ public class AssignmentNode implements JottTree {
      * @return a string representing the Python code of this tree
      */
     public String convertToPython() {
-        return null;
+        StringBuilder finalString = new StringBuilder();
+        finalString.append(myIDKeywordNode.convertToPython());
+        finalString.append(" = ");
+        finalString.append(myExpressionNode.convertToPython());
+        finalString.append(" ");
+        return finalString.toString();
     }
 
     /**

@@ -43,15 +43,32 @@ public class ElseNode implements JottTree {
     }
 
     public String convertToJava() {
-        return null;
+        if(bodyNode == null){
+            return "";
+        }
+        else{
+            return "else {" + bodyNode.convertToJava() + "}";
+        }
     }
 
     public String convertToC() {
-        return null;
+        if(bodyNode == null){
+            return "";
+        }
+        else{
+            return "else {" + bodyNode.convertToC() + "}";
+        }
     }
 
     public String convertToPython() {
-        return null;
+        if(bodyNode == null){
+            return "";
+        }
+        else{
+            String finalString =  "else:\n\t";
+            finalString += bodyNode.convertToPython().replace("\n", "\n\t");
+            return finalString;
+        }
     }
 
     public boolean validateTree() {

@@ -59,7 +59,15 @@ public class BodyNode implements JottTree {
      * @return a string representing the Java code of this tree
      */
     public String convertToJava() {
-        return null;
+        StringBuilder finalString = new StringBuilder();
+
+        for(BodyStatementNode i: bodyStatements){
+            finalString.append(i.convertToJava());
+        }
+        if(returnStatement != null){
+            finalString.append(returnStatement.convertToJava());
+        }
+        return finalString.toString();
     }
 
     /**
@@ -67,7 +75,15 @@ public class BodyNode implements JottTree {
      * @return a string representing the C code of this tree
      */
     public String convertToC() {
-        return null;
+        StringBuilder finalString = new StringBuilder();
+
+        for(BodyStatementNode i: bodyStatements){
+            finalString.append(i.convertToC());
+        }
+        if(returnStatement != null){
+            finalString.append(returnStatement.convertToC());
+        }
+        return finalString.toString();
     }
 
     /**
@@ -75,7 +91,16 @@ public class BodyNode implements JottTree {
      * @return a string representing the Python code of this tree
      */
     public String convertToPython() {
-        return null;
+        StringBuilder finalString = new StringBuilder();
+
+        for(BodyStatementNode i: bodyStatements){
+            finalString.append(i.convertToJott());
+            finalString.append("\n");
+        }
+        if(returnStatement != null){
+            finalString.append(returnStatement.convertToJott());
+        }
+        return finalString.toString();
     }
 
     /**
