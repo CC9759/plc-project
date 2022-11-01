@@ -8,6 +8,8 @@ package Phase2;
 import java.util.*;
 
 public abstract class BodyStatementNode implements JottTree{
+    public static boolean isStatement;
+
     public static BodyStatementNode parseBodyStatementNode(ArrayList<Token> tokens, HashMap<String, String> localSymbolTable) throws Exception{
         Token check = tokens.get(0);
         if(check.getToken().equals("if")){
@@ -47,4 +49,6 @@ public abstract class BodyStatementNode implements JottTree{
      * @return true if valid Jott code; false otherwise
      */
     public abstract boolean validateTree();
+
+    public abstract boolean returnable();
 }
