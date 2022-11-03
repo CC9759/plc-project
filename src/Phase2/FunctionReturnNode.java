@@ -24,17 +24,17 @@ public class FunctionReturnNode implements JottTree{
 
     @Override
     public String convertToJava() {
-        return null;
+        return returnToken.getToken();
     }
 
     @Override
     public String convertToC() {
-        return null;
+        return returnToken.getToken();
     }
 
     @Override
     public String convertToPython() {
-        return null;
+        return returnToken.getToken();
     }
 
     @Override

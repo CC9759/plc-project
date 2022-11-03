@@ -60,18 +60,42 @@ public class FunctionDefNode implements JottTree{
     }
 
     @Override
+    // TODO: Do we need private?
     public String convertToJava() {
-        return null;
+        String result = "public ";
+        result += myReturnNode.convertToJava() + " ";
+        result += myIDKeywordNode.convertToJava();
+        result += "(";
+        result += myFunctionDefParamsNode.convertToJava();
+        result += "){";
+        result += myBodyNode.convertToJava();
+        result += "}";
+        return result;
     }
 
     @Override
     public String convertToC() {
-        return null;
+        String result = "";
+        result += myReturnNode.convertToC() + " ";
+        result += myIDKeywordNode.convertToC();
+        result += "(";
+        result += myFunctionDefParamsNode.convertToC();
+        result += "){";
+        result += myBodyNode.convertToC();
+        result += "}";
+        return result;
     }
 
     @Override
     public String convertToPython() {
-        return null;
+        String result = "def ";
+        result += myReturnNode.convertToPython() + " ";
+        result += myIDKeywordNode.convertToPython();
+        result += "(";
+        result += myFunctionDefParamsNode.convertToPython();
+        result += "):\n\t";
+        result += myBodyNode.convertToPython().replace("\n", "\n\t");;
+        return result;
     }
 
     @Override

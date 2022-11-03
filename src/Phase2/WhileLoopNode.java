@@ -40,25 +40,25 @@ public class WhileLoopNode extends BodyStatementNode{
      * @return a string representing the Jott code of this tree
      */
     //We should add space correct?
-    public String convertToJott(){return "while [ " + boolExpression.convertToJott() + " ] { "+body.convertToJott()+" }";}
+    public String convertToJott(){return "while[" + boolExpression.convertToJott() + "] {"+ body.convertToJott() +"}";}
 
     /**
      * Will output a string of this tree in Java
      * @return a string representing the Java code of this tree
      */
-    public String convertToJava(){return null;}
+    public String convertToJava(){return "while(" + boolExpression.convertToJava() + "){" + body.convertToJava() +"}";}
 
     /**
      * Will output a string of this tree in C
      * @return a string representing the C code of this tree
      */
-    public String convertToC(){return null;}
+    public String convertToC(){return "while(" + boolExpression.convertToC() + "){" + body.convertToC() +"}";}
 
     /**
      * Will output a string of this tree in Python
      * @return a string representing the Python code of this tree
      */
-    public String convertToPython(){return null;}
+    public String convertToPython(){return "while(" + boolExpression.convertToPython() + "):\n\t" + body.convertToPython().replace("\n", "\n\t");}
 
     /**
      * This will validate that the tree follows the semantic rules of Jott

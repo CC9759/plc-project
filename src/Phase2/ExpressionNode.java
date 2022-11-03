@@ -110,8 +110,18 @@ public class ExpressionNode implements JottTree {
      * Will output a string of this tree in Java
      * @return a string representing the Java code of this tree
      */
+    // TODO: Why these extra spaces?
     public String convertToJava() {
-        return null;
+        if(idKeywordNode != null) {
+            return " " + idKeywordNode.convertToJava() + " ";
+        }
+        if(constantNode != null) {
+            return " " + constantNode.convertToJava() + " ";
+        }
+        if(functionCallNode != null) {
+            return " " + functionCallNode.convertToJava() + " ";
+        }
+        return firstExpressionNode.convertToJava() + " " + operationNode.convertToJava() + " " + secondExpressionNode.convertToJava();
     }
 
     /**
@@ -119,7 +129,16 @@ public class ExpressionNode implements JottTree {
      * @return a string representing the C code of this tree
      */
     public String convertToC() {
-        return null;
+        if(idKeywordNode != null) {
+            return " " + idKeywordNode.convertToC() + " ";
+        }
+        if(constantNode != null) {
+            return " " + constantNode.convertToC() + " ";
+        }
+        if(functionCallNode != null) {
+            return " " + functionCallNode.convertToC() + " ";
+        }
+        return firstExpressionNode.convertToC() + " " + operationNode.convertToC() + " " + secondExpressionNode.convertToC();
     }
 
     /**
@@ -127,7 +146,16 @@ public class ExpressionNode implements JottTree {
      * @return a string representing the Python code of this tree
      */
     public String convertToPython() {
-        return null;
+        if(idKeywordNode != null) {
+            return " " + idKeywordNode.convertToPython() + " ";
+        }
+        if(constantNode != null) {
+            return " " + constantNode.convertToPython() + " ";
+        }
+        if(functionCallNode != null) {
+            return " " + functionCallNode.convertToPython() + " ";
+        }
+        return firstExpressionNode.convertToPython() + " " + operationNode.convertToPython() + " " + secondExpressionNode.convertToPython();
     }
 
     /**

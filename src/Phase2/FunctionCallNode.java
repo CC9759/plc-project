@@ -37,19 +37,19 @@ public class FunctionCallNode implements JottTree{
      * Will output a string of this tree in Java
      * @return a string representing the Java code of this tree
      */
-    public String convertToJava(){return null;}
+    public String convertToJava(){return id.convertToJava() + "(" + params.convertToJava() + ")";}
 
     /**
      * Will output a string of this tree in C
      * @return a string representing the C code of this tree
      */
-    public String convertToC(){return null;}
+    public String convertToC(){return id.convertToC() + "(" + params.convertToC() + ")";}
 
     /**
      * Will output a string of this tree in Python
      * @return a string representing the Python code of this tree
      */
-    public String convertToPython(){return null;}
+    public String convertToPython(){return id.convertToPython() + "(" + params.convertToPython() + ")";}
 
     /**
      * This will validate that the tree follows the semantic rules of Jott

@@ -40,7 +40,12 @@ public class ParamsTNode implements JottTree {
      * @return a string representing the Java code of this tree
      */
     public String convertToJava() {
-        return null;
+        String result = myExpressionNode.convertToJava();
+        if (myParamsTNode != null) {
+            result +=",";
+            result += myParamsTNode.convertToJava();
+        }
+        return result;
     }
 
     /**
@@ -48,7 +53,12 @@ public class ParamsTNode implements JottTree {
      * @return a string representing the C code of this tree
      */
     public String convertToC() {
-        return null;
+        String result = myExpressionNode.convertToC();
+        if (myParamsTNode != null) {
+            result +=",";
+            result += myParamsTNode.convertToC();
+        }
+        return result;
     }
 
     /**
@@ -56,7 +66,12 @@ public class ParamsTNode implements JottTree {
      * @return a string representing the Python code of this tree
      */
     public String convertToPython() {
-        return null;
+        String result = myExpressionNode.convertToPython();
+        if (myParamsTNode != null) {
+            result +=",";
+            result += myParamsTNode.convertToPython();
+        }
+        return result;
     }
 
     /**

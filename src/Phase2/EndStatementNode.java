@@ -29,7 +29,7 @@ public class EndStatementNode implements JottTree {
      * @return a string representing the Java code of this tree
      */
     public String convertToJava() {
-        return null;
+        return ";";
     }
 
     /**
@@ -37,7 +37,7 @@ public class EndStatementNode implements JottTree {
      * @return a string representing the C code of this tree
      */
     public String convertToC() {
-        return null;
+        return ";";
     }
 
     /**
@@ -45,7 +45,7 @@ public class EndStatementNode implements JottTree {
      * @return a string representing the Python code of this tree
      */
     public String convertToPython() {
-        return null;
+        return "\n";
     }
 
     /**

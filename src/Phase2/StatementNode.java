@@ -50,14 +50,16 @@ public class StatementNode extends BodyStatementNode{
      * Will output a string of this tree in Java
      * @return a string representing the Java code of this tree
      */
-    public String convertToJava() {        return null;
+    public String convertToJava() {
+        return node.convertToJava() + ";";
     }
 
     /**
      * Will output a string of this tree in C
      * @return a string representing the C code of this tree
      */
-    public String convertToC() {        return null;
+    public String convertToC() {
+        return node.convertToPython() + ";";
     }
 
     /**
@@ -65,7 +67,7 @@ public class StatementNode extends BodyStatementNode{
      * @return a string representing the Python code of this tree
      */
     public String convertToPython() {
-        return null;
+        return node.convertToPython() + "\n";
     }
 
     /**

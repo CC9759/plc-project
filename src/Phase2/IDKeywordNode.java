@@ -33,15 +33,16 @@ public class IDKeywordNode implements JottTree {
      * @return a string representing the Java code of this tree
      */
     public String convertToJava() {
-        return null;
+        return this.value;
     }
 
     /**
      * Will output a string of this tree in C
      * @return a string representing the C code of this tree
      */
+    // TODO: Discuss this with print statements
     public String convertToC() {
-        return null;
+        return this.value;
     }
 
     /**
@@ -49,7 +50,7 @@ public class IDKeywordNode implements JottTree {
      * @return a string representing the Python code of this tree
      */
     public String convertToPython() {
-        return null;
+        return this.value;
     }
 
     /**

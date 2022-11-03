@@ -12,13 +12,13 @@ public class IfStatementNode extends BodyStatementNode{
 
     public final boolean isStatement = false;
 
-    private final ExpressionNode boolExpressoin;
+    private final ExpressionNode boolExpression;
     private final BodyNode body;
 
     private final ElseIfNode elsIf;
     private final ElseNode elseStatement;
     public IfStatementNode(ExpressionNode boolExpressionNode, BodyNode bodyNode, ElseIfNode elseIfNode, ElseNode elseNode) throws Exception{
-        this.boolExpressoin = boolExpressionNode;
+        this.boolExpression = boolExpressionNode;
         this.body = bodyNode;
         this.elsIf = elseIfNode;
         this.elseStatement = elseNode;
@@ -59,7 +59,7 @@ public class IfStatementNode extends BodyStatementNode{
      * @return a string representing the Jott code of this tree
      */
     public String convertToJott() {
-        String result = "if [ " + boolExpressoin.convertToJott()+ " ] { "+ body.convertToJott()+" } ";
+        String result = "if[" + boolExpression.convertToJott()+ "]{"+ body.convertToJott()+"}";
         if (elsIf != null){
             result += elsIf.convertToJott();
         }
@@ -76,7 +76,15 @@ public class IfStatementNode extends BodyStatementNode{
      * @return a string representing the Java code of this tree
      */
     public String convertToJava() {
-        return null;
+        String result = "if (" + boolExpression.convertToJava()+ "){ "+ body.convertToJava()+ "}";
+        if (elsIf != null){
+            result += elsIf.convertToJava();
+        }
+        if (elseStatement != null){
+            result += elseStatement.convertToJava();
+        }
+
+        return result;
     }
 
     /**
@@ -84,7 +92,15 @@ public class IfStatementNode extends BodyStatementNode{
      * @return a string representing the C code of this tree
      */
     public String convertToC() {
-        return null;
+        String result = "if (" + boolExpression.convertToJava()+ "){ "+ body.convertToJava()+ "}";
+        if (elsIf != null){
+            result += elsIf.convertToJava();
+        }
+        if (elseStatement != null){
+            result += elseStatement.convertToJava();
+        }
+
+        return result;
     }
 
     /**
@@ -92,7 +108,15 @@ public class IfStatementNode extends BodyStatementNode{
      * @return a string representing the Python code of this tree
      */
     public String convertToPython() {
-        return null;
+        String result = "if (" + boolExpression.convertToPython()+ "):\n\t"+ body.convertToJava().replace("\n", "\n\t");
+        if (elsIf != null){
+            result += elsIf.convertToPython();
+        }
+        if (elseStatement != null){
+            result += elseStatement.convertToPython();
+        }
+
+        return result;
     }
 
     /**
@@ -101,7 +125,7 @@ public class IfStatementNode extends BodyStatementNode{
      * @return true if valid Jott code; false otherwise
      */
     public boolean validateTree() {
-        boolean expressionBool = boolExpressoin.validateTree();
+        boolean expressionBool = boolExpression.validateTree();
         boolean bodyBool = body.validateTree();
         boolean elseIfBool = true;
         boolean elseBool = true;

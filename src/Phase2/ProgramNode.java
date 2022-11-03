@@ -45,19 +45,35 @@ public class ProgramNode implements JottTree{
         return result.toString();
     }
 
+
     @Override
     public String convertToJava() {
-        return null;
+        StringBuilder result = new StringBuilder();
+        // TODO: what should the class nanme be/how do we determine class name
+        result.append("public class Main{");
+        for(FunctionDefNode functionDef: functionDefs) {
+            result.append(functionDef.convertToJava());
+        }
+        result.append("}");
+        return result.toString();
     }
 
     @Override
     public String convertToC() {
-        return null;
+        StringBuilder result = new StringBuilder();
+        for(FunctionDefNode functionDef: functionDefs) {
+            result.append(functionDef.convertToC());
+        }
+        return result.toString();
     }
 
     @Override
     public String convertToPython() {
-        return null;
+        StringBuilder result = new StringBuilder();
+        for(FunctionDefNode functionDef: functionDefs) {
+            result.append(functionDef.convertToPython());
+        }
+        return result.toString();
     }
 
     @Override
