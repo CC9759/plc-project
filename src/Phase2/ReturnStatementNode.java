@@ -16,7 +16,7 @@ public class ReturnStatementNode implements JottTree {
     public ReturnStatementNode(ExpressionNode expressionNode) throws Exception {
         this.expression = expressionNode;
     }
-    //TODO implement ParseReturnStatementNode
+
     public static ReturnStatementNode ParseReturnStatementNode(ArrayList<Token> inputList, HashMap<String, String> localSymbolTable) throws Exception {
         inputList.remove(0);
         ExpressionNode expressionNode = ExpressionNode.parseExpressionNode(inputList, localSymbolTable);

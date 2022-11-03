@@ -11,7 +11,7 @@ import java.util.HashMap;
 public class ProgramNode implements JottTree{
     private final ArrayList<FunctionDefNode> functionDefs;
 
-    public HashMap<String, FunctionDefNode> globalSymbolTable;
+    public static HashMap<String, FunctionDefNode> globalSymbolTable;
 
     private ProgramNode(ArrayList<FunctionDefNode> functionDefs, HashMap<String, FunctionDefNode> table) {
         this.functionDefs = functionDefs;
@@ -78,6 +78,11 @@ public class ProgramNode implements JottTree{
 
     @Override
     public boolean validateTree() {
+        for (FunctionDefNode node: functionDefs) {
+
+
+        }
+
         for (FunctionDefNode node:  functionDefs
              ) {
 
