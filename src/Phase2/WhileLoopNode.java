@@ -10,14 +10,17 @@ import java.util.HashMap;
 
 public class WhileLoopNode extends BodyStatementNode{
 
+    public HashMap<String, String> localSymbolTable;
+
     public final boolean isStatement = false;
 
     private final ExpressionNode boolExpression;
     private final BodyNode body;
 
-    private WhileLoopNode(ExpressionNode boolExpressionNode, BodyNode bodyNode){
+    private WhileLoopNode(ExpressionNode boolExpressionNode, BodyNode bodyNode, HashMap<String, String> localSymbolTable){
         this.boolExpression = boolExpressionNode;
         this.body = bodyNode;
+        this.localSymbolTable = localSymbolTable;
     }
 
 
@@ -30,7 +33,7 @@ public class WhileLoopNode extends BodyStatementNode{
         ParserUtils.removeToken(tokens,TokenType.L_BRACE);
         BodyNode bodyNode = BodyNode.parseBodyNode(tokens, localSymbolTable);
         ParserUtils.removeToken(tokens,TokenType.R_BRACE);
-        return new WhileLoopNode(boolExpressionNode, bodyNode);
+        return new WhileLoopNode(boolExpressionNode, bodyNode, localSymbolTable);
 
 
     }

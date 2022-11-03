@@ -9,20 +9,23 @@ import java.util.ArrayList;
 import java.util.HashMap;
 
 public class VarDeclarationNode implements JottTree{
+
+    public HashMap<String, String> localSymbolTable;
     private final String type;
     private final IDKeywordNode id;
 
 
-    private VarDeclarationNode(Token typeToken, IDKeywordNode idKeywordNode){
+    private VarDeclarationNode(Token typeToken, IDKeywordNode idKeywordNode, HashMap<String, String> localSymbolTable){
         this.type = typeToken.getToken();
         this.id = idKeywordNode;
+        this.localSymbolTable = localSymbolTable;
     }
 
     static VarDeclarationNode parseVariableDeclarationNode(ArrayList<Token> tokens, HashMap<String, String> localSymbolTable) throws Exception{
         Token typeToken = tokens.remove(0);
         IDKeywordNode idNode = IDKeywordNode.parseIdKeyWordNode(tokens);
         localSymbolTable.put(idNode.value, typeToken.getToken());
-        return new VarDeclarationNode(typeToken, idNode);
+        return new VarDeclarationNode(typeToken, idNode, localSymbolTable);
     }
 
     /**

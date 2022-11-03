@@ -9,9 +9,11 @@ import java.util.*;
 
 public class ElseNode implements JottTree {
     private final BodyNode bodyNode;
+    public HashMap<String, String> localSymbolTable;
 
     public ElseNode(ArrayList<Token> inputList, HashMap<String, String> localSymbolTable) throws Exception{
         this.bodyNode = BodyNode.parseBodyNode(inputList, localSymbolTable);
+        this.localSymbolTable = localSymbolTable;
     }
 
     public static ElseNode parseElseNode(ArrayList<Token> inputList, HashMap<String, String> localSymbolTable) throws Exception{

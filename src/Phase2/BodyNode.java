@@ -10,14 +10,16 @@ import java.util.*;
 public class BodyNode implements JottTree { 
     final ArrayList<BodyStatementNode> bodyStatements;
     ReturnStatementNode returnStatement;
+    public HashMap<String, String> localSymbolTable;
 
-    private BodyNode() {
+    private BodyNode(HashMap<String, String> localSymbolTable) {
         bodyStatements = new ArrayList<BodyStatementNode>();
         returnStatement = null;
+        this.localSymbolTable = localSymbolTable;
     }
 
     public static BodyNode parseBodyNode(ArrayList<Token> inputList, HashMap<String, String> localSymbolTable) throws Exception{
-        BodyNode bodyNode = new BodyNode();
+        BodyNode bodyNode = new BodyNode(localSymbolTable);
         while (true){
             Token token = inputList.get(0);
     
@@ -108,8 +110,7 @@ public class BodyNode implements JottTree {
      * Errors validating will be reported to System.err
      * @return true if valid Jott code; false otherwise
      */
-    public boolean validateTree() {
-        return true;
+    public boolean validateTree() {return true;
     }
 
     public boolean returnable() {

@@ -12,12 +12,14 @@ public class AssignmentNode implements JottTree {
     String myType;
     final IDKeywordNode myIDKeywordNode;
     final ExpressionNode myExpressionNode;
-    private AssignmentNode(Token type, IDKeywordNode id, ExpressionNode expression){//}, EndStatementNode endStatement){
+    public HashMap<String, String> localSymbolTable;
+    private AssignmentNode(Token type, IDKeywordNode id, ExpressionNode expression, HashMap<String, String> localSymbolTable){//}, EndStatementNode endStatement){
         if(type != null) {
             this.myType = type.getToken();
         }
         this.myIDKeywordNode = id;
         this.myExpressionNode = expression;
+        this.localSymbolTable = localSymbolTable;
     }
 
     static AssignmentNode parseAssignmentNode(ArrayList<Token> tokens, HashMap<String, String> localSymbolTable) throws Exception{
@@ -34,7 +36,7 @@ public class AssignmentNode implements JottTree {
         localSymbolTable.put(idKeywordNode.value, typeToken.getToken());
         ParserUtils.removeToken(tokens, TokenType.ASSIGN);
         ExpressionNode expressionNode = ExpressionNode.parseExpressionNode(tokens, localSymbolTable);
-        return new AssignmentNode(typeToken, idKeywordNode, expressionNode);
+        return new AssignmentNode(typeToken, idKeywordNode, expressionNode, localSymbolTable);
     }
     /**
      * Will output a string of this tree in Jott

@@ -10,6 +10,8 @@ import java.util.HashMap;
 
 public class IfStatementNode extends BodyStatementNode{
 
+    public HashMap<String, String> localSymbolTable;
+
     public final boolean isStatement = false;
 
     private final ExpressionNode boolExpression;
@@ -17,11 +19,12 @@ public class IfStatementNode extends BodyStatementNode{
 
     private final ElseIfNode elsIf;
     private final ElseNode elseStatement;
-    public IfStatementNode(ExpressionNode boolExpressionNode, BodyNode bodyNode, ElseIfNode elseIfNode, ElseNode elseNode) throws Exception{
+    public IfStatementNode(ExpressionNode boolExpressionNode, BodyNode bodyNode, ElseIfNode elseIfNode, ElseNode elseNode, HashMap<String, String> localSymbolTable) throws Exception{
         this.boolExpression = boolExpressionNode;
         this.body = bodyNode;
         this.elsIf = elseIfNode;
         this.elseStatement = elseNode;
+        this.localSymbolTable = localSymbolTable;
     }
     public static IfStatementNode parseIfStatementNode(ArrayList<Token> tokens, HashMap<String, String> localSymbolTable) throws Exception{
         tokens.remove(0); //remove if
@@ -52,7 +55,7 @@ public class IfStatementNode extends BodyStatementNode{
             }
         }
 
-        return new IfStatementNode(boolExpressionNode, bodyNode, elseIfNode, elseNode);
+        return new IfStatementNode(boolExpressionNode, bodyNode, elseIfNode, elseNode, localSymbolTable);
     }
     /**
      * Will output a string of this tree in Jott

@@ -8,6 +8,8 @@ package Phase2;
 import java.util.*;
 
 public class ExpressionNode implements JottTree {
+
+    public HashMap<String, String> localSymbolTable;
     ExpressionNode firstExpressionNode;
     ExpressionNode secondExpressionNode;
     JottTree operationNode;
@@ -30,22 +32,26 @@ public class ExpressionNode implements JottTree {
         return firstExpressionNode.WhatAmI();
     }
 
-    public ExpressionNode(FunctionCallNode input) {
+    public ExpressionNode(FunctionCallNode input, HashMap<String, String> localSymbolTable) {
         functionCallNode = input;
+        this.localSymbolTable = localSymbolTable;
     }
 
-    public ExpressionNode(IDKeywordNode input) {
+    public ExpressionNode(IDKeywordNode input, HashMap<String, String> localSymbolTable) {
         idKeywordNode = input;
+        this.localSymbolTable = localSymbolTable;
     }
 
-    public ExpressionNode(ConstantNode input) {
+    public ExpressionNode(ConstantNode input, HashMap<String, String> localSymbolTable) {
         constantNode = input;
+        this.localSymbolTable = localSymbolTable;
     }
 
-    public ExpressionNode(ExpressionNode first, JottTree op, ExpressionNode second) {
+    public ExpressionNode(ExpressionNode first, JottTree op, ExpressionNode second, HashMap<String, String> localSymbolTable) {
         firstExpressionNode = first;
         operationNode = op;
         secondExpressionNode = second;
+        this.localSymbolTable = localSymbolTable;
     }
 
     public static ExpressionNode parseExpressionNode(ArrayList<Token> inputList, HashMap<String, String> localSymbolTable) throws Exception {
@@ -55,21 +61,21 @@ public class ExpressionNode implements JottTree {
 
         if(inputList.get(0).getTokenType() == TokenType.ID_KEYWORD) {
             if(inputList.get(1).getTokenType() == TokenType.L_BRACKET) {
-                firstExpression = new ExpressionNode(FunctionCallNode.parseFunctionCallNode(inputList, localSymbolTable));
+                firstExpression = new ExpressionNode(FunctionCallNode.parseFunctionCallNode(inputList, localSymbolTable), localSymbolTable);
             }
             else if(inputList.get(0).getToken().equals("True") ||
                     inputList.get(0).getToken().equals("False")) {
-                firstExpression = new ExpressionNode(ConstantNode.parseConstantNode(inputList));
+                firstExpression = new ExpressionNode(ConstantNode.parseConstantNode(inputList), localSymbolTable);
             }
             else {
-                firstExpression = new ExpressionNode(IDKeywordNode.parseIdKeyWordNode(inputList));
+                firstExpression = new ExpressionNode(IDKeywordNode.parseIdKeyWordNode(inputList), localSymbolTable);
             }
         }
         else if(inputList.get(0).getTokenType() == TokenType.NUMBER) {
-            firstExpression = new ExpressionNode(ConstantNode.parseConstantNode(inputList));
+            firstExpression = new ExpressionNode(ConstantNode.parseConstantNode(inputList), localSymbolTable);
         }
         else if(inputList.get(0).getTokenType() == TokenType.STRING) {
-            firstExpression = new ExpressionNode(ConstantNode.parseConstantNode(inputList));
+            firstExpression = new ExpressionNode(ConstantNode.parseConstantNode(inputList), localSymbolTable);
         }
         else {
             throw new Exception("Invalid start of expression. Expected ID or Number but got " + inputList.get(0).getTokenType());
@@ -86,7 +92,7 @@ public class ExpressionNode implements JottTree {
         }
 
         secondExpression = ExpressionNode.parseExpressionNode(inputList, localSymbolTable);
-        return new ExpressionNode(firstExpression, op, secondExpression);
+        return new ExpressionNode(firstExpression, op, secondExpression, localSymbolTable);
     }
 
     /**

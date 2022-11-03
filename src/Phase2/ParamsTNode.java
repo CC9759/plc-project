@@ -8,12 +8,15 @@ package Phase2;
 import java.util.*;
 
 public class ParamsTNode implements JottTree {
+
+    public HashMap<String, String> localSymbolTable;
     NodeType myType = NodeType.PARAMST;
     final ExpressionNode myExpressionNode;
     final ParamsTNode myParamsTNode;
-    private ParamsTNode(ExpressionNode expression, ParamsTNode paramsTNode) {
+    private ParamsTNode(ExpressionNode expression, ParamsTNode paramsTNode, HashMap<String, String> localSymbolTable) {
         this.myExpressionNode = expression;
         this.myParamsTNode = paramsTNode;
+        this.localSymbolTable = localSymbolTable;
     }
 
     public static ParamsTNode parseParamsT(ArrayList<Token> tokens, HashMap<String, String> localSymbolTable) throws Exception{
@@ -22,7 +25,7 @@ public class ParamsTNode implements JottTree {
             ParserUtils.removeToken(tokens,TokenType.COMMA);
             ExpressionNode expressionNode = ExpressionNode.parseExpressionNode(tokens, localSymbolTable);
             ParamsTNode paramsTNode = parseParamsT(tokens, localSymbolTable);
-            return new ParamsTNode(expressionNode, paramsTNode);
+            return new ParamsTNode(expressionNode, paramsTNode, localSymbolTable);
         }
         return null;
     }
