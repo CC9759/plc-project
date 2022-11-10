@@ -12,7 +12,7 @@ import java.util.HashMap;
 public class FunctionDefNode implements JottTree{
 
     public HashMap<String, InformationType> localSymbolTable;
-    public  ArrayList<String> paramTypes;
+    public  ArrayList<String> paramTypes = new ArrayList<>();
     public String returnType;
     final IDKeywordNode myIDKeywordNode;
     final FunctionDefParamsNode myFunctionDefParamsNode;
