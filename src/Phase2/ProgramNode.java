@@ -78,10 +78,6 @@ public class ProgramNode implements JottTree{
 
     @Override
     public boolean validateTree() {
-        for (FunctionDefNode node: functionDefs) {
-
-
-        }
 
         for (FunctionDefNode node:  functionDefs
              ) {
