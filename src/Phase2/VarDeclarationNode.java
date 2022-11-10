@@ -7,24 +7,35 @@ package Phase2;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Objects;
 
 public class VarDeclarationNode implements JottTree{
 
-    public HashMap<String, String> localSymbolTable;
+    public HashMap<String, InformationType> localSymbolTable;
     private final String type;
     private final IDKeywordNode id;
 
 
-    private VarDeclarationNode(Token typeToken, IDKeywordNode idKeywordNode, HashMap<String, String> localSymbolTable){
+    private VarDeclarationNode(Token typeToken, IDKeywordNode idKeywordNode, HashMap<String, InformationType> localSymbolTable){
         this.type = typeToken.getToken();
         this.id = idKeywordNode;
         this.localSymbolTable = localSymbolTable;
     }
 
-    static VarDeclarationNode parseVariableDeclarationNode(ArrayList<Token> tokens, HashMap<String, String> localSymbolTable) throws Exception{
+    static VarDeclarationNode parseVariableDeclarationNode(ArrayList<Token> tokens, HashMap<String, InformationType> localSymbolTable) throws Exception{
         Token typeToken = tokens.remove(0);
         IDKeywordNode idNode = IDKeywordNode.parseIdKeyWordNode(tokens);
-        localSymbolTable.put(idNode.value, typeToken.getToken());
+        InformationType informationType = InformationType.VOID;
+        if(Objects.equals(typeToken.getToken(), "Boolean")){
+            informationType = InformationType.BOOLEAN;
+        }else if(Objects.equals(typeToken.getToken(), "Double")){
+            informationType = InformationType.DOUBLE;
+        }else if(Objects.equals(typeToken.getToken(), "Integer")){
+            informationType = InformationType.INT;
+        }else if(Objects.equals(typeToken.getToken(), "String")){
+            informationType = InformationType.STRING;
+        }
+        localSymbolTable.put(idNode.value, informationType);
         return new VarDeclarationNode(typeToken, idNode, localSymbolTable);
     }
 

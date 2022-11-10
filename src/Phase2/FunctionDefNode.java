@@ -11,14 +11,14 @@ import java.util.HashMap;
 
 public class FunctionDefNode implements JottTree{
 
-    public HashMap<String, String> localSymbolTable;
+    public HashMap<String, InformationType> localSymbolTable;
     public  ArrayList<String> paramTypes;
     public String returnType;
     final IDKeywordNode myIDKeywordNode;
     final FunctionDefParamsNode myFunctionDefParamsNode;
     final FunctionReturnNode myReturnNode;
     final BodyNode myBodyNode;
-    private FunctionDefNode(IDKeywordNode myIDKeywordNode, FunctionDefParamsNode myFunctionDefParamsNode, FunctionReturnNode myReturnNode, BodyNode myBodyNode, HashMap<String, String> table) {
+    private FunctionDefNode(IDKeywordNode myIDKeywordNode, FunctionDefParamsNode myFunctionDefParamsNode, FunctionReturnNode myReturnNode, BodyNode myBodyNode, HashMap<String, InformationType> table) {
         this.myIDKeywordNode = myIDKeywordNode;
         this.myFunctionDefParamsNode = myFunctionDefParamsNode;
         this.myReturnNode = myReturnNode;
@@ -32,7 +32,7 @@ public class FunctionDefNode implements JottTree{
         this.localSymbolTable = table;
     }
     public static FunctionDefNode parseFunctionDefNode(ArrayList<Token> inputTokens) throws Exception {
-        HashMap<String, String> localSymbolTable = new HashMap<>();
+        HashMap<String, InformationType> localSymbolTable = new HashMap<>();
         IDKeywordNode myIDKeywordNode = IDKeywordNode.parseIdKeyWordNode(inputTokens);
         //TODO check that types are correct
         ParserUtils.removeToken(inputTokens, TokenType.L_BRACKET);

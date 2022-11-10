@@ -10,21 +10,21 @@ import java.util.HashMap;
 
 public class WhileLoopNode extends BodyStatementNode{
 
-    public HashMap<String, String> localSymbolTable;
+    public HashMap<String, InformationType> localSymbolTable;
 
     public final boolean isStatement = false;
 
     private final ExpressionNode boolExpression;
     private final BodyNode body;
 
-    private WhileLoopNode(ExpressionNode boolExpressionNode, BodyNode bodyNode, HashMap<String, String> localSymbolTable){
+    private WhileLoopNode(ExpressionNode boolExpressionNode, BodyNode bodyNode, HashMap<String, InformationType> localSymbolTable){
         this.boolExpression = boolExpressionNode;
         this.body = bodyNode;
         this.localSymbolTable = localSymbolTable;
     }
 
 
-    public static WhileLoopNode parseWhileLoopNode(ArrayList<Token> tokens, HashMap<String, String> localSymbolTable) throws Exception{
+    public static WhileLoopNode parseWhileLoopNode(ArrayList<Token> tokens, HashMap<String, InformationType> localSymbolTable) throws Exception{
         //ask about the braces
         tokens.remove(0); //removes while
         ParserUtils.removeToken(tokens, TokenType.L_BRACKET);

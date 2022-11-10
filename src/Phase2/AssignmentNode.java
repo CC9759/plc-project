@@ -12,8 +12,8 @@ public class AssignmentNode implements JottTree {
     String myType;
     final IDKeywordNode myIDKeywordNode;
     final ExpressionNode myExpressionNode;
-    public HashMap<String, String> localSymbolTable;
-    private AssignmentNode(Token type, IDKeywordNode id, ExpressionNode expression, HashMap<String, String> localSymbolTable){//}, EndStatementNode endStatement){
+    public HashMap<String, InformationType> localSymbolTable;
+    private AssignmentNode(Token type, IDKeywordNode id, ExpressionNode expression, HashMap<String, InformationType> localSymbolTable){//}, EndStatementNode endStatement){
         if(type != null) {
             this.myType = type.getToken();
         }
@@ -22,7 +22,7 @@ public class AssignmentNode implements JottTree {
         this.localSymbolTable = localSymbolTable;
     }
 
-    static AssignmentNode parseAssignmentNode(ArrayList<Token> tokens, HashMap<String, String> localSymbolTable) throws Exception{
+    static AssignmentNode parseAssignmentNode(ArrayList<Token> tokens, HashMap<String, InformationType> localSymbolTable) throws Exception{
         String firstTokenAsString = tokens.get(0).getToken();
         Token typeToken = null;
         if(firstTokenAsString.equals("Boolean") ||
@@ -33,7 +33,17 @@ public class AssignmentNode implements JottTree {
         }
 
         IDKeywordNode idKeywordNode = IDKeywordNode.parseIdKeyWordNode(tokens);
-        localSymbolTable.put(idKeywordNode.value, typeToken.getToken());
+        InformationType informationType = InformationType.VOID;
+        if(Objects.equals(typeToken.getToken(), "Boolean")){
+            informationType = InformationType.BOOLEAN;
+        }else if(Objects.equals(typeToken.getToken(), "Double")){
+            informationType = InformationType.DOUBLE;
+        }else if(Objects.equals(typeToken.getToken(), "Integer")){
+            informationType = InformationType.INT;
+        }else if(Objects.equals(typeToken.getToken(), "String")){
+            informationType = InformationType.STRING;
+        }
+        localSymbolTable.put(idKeywordNode.value, informationType);
         ParserUtils.removeToken(tokens, TokenType.ASSIGN);
         ExpressionNode expressionNode = ExpressionNode.parseExpressionNode(tokens, localSymbolTable);
         return new AssignmentNode(typeToken, idKeywordNode, expressionNode, localSymbolTable);

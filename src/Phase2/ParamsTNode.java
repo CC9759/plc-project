@@ -9,17 +9,17 @@ import java.util.*;
 
 public class ParamsTNode implements JottTree {
 
-    public HashMap<String, String> localSymbolTable;
+    public HashMap<String, InformationType> localSymbolTable;
     NodeType myType = NodeType.PARAMST;
     final ExpressionNode myExpressionNode;
     final ParamsTNode myParamsTNode;
-    private ParamsTNode(ExpressionNode expression, ParamsTNode paramsTNode, HashMap<String, String> localSymbolTable) {
+    private ParamsTNode(ExpressionNode expression, ParamsTNode paramsTNode, HashMap<String, InformationType> localSymbolTable) {
         this.myExpressionNode = expression;
         this.myParamsTNode = paramsTNode;
         this.localSymbolTable = localSymbolTable;
     }
 
-    public static ParamsTNode parseParamsT(ArrayList<Token> tokens, HashMap<String, String> localSymbolTable) throws Exception{
+    public static ParamsTNode parseParamsT(ArrayList<Token> tokens, HashMap<String, InformationType> localSymbolTable) throws Exception{
 
         if(tokens.get(0).getTokenType() != TokenType.R_BRACKET) {
             ParserUtils.removeToken(tokens,TokenType.COMMA);

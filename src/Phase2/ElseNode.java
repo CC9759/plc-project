@@ -9,14 +9,14 @@ import java.util.*;
 
 public class ElseNode implements JottTree {
     private final BodyNode bodyNode;
-    public HashMap<String, String> localSymbolTable;
+    public HashMap<String, InformationType> localSymbolTable;
 
-    public ElseNode(ArrayList<Token> inputList, HashMap<String, String> localSymbolTable) throws Exception{
+    public ElseNode(ArrayList<Token> inputList, HashMap<String, InformationType> localSymbolTable) throws Exception{
         this.bodyNode = BodyNode.parseBodyNode(inputList, localSymbolTable);
         this.localSymbolTable = localSymbolTable;
     }
 
-    public static ElseNode parseElseNode(ArrayList<Token> inputList, HashMap<String, String> localSymbolTable) throws Exception{
+    public static ElseNode parseElseNode(ArrayList<Token> inputList, HashMap<String, InformationType> localSymbolTable) throws Exception{
         ElseNode elseNode;
         
         if(inputList.get(0).getToken().equals("else")){

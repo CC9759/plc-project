@@ -9,7 +9,7 @@ import java.util.*;
 
 public class ParamsNode implements JottTree {
 
-    public HashMap<String, String> localSymbolTable;
+    public HashMap<String, InformationType> localSymbolTable;
     final NodeType myType = NodeType.PARAMS;
     final ExpressionNode myExpressionNode;
     final ParamsTNode myParamsTNode;
@@ -17,13 +17,13 @@ public class ParamsNode implements JottTree {
      * < params > -> < expr > < params_t > | 
      * < params_t > -> ,< expr > < params_t > | 
      */
-    private ParamsNode(ExpressionNode expressionNode, ParamsTNode paramsTNode, HashMap<String, String> localSymbolTable) {
+    private ParamsNode(ExpressionNode expressionNode, ParamsTNode paramsTNode, HashMap<String, InformationType> localSymbolTable) {
         this.myExpressionNode = expressionNode;
         this.myParamsTNode = paramsTNode;
         this.localSymbolTable = localSymbolTable;
     }
 
-    public static ParamsNode parseParamsNode(ArrayList<Token> tokens, HashMap<String, String> localSymbolTable) throws Exception {
+    public static ParamsNode parseParamsNode(ArrayList<Token> tokens, HashMap<String, InformationType> localSymbolTable) throws Exception {
         if(tokens.get(0).getTokenType() != TokenType.R_BRACKET) {
             ExpressionNode expressionNode = ExpressionNode.parseExpressionNode(tokens, localSymbolTable);
             ParamsTNode paramsTNode = ParamsTNode.parseParamsT(tokens, localSymbolTable);

@@ -10,17 +10,17 @@ import java.util.HashMap;
 
 public class ReturnStatementNode implements JottTree {
 
-    public HashMap<String, String> localSymbolTable;
+    public HashMap<String, InformationType> localSymbolTable;
     private final ExpressionNode expression;
 
 
 
-    public ReturnStatementNode(ExpressionNode expressionNode, HashMap<String, String> localSymbolTable) throws Exception {
+    public ReturnStatementNode(ExpressionNode expressionNode, HashMap<String, InformationType> localSymbolTable) throws Exception {
         this.expression = expressionNode;
         this.localSymbolTable = localSymbolTable;
     }
 
-    public static ReturnStatementNode ParseReturnStatementNode(ArrayList<Token> inputList, HashMap<String, String> localSymbolTable) throws Exception {
+    public static ReturnStatementNode ParseReturnStatementNode(ArrayList<Token> inputList, HashMap<String, InformationType> localSymbolTable) throws Exception {
         inputList.remove(0);
         ExpressionNode expressionNode = ExpressionNode.parseExpressionNode(inputList, localSymbolTable);
         ParserUtils.removeToken(inputList,TokenType.SEMICOLON);
