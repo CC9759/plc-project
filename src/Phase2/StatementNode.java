@@ -15,7 +15,7 @@ public class StatementNode extends BodyStatementNode{
     public StatementNode(JottTree node) {
         this.node = node;
     }
-    public static StatementNode parseStatementNode(ArrayList<Token> tokens, HashMap<String, String> localSymbolTable) throws Exception{
+    public static StatementNode parseStatementNode(ArrayList<Token> tokens, HashMap<String, InformationType> localSymbolTable) throws Exception{
         JottTree result;
         Token firstToken = tokens.get(0);
         String firstTokenValue = firstToken.getToken();

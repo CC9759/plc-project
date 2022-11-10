@@ -11,9 +11,9 @@ public class ElseIfNode implements JottTree {
     private final BodyNode bodyNode;
     private final ExpressionNode bExpr;
     private final ElseIfNode elseIfNode;
-    public HashMap<String, String> localSymbolTable;
+    public HashMap<String, InformationType> localSymbolTable;
 
-    public ElseIfNode(ArrayList<Token> inputList, HashMap<String, String> localSymbolTable) throws Exception{
+    public ElseIfNode(ArrayList<Token> inputList, HashMap<String, InformationType> localSymbolTable) throws Exception{
         bExpr = ExpressionNode.parseExpressionNode(inputList, localSymbolTable);
         // remove right bracket and left brace
         ParserUtils.removeToken(inputList, TokenType.R_BRACKET);
@@ -25,7 +25,7 @@ public class ElseIfNode implements JottTree {
         this.localSymbolTable = localSymbolTable;
     }
 
-    public static ElseIfNode parseElseIfNode(ArrayList<Token> inputList, HashMap<String, String> localSymbolTable) throws Exception{
+    public static ElseIfNode parseElseIfNode(ArrayList<Token> inputList, HashMap<String, InformationType> localSymbolTable) throws Exception{
         ElseIfNode elseIfNode;
         
         if(inputList.get(0).getToken().equals("elseif")){

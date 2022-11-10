@@ -10,15 +10,15 @@ import java.util.*;
 public class BodyNode implements JottTree { 
     final ArrayList<BodyStatementNode> bodyStatements;
     ReturnStatementNode returnStatement;
-    public HashMap<String, String> localSymbolTable;
+    public HashMap<String, InformationType> localSymbolTable;
 
-    private BodyNode(HashMap<String, String> localSymbolTable) {
+    private BodyNode(HashMap<String, InformationType> localSymbolTable) {
         bodyStatements = new ArrayList<BodyStatementNode>();
         returnStatement = null;
         this.localSymbolTable = localSymbolTable;
     }
 
-    public static BodyNode parseBodyNode(ArrayList<Token> inputList, HashMap<String, String> localSymbolTable) throws Exception{
+    public static BodyNode parseBodyNode(ArrayList<Token> inputList, HashMap<String, InformationType> localSymbolTable) throws Exception{
         BodyNode bodyNode = new BodyNode(localSymbolTable);
         while (true){
             Token token = inputList.get(0);

@@ -9,7 +9,7 @@ import java.util.*;
 
 public class ExpressionNode implements JottTree {
 
-    public HashMap<String, String> localSymbolTable;
+    public HashMap<String, InformationType> localSymbolTable;
     ExpressionNode firstExpressionNode;
     ExpressionNode secondExpressionNode;
     JottTree operationNode;
@@ -34,29 +34,29 @@ public class ExpressionNode implements JottTree {
         return firstExpressionNode.WhatAmI();
     }
 
-    public ExpressionNode(FunctionCallNode input, HashMap<String, String> localSymbolTable) {
+    public ExpressionNode(FunctionCallNode input, HashMap<String, InformationType> localSymbolTable) {
         functionCallNode = input;
         this.localSymbolTable = localSymbolTable;
     }
 
-    public ExpressionNode(IDKeywordNode input, HashMap<String, String> localSymbolTable) {
+    public ExpressionNode(IDKeywordNode input, HashMap<String, InformationType> localSymbolTable) {
         idKeywordNode = input;
         this.localSymbolTable = localSymbolTable;
     }
 
-    public ExpressionNode(ConstantNode input, HashMap<String, String> localSymbolTable) {
+    public ExpressionNode(ConstantNode input, HashMap<String, InformationType> localSymbolTable) {
         constantNode = input;
         this.localSymbolTable = localSymbolTable;
     }
 
-    public ExpressionNode(ExpressionNode first, JottTree op, ExpressionNode second, HashMap<String, String> localSymbolTable) {
+    public ExpressionNode(ExpressionNode first, JottTree op, ExpressionNode second, HashMap<String, InformationType> localSymbolTable) {
         firstExpressionNode = first;
         operationNode = op;
         secondExpressionNode = second;
         this.localSymbolTable = localSymbolTable;
     }
 
-    public static ExpressionNode parseExpressionNode(ArrayList<Token> inputList, HashMap<String, String> localSymbolTable) throws Exception {
+    public static ExpressionNode parseExpressionNode(ArrayList<Token> inputList, HashMap<String, InformationType> localSymbolTable) throws Exception {
         ExpressionNode firstExpression;
         JottTree op;
         ExpressionNode secondExpression;

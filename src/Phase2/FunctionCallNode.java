@@ -12,14 +12,14 @@ public class FunctionCallNode implements JottTree{
 
     private final IDKeywordNode id;
     private final ParamsNode params;
-    public HashMap<String, String> localSymbolTable;
+    public HashMap<String, InformationType> localSymbolTable;
 
-    private FunctionCallNode(IDKeywordNode idKeywordNode, ParamsNode paramsNode, HashMap<String, String> localSymbolTable){
+    private FunctionCallNode(IDKeywordNode idKeywordNode, ParamsNode paramsNode, HashMap<String, InformationType> localSymbolTable){
         this.id = idKeywordNode;
         this.params = paramsNode;
         this.localSymbolTable = localSymbolTable;
     }
-    public static FunctionCallNode parseFunctionCallNode(ArrayList<Token> tokens, HashMap<String, String> localSymbolTable) throws Exception{
+    public static FunctionCallNode parseFunctionCallNode(ArrayList<Token> tokens, HashMap<String, InformationType> localSymbolTable) throws Exception{
         IDKeywordNode idKeywordNode = IDKeywordNode.parseIdKeyWordNode(tokens);
         ParserUtils.removeToken(tokens,TokenType.L_BRACKET);
         ParamsNode paramsNode = ParamsNode.parseParamsNode(tokens, localSymbolTable);
