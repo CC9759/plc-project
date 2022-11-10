@@ -116,7 +116,6 @@ public class ExpressionNode implements JottTree {
      * Will output a string of this tree in Java
      * @return a string representing the Java code of this tree
      */
-    // TODO: Why these extra spaces?
     public String convertToJava() {
         if(idKeywordNode != null) {
             return " " + idKeywordNode.convertToJava() + " ";

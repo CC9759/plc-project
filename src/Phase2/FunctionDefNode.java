@@ -60,7 +60,6 @@ public class FunctionDefNode implements JottTree{
     }
 
     @Override
-    // TODO: Do we need private?
     public String convertToJava() {
         String result = "public ";
         result += myReturnNode.convertToJava() + " ";

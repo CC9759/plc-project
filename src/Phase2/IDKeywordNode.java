@@ -33,6 +33,9 @@ public class IDKeywordNode implements JottTree {
      * @return a string representing the Java code of this tree
      */
     public String convertToJava() {
+        if(value.equals("print")){
+            return "System.out.print";
+        }
         return this.value;
     }
 
@@ -40,8 +43,11 @@ public class IDKeywordNode implements JottTree {
      * Will output a string of this tree in C
      * @return a string representing the C code of this tree
      */
-    // TODO: Discuss this with print statements
+
     public String convertToC() {
+        if(value.equals("print")){
+            return "printf";
+        }
         return this.value;
     }
 
