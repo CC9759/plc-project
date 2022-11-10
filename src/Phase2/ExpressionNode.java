@@ -23,7 +23,7 @@ public class ExpressionNode implements JottTree {
         }
         if(functionCallNode != null) {
             //return localSymbolTable.get(idKeywordNode.getValue());
-            return InformationType.VOID; //TODO SAME AS ABOVEasdfadsfsadf
+            return InformationType.VOID; //TODO SAME AS ABOVE
         }
         if(constantNode != null) {
             return constantNode.getMyType();
