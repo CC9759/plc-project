@@ -95,5 +95,4 @@ public class ParamsNode implements JottTree {
     public NodeType getMyType() {
         return myType;
     }
-
 }

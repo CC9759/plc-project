@@ -18,9 +18,11 @@ public class ExpressionNode implements JottTree {
     ConstantNode constantNode;
     public InformationType WhatAmI() throws Exception {
         if(idKeywordNode != null) {
-            return InformationType.VOID; //TODO PHASE 3 SYMBOL TABLE
+            //return localSymbolTable.get(idKeywordNode.getValue());
+            return InformationType.VOID; //TODO SAME AS ABOVE
         }
         if(functionCallNode != null) {
+            //return localSymbolTable.get(idKeywordNode.getValue());
             return InformationType.VOID; //TODO SAME AS ABOVE
         }
         if(constantNode != null) {
@@ -116,7 +118,6 @@ public class ExpressionNode implements JottTree {
      * Will output a string of this tree in Java
      * @return a string representing the Java code of this tree
      */
-    // TODO: Why these extra spaces?
     public String convertToJava() {
         if(idKeywordNode != null) {
             return " " + idKeywordNode.convertToJava() + " ";

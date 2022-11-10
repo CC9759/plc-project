@@ -44,7 +44,29 @@ public class FunctionCallNode implements JottTree{
      * Will output a string of this tree in C
      * @return a string representing the C code of this tree
      */
-    public String convertToC(){return id.convertToC() + "(" + params.convertToC() + ")";}
+    public String convertToC(){
+        if(id.convertToC().equals("printf")){
+            StringBuilder result = new StringBuilder();
+
+            result.append("printf");
+            result.append("(");
+            try {
+                switch(params.myExpressionNode.WhatAmI()){
+                    case BOOLEAN: result.append("%b"); break;
+                    case DOUBLE: result.append("%f"); break;
+                    case INT: result.append("%d"); break;
+                    case STRING: result.append("%s"); break;
+                }
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+
+            result.append(",");
+            result.append(params.myExpressionNode.convertToC());
+            result.append(")");
+        }
+        return id.convertToC() + "(" + params.convertToC() + ")";
+    }
 
     /**
      * Will output a string of this tree in Python
