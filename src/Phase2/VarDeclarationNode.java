@@ -24,7 +24,7 @@ public class VarDeclarationNode implements JottTree{
     static VarDeclarationNode parseVariableDeclarationNode(ArrayList<Token> tokens, HashMap<String, String> localSymbolTable) throws Exception{
         Token typeToken = tokens.remove(0);
         IDKeywordNode idNode = IDKeywordNode.parseIdKeyWordNode(tokens);
-        localSymbolTable.put(idNode.value, typeToken.getToken());
+        localSymbolTable.put(idNode.getValue(), typeToken.getToken());
         return new VarDeclarationNode(typeToken, idNode, localSymbolTable);
     }
 

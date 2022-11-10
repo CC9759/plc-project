@@ -26,7 +26,7 @@ public class ProgramNode implements JottTree{
 
                 FunctionDefNode function = FunctionDefNode.parseFunctionDefNode(tokens);
                 functionDefs.add(function);
-                newTable.put(function.myIDKeywordNode.value, function);
+                newTable.put(function.myIDKeywordNode.getValue(), function);
 
             }
             return new ProgramNode(functionDefs, newTable);

@@ -12,7 +12,7 @@ import java.util.*;
  */
 public class IDKeywordNode implements JottTree {
     final NodeType myType = NodeType.IDKEYWORD;
-    public String value;
+    private String value;
 
     public IDKeywordNode(Token token){this.value = token.getToken();}
     public static IDKeywordNode parseIdKeyWordNode(ArrayList<Token> tokens) throws Exception{
@@ -60,6 +60,10 @@ public class IDKeywordNode implements JottTree {
      */
     public boolean validateTree() {
         return true;
+    }
+
+    public String getValue() {
+        return this.value;
     }
 
     public NodeType getMyType() {

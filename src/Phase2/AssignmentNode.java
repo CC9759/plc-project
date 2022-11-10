@@ -33,7 +33,7 @@ public class AssignmentNode implements JottTree {
         }
 
         IDKeywordNode idKeywordNode = IDKeywordNode.parseIdKeyWordNode(tokens);
-        localSymbolTable.put(idKeywordNode.value, typeToken.getToken());
+        localSymbolTable.put(idKeywordNode.getValue(), typeToken.getToken());
         ParserUtils.removeToken(tokens, TokenType.ASSIGN);
         ExpressionNode expressionNode = ExpressionNode.parseExpressionNode(tokens, localSymbolTable);
         return new AssignmentNode(typeToken, idKeywordNode, expressionNode, localSymbolTable);
