@@ -10,7 +10,6 @@ import java.util.HashMap;
 
 public class ProgramNode implements JottTree{
     private final ArrayList<FunctionDefNode> functionDefs;
-
     public static HashMap<String, FunctionDefNode> globalSymbolTable;
 
     private ProgramNode(ArrayList<FunctionDefNode> functionDefs, HashMap<String, FunctionDefNode> table) {
@@ -45,12 +44,10 @@ public class ProgramNode implements JottTree{
         return result.toString();
     }
 
-
     @Override
     public String convertToJava() {
         StringBuilder result = new StringBuilder();
-        // TODO: what should the class nanme be/how do we determine class name
-        result.append("public class Main{");
+        result.append("public class Name {");
         for(FunctionDefNode functionDef: functionDefs) {
             result.append(functionDef.convertToJava());
         }
@@ -61,6 +58,7 @@ public class ProgramNode implements JottTree{
     @Override
     public String convertToC() {
         StringBuilder result = new StringBuilder();
+        result.append("#include <stdio.h>\n#include <string.h>\n#include <stdlib.h>");
         for(FunctionDefNode functionDef: functionDefs) {
             result.append(functionDef.convertToC());
         }
