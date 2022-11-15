@@ -26,7 +26,7 @@ public class ElseNode implements JottTree {
             elseNode = new ElseNode(inputList, localSymbolTable);
             // remove right brace
             ParserUtils.removeToken(inputList,TokenType.R_BRACE);
-            inputList.remove(0);
+//            inputList.remove(0);
         }
         else{
             elseNode = null;
