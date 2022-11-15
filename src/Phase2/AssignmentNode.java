@@ -83,7 +83,6 @@ public class AssignmentNode implements JottTree {
         finalString.append(myIDKeywordNode.convertToJava());
         finalString.append(" = ");
         finalString.append(myExpressionNode.convertToJava());
-        finalString.append(";");
         return finalString.toString();
     }
 
@@ -106,7 +105,6 @@ public class AssignmentNode implements JottTree {
         finalString.append(myIDKeywordNode.convertToC());
         finalString.append(" = ");
         finalString.append(myExpressionNode.convertToC());
-        finalString.append(";");
         return finalString.toString();
     }
 
