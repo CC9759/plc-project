@@ -96,6 +96,12 @@ public class ParamsNode implements JottTree {
      * @return true if valid Jott code; false otherwise
      */
     public boolean validateTree() {
+        for (ExpressionNode expression:expressions
+             ) {
+            if(!expression.validateTree()){
+                return false;
+            }
+        }
         return true;
     }
 
