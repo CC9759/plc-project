@@ -100,7 +100,7 @@ public class BodyNode implements JottTree {
             finalString.append("\n");
         }
         if(returnStatement != null){
-            finalString.append(returnStatement.convertToPython()());
+            finalString.append(returnStatement.convertToPython());
         }
         return finalString.toString();
     }
