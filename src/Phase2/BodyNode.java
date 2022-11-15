@@ -110,7 +110,20 @@ public class BodyNode implements JottTree {
      * Errors validating will be reported to System.err
      * @return true if valid Jott code; false otherwise
      */
-    public boolean validateTree() {return true;
+    public boolean validateTree() {
+        for (BodyStatementNode bodyStatement: bodyStatements
+             ) {
+            if(!bodyStatement.validateTree()){
+                return false;
+            }
+        }
+        Boolean returnBool = true;
+
+        if(returnStatement!=null){
+            returnBool = returnStatement.validateTree();
+        }
+
+        return returnBool;
     }
 
     public boolean returnable() {

@@ -39,6 +39,6 @@ public class FunctionReturnNode implements JottTree{
 
     @Override
     public boolean validateTree() {
-        return false;
+        return true;
     }
 }
