@@ -51,7 +51,7 @@ public class FunctionCallNode implements JottTree{
             result.append("printf");
             result.append("(");
             try {
-                switch(params.myExpressionNode.WhatAmI()){
+                switch(params.expressions.get(0).WhatAmI()){
                     case BOOLEAN: result.append("%b"); break;
                     case DOUBLE: result.append("%f"); break;
                     case INT: result.append("%d"); break;
@@ -62,7 +62,7 @@ public class FunctionCallNode implements JottTree{
             }
 
             result.append(",");
-            result.append(params.myExpressionNode.convertToC());
+            result.append(params.expressions.get(0).convertToC());
             result.append(")");
         }
         return id.convertToC() + "(" + params.convertToC() + ")";
