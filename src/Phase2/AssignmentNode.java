@@ -108,7 +108,7 @@ public class AssignmentNode implements JottTree {
         finalString.append(myIDKeywordNode.convertToPython());
         finalString.append(" = ");
         finalString.append(myExpressionNode.convertToPython());
-        finalString.append(";");
+        finalString.append("\n");
         return finalString.toString();
     }
 

@@ -59,7 +59,7 @@ public class StatementNode extends BodyStatementNode{
      * @return a string representing the C code of this tree
      */
     public String convertToC() {
-        return node.convertToPython() + ";";
+        return node.convertToC() + ";";
     }
 
     /**
