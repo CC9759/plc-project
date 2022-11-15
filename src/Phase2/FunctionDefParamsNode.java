@@ -76,7 +76,13 @@ public class FunctionDefParamsNode implements JottTree{
     public String convertToC() {
         StringBuilder result = new StringBuilder();
         for (int i = 0; i < paramIDs.size(); i++) {
-            result.append(paramTypes.get(i).getToken());
+            switch(paramTypes.get(i).getToken()){
+                case "String": result.append("char*"); break;
+                case "Integer": result.append("int"); break;
+                case "Boolean": result.append("bool"); break;
+                case "Double": result.append("double"); break;
+                default: result.append(paramTypes.get(i).getToken()); break;
+            }
             result.append(" ");
             result.append(paramIDs.get(i).convertToC());
             if(i < paramIDs.size() - 1) {
