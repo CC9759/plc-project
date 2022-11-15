@@ -8,12 +8,13 @@ package Phase2;
 import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Objects;
 
 public class FunctionDefNode implements JottTree{
 
     public HashMap<String, InformationType> localSymbolTable;
-    public  ArrayList<String> paramTypes = new ArrayList<>();
-    public String returnType;
+    public  ArrayList<InformationType> paramTypes = new ArrayList<>();
+    public InformationType returnType;
     final IDKeywordNode myIDKeywordNode;
     final FunctionDefParamsNode myFunctionDefParamsNode;
     final FunctionReturnNode myReturnNode;
@@ -22,10 +23,30 @@ public class FunctionDefNode implements JottTree{
         this.myIDKeywordNode = myIDKeywordNode;
         this.myFunctionDefParamsNode = myFunctionDefParamsNode;
         this.myReturnNode = myReturnNode;
-        this. returnType = myReturnNode.returnToken.getToken();
+        this.returnType = InformationType.VOID;
+        if(Objects.equals(myReturnNode.returnToken.getToken(), "Boolean")){
+            this.returnType = InformationType.BOOLEAN;
+        }else if(Objects.equals(myReturnNode.returnToken.getToken(), "Double")){
+            this.returnType = InformationType.DOUBLE;
+        }else if(Objects.equals(myReturnNode.returnToken.getToken(), "Integer")){
+            this.returnType = InformationType.INT;
+        }else if(Objects.equals(myReturnNode.returnToken.getToken(), "String")){
+            this.returnType = InformationType.STRING;
+        }
         for (Token temp: myFunctionDefParamsNode.getParamTypes()
              ) {
-            this.paramTypes.add(temp.getToken());
+
+            if(Objects.equals(temp.getToken(), "Boolean")){
+                this.paramTypes.add(InformationType.BOOLEAN);
+            }else if(Objects.equals(temp.getToken(), "Double")){
+                this.paramTypes.add(InformationType.DOUBLE);
+            }else if(Objects.equals(temp.getToken(), "Integer")){
+                this.paramTypes.add(InformationType.INT);
+            }else if(Objects.equals(temp.getToken(), "String")){
+                this.paramTypes.add(InformationType.STRING);
+            }else{
+                this.paramTypes.add(InformationType.VOID);
+            }
 
         }
         this.myBodyNode = myBodyNode;
