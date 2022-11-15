@@ -68,6 +68,10 @@ public class IDKeywordNode implements JottTree {
         return true;
     }
 
+    public String getValue() {
+        return this.value;
+    }
+
     public NodeType getMyType() {
         return myType;
     }
