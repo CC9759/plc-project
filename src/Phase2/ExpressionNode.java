@@ -19,12 +19,12 @@ public class ExpressionNode implements JottTree {
     public InformationType WhatAmI() {
         try {
             if (idKeywordNode != null) {
-                //return localSymbolTable.get(idKeywordNode.getValue());
-                return InformationType.VOID; //TODO SAME AS ABOVE
+                return localSymbolTable.get(idKeywordNode.getValue());
+                //return InformationType.VOID; //TODO SAME AS ABOVE
             }
             if (functionCallNode != null) {
-                //return localSymbolTable.get(idKeywordNode.getValue());
-                return InformationType.VOID; //TODO SAME AS ABOVE
+                return ProgramNode.globalSymbolTable.get(idKeywordNode.value).returnType;
+                //return InformationType.VOID; //TODO SAME AS ABOVE
             }
             if (constantNode != null) {
                 return constantNode.getMyType();
