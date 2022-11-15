@@ -33,19 +33,25 @@ public class AssignmentNode implements JottTree {
         }
 
         IDKeywordNode idKeywordNode = IDKeywordNode.parseIdKeyWordNode(tokens);
-        InformationType informationType = InformationType.VOID;
-        if(Objects.equals(typeToken.getToken(), "Boolean")){
-            informationType = InformationType.BOOLEAN;
-        }else if(Objects.equals(typeToken.getToken(), "Double")){
-            informationType = InformationType.DOUBLE;
-        }else if(Objects.equals(typeToken.getToken(), "Integer")){
-            informationType = InformationType.INT;
-        }else if(Objects.equals(typeToken.getToken(), "String")){
-            informationType = InformationType.STRING;
-        }
-        localSymbolTable.put(idKeywordNode.value, informationType);
         ParserUtils.removeToken(tokens, TokenType.ASSIGN);
         ExpressionNode expressionNode = ExpressionNode.parseExpressionNode(tokens, localSymbolTable);
+        InformationType informationType = InformationType.VOID;
+
+        if(typeToken != null) {
+            if (Objects.equals(typeToken.getToken(), "Boolean")) {
+                informationType = InformationType.BOOLEAN;
+            } else if (Objects.equals(typeToken.getToken(), "Double")) {
+                informationType = InformationType.DOUBLE;
+            } else if (Objects.equals(typeToken.getToken(), "Integer")) {
+                informationType = InformationType.INT;
+            } else if (Objects.equals(typeToken.getToken(), "String")) {
+                informationType = InformationType.STRING;
+            }
+        }
+        else{
+            informationType = expressionNode.WhatAmI();
+        }
+        localSymbolTable.put(idKeywordNode.value, informationType);
         return new AssignmentNode(typeToken, idKeywordNode, expressionNode, localSymbolTable);
     }
     /**
@@ -61,7 +67,6 @@ public class AssignmentNode implements JottTree {
         finalString.append(myIDKeywordNode.convertToJott());
         finalString.append(" = ");
         finalString.append(myExpressionNode.convertToJott());
-        finalString.append(";");
         return finalString.toString();
     }
 
