@@ -57,7 +57,7 @@ public class VarDeclarationNode implements JottTree{
      */
     public String convertToC(){
         if(type.equals("String")){
-            return "char " + id.convertToC() + "[];";
+            return "char *" + id.convertToC() + ";";
         }
         return type + " " + id.convertToC();
     }
