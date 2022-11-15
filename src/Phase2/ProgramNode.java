@@ -68,7 +68,7 @@ public class ProgramNode implements JottTree{
     @Override
     public String convertToC() {
         StringBuilder result = new StringBuilder();
-        result.append("#include <stdio.h>\n#include <string.h>\n#include <stdlib.h>");
+        result.append("#include <stdio.h>\n#include <string.h>\n#include <stdlib.h>\n");
         for(FunctionDefNode functionDef: functionDefs) {
             result.append(functionDef.convertToC());
         }
