@@ -16,7 +16,7 @@ import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.ArrayList;
 
-public class JottParserTester {
+public class Phase3Tester {
     ArrayList<TestCase> testCases;
 
     private static class TestCase{
@@ -105,9 +105,6 @@ public class JottParserTester {
             System.out.println(jottCode);
 
             boolean valid = root.validateTree();
-            System.out.print("valid:");
-            System.out.println(valid);
-
             try {
                 FileWriter writer = new FileWriter("parserTestCases/parserTestTemp.jott");
                 if (jottCode == null) {
@@ -154,7 +151,7 @@ public class JottParserTester {
                     return false;
                 }
             }
-            return true;
+            return valid;
         }catch (Exception e){
             System.err.println("\tFailed Test: " + test.testName);
             System.err.println("Unknown Exception occured.");
@@ -190,12 +187,12 @@ public class JottParserTester {
 
     public static void main(String[] args) {
         System.out.println("NOTE: System.err may print at the end. This is fine.");
-        JottParserTester tester = new JottParserTester();
+        Phase3Tester tester = new Phase3Tester();
 
         int numTests = 0;
         int passedTests = 0;
         tester.createTestCases();
-        for(JottParserTester.TestCase test: tester.testCases){
+        for(Phase3Tester.TestCase test: tester.testCases){
             numTests++;
             if(tester.runTest(test)){
                 passedTests++;
