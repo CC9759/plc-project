@@ -16,22 +16,26 @@ public class ExpressionNode implements JottTree {
     FunctionCallNode functionCallNode;
     IDKeywordNode idKeywordNode;
     ConstantNode constantNode;
-    public InformationType WhatAmI() throws Exception {
-        if(idKeywordNode != null) {
-            //return localSymbolTable.get(idKeywordNode.getValue());
-            return InformationType.VOID; //TODO SAME AS ABOVE
+    public InformationType WhatAmI() {
+        try {
+            if (idKeywordNode != null) {
+                //return localSymbolTable.get(idKeywordNode.getValue());
+                return InformationType.VOID; //TODO SAME AS ABOVE
+            }
+            if (functionCallNode != null) {
+                //return localSymbolTable.get(idKeywordNode.getValue());
+                return InformationType.VOID; //TODO SAME AS ABOVE
+            }
+            if (constantNode != null) {
+                return constantNode.getMyType();
+            }
+            if (firstExpressionNode.WhatAmI() != secondExpressionNode.WhatAmI()) {
+                throw new Exception("Invalid expression types joined by operation");
+            }
+            return firstExpressionNode.WhatAmI();
+        }catch (Exception e){
+            return null;
         }
-        if(functionCallNode != null) {
-            //return localSymbolTable.get(idKeywordNode.getValue());
-            return InformationType.VOID; //TODO SAME AS ABOVE
-        }
-        if(constantNode != null) {
-            return constantNode.getMyType();
-        }
-        if(firstExpressionNode.WhatAmI() != secondExpressionNode.WhatAmI()) {
-            throw new Exception("Invalid expression types joined by operation");
-        }
-        return firstExpressionNode.WhatAmI();
     }
 
     public ExpressionNode(FunctionCallNode input, HashMap<String, InformationType> localSymbolTable) {

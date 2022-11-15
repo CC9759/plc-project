@@ -82,8 +82,16 @@ public class FunctionCallNode implements JottTree{
      */
     public boolean validateTree(){
         if (ProgramNode.globalSymbolTable.containsKey(id.value)){
-            return (
-                    id.validateTree() && params.validateTree());
+            FunctionDefNode function = ProgramNode.globalSymbolTable.get(id.value);
+            if(function.paramTypes.size() != params.expressions.size()){
+                return false;
+            }
+            for (int i = 0; i <function.paramTypes.size(); i ++){
+                if(!(params.expressions.get(i).WhatAmI() == function.paramTypes.get(i))){
+                    return false;
+                }
+            }
+            return (id.validateTree() && params.validateTree());
         }
         return false;
     }

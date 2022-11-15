@@ -118,6 +118,9 @@ public class AssignmentNode implements JottTree {
      * @return true if valid Jott code; false otherwise
      */
     public boolean validateTree() {
+//        if localSymbolTable.get(myIDKeywordNode.value) {}
+//        localSymbolTable.put(myIDKeywordNode.value,myExpressionNode.WhatAmI());
+
         return true;
     }
 }
