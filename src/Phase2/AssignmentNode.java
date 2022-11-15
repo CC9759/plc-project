@@ -48,11 +48,6 @@ public class AssignmentNode implements JottTree {
             }
             localSymbolTable.put(idKeywordNode.value, informationType);
         }
-        else{
-            if (localSymbolTable.containsKey(idKeywordNode.value)){
-                typeToken
-            }
-        }
         return new AssignmentNode(typeToken, idKeywordNode, expressionNode, localSymbolTable);
     }
     /**
@@ -124,13 +119,12 @@ public class AssignmentNode implements JottTree {
      * @return true if valid Jott code; false otherwise
      */
     public boolean validateTree() {
-        if(localSymbolTable.containsKey(myIDKeywordNode.value)) {
-            return true;
-
-        }
-        localSymbolTable.put(myIDKeywordNode.value,myExpressionNode.WhatAmI());
-
-        return true;
+        if(localSymbolTable.containsKey(myIDKeywordNode.value)){
+            if(myIDKeywordNode.validateTree() && myExpressionNode.validateTree()){
+                return (localSymbolTable.get(myIDKeywordNode.value) == myExpressionNode.WhatAmI());
+            }
+            else{return false;}
+        } else{ return false;}
     }
 }
 
