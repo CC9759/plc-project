@@ -11,31 +11,33 @@ public class ParamsNode implements JottTree {
 
     public HashMap<String, InformationType> localSymbolTable;
     final NodeType myType = NodeType.PARAMS;
-    final ExpressionNode myExpressionNode;
-    final ParamsTNode myParamsTNode;
+
+    public ArrayList<ExpressionNode> expressions;
     /**
      * < params > -> < expr > < params_t > | 
      * < params_t > -> ,< expr > < params_t > | 
      */
-    private ParamsNode(ExpressionNode expressionNode, ParamsTNode paramsTNode, HashMap<String, InformationType> localSymbolTable) {
-        this.myExpressionNode = expressionNode;
-        this.myParamsTNode = paramsTNode;
+    private ParamsNode(ArrayList<ExpressionNode> expressions, HashMap<String, InformationType> localSymbolTable) {
+        this.expressions = expressions;
         this.localSymbolTable = localSymbolTable;
     }
 
     public static ParamsNode parseParamsNode(ArrayList<Token> tokens, HashMap<String, InformationType> localSymbolTable) throws Exception {
+        ArrayList<ExpressionNode> expressions = new ArrayList<>();
         if(tokens.get(0).getTokenType() != TokenType.R_BRACKET) {
             ExpressionNode expressionNode = ExpressionNode.parseExpressionNode(tokens, localSymbolTable);
-            ParamsTNode paramsTNode = ParamsTNode.parseParamsT(tokens, localSymbolTable);
-            return new ParamsNode(expressionNode, paramsTNode, localSymbolTable);
+            expressions.add(expressionNode);
         }
-        return null;
+        return new ParamsNode(expressions, localSymbolTable);
     }
     public String convertToJott() {
-        String result = myExpressionNode.convertToJott();
-        if (myParamsTNode != null) {
-            result +=",";
-            result += myParamsTNode.convertToJott();
+        String result = "";
+        for (int i = 0; i < expressions.size(); i ++) {
+            ExpressionNode expression = expressions.get(i);
+            result += expression.convertToJott();
+            if (i  < expressions.size()-1) {
+                result +=",";
+            }
         }
         return result;
     }
@@ -45,10 +47,13 @@ public class ParamsNode implements JottTree {
      * @return a string representing the Java code of this tree
      */
     public String convertToJava() {
-        String result = myExpressionNode.convertToJava();
-        if (myParamsTNode != null) {
-            result +=",";
-            result += myParamsTNode.convertToJava();
+        String result = "";
+        for (int i = 0; i < expressions.size(); i ++) {
+            ExpressionNode expression = expressions.get(i);
+            result += expression.convertToJott();
+            if (i  < expressions.size()-1) {
+                result +=",";
+            }
         }
         return result;
     }
@@ -58,10 +63,13 @@ public class ParamsNode implements JottTree {
      * @return a string representing the C code of this tree
      */
     public String convertToC() {
-        String result = myExpressionNode.convertToC();
-        if (myParamsTNode != null) {
-            result +=",";
-            result += myParamsTNode.convertToC();
+        String result = "";
+        for (int i = 0; i < expressions.size(); i ++) {
+            ExpressionNode expression = expressions.get(i);
+            result += expression.convertToJott();
+            if (i  < expressions.size()-1) {
+                result +=",";
+            }
         }
         return result;
     }
@@ -71,10 +79,13 @@ public class ParamsNode implements JottTree {
      * @return a string representing the Python code of this tree
      */
     public String convertToPython() {
-        String result = myExpressionNode.convertToPython();
-        if (myParamsTNode != null) {
-            result +=",";
-            result += myParamsTNode.convertToPython();
+        String result = "";
+        for (int i = 0; i < expressions.size(); i ++) {
+            ExpressionNode expression = expressions.get(i);
+            result += expression.convertToJott();
+            if (i  < expressions.size()-1) {
+                result +=",";
+            }
         }
         return result;
     }
@@ -85,6 +96,12 @@ public class ParamsNode implements JottTree {
      * @return true if valid Jott code; false otherwise
      */
     public boolean validateTree() {
+        for (ExpressionNode expression:expressions
+             ) {
+            if(!expression.validateTree()){
+                return false;
+            }
+        }
         return true;
     }
 
