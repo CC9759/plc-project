@@ -56,10 +56,18 @@ public class VarDeclarationNode implements JottTree{
      * @return a string representing the C code of this tree
      */
     public String convertToC(){
-        if(type.equals("String")){
-            return "char *" + id.convertToC() + ";";
+        StringBuilder result = new StringBuilder();
+        switch(type){
+            case "String": result.append("char*"); break;
+            case "Integer": result.append("int"); break;
+            case "Boolean": result.append("bool"); break;
+            case "Double": result.append("double"); break;
+            default: result.append(type); break;
         }
-        return type + " " + id.convertToC();
+
+        result.append(" ");
+        result.append(id.convertToC());
+        return result.toString();
     }
 
     /**

@@ -83,7 +83,6 @@ public class AssignmentNode implements JottTree {
         finalString.append(myIDKeywordNode.convertToJava());
         finalString.append(" = ");
         finalString.append(myExpressionNode.convertToJava());
-        finalString.append(";");
         return finalString.toString();
     }
 
@@ -94,13 +93,18 @@ public class AssignmentNode implements JottTree {
     public String convertToC() {
         StringBuilder finalString = new StringBuilder();
         if(myType != null) {
-            finalString.append(myType);
+            switch(myType){
+                case "String": finalString.append("char*"); break;
+                case "Integer": finalString.append("int"); break;
+                case "Boolean": finalString.append("bool"); break;
+                case "Double": finalString.append("double"); break;
+                default: finalString.append(myType); break;
+            }
             finalString.append(" ");
         }
         finalString.append(myIDKeywordNode.convertToC());
         finalString.append(" = ");
         finalString.append(myExpressionNode.convertToC());
-        finalString.append(";");
         return finalString.toString();
     }
 
@@ -113,7 +117,6 @@ public class AssignmentNode implements JottTree {
         finalString.append(myIDKeywordNode.convertToPython());
         finalString.append(" = ");
         finalString.append(myExpressionNode.convertToPython());
-        finalString.append("\n");
         return finalString.toString();
     }
 

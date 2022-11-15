@@ -114,7 +114,8 @@ public class FunctionDefNode implements JottTree{
         result += "(";
         result += myFunctionDefParamsNode.convertToPython();
         result += "):\n\t";
-        result += myBodyNode.convertToPython().replace("\n", "\n\t");;
+        result += myBodyNode.convertToPython().replace("\n", "\n\t");
+        result += ("\n");
         return result;
     }
 
