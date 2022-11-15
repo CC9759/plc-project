@@ -34,7 +34,7 @@ public class IDKeywordNode implements JottTree {
      */
     public String convertToJava() {
         if(value.equals("print")){
-            return "System.out.print";
+            return "System.out.println";
         }
         return this.value;
     }

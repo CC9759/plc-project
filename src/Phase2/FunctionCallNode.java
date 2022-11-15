@@ -49,7 +49,7 @@ public class FunctionCallNode implements JottTree{
             StringBuilder result = new StringBuilder();
 
             result.append("printf");
-            result.append("(");
+            result.append("(\"");
             try {
                 switch(params.myExpressionNode.WhatAmI()){
                     case BOOLEAN: result.append("%b"); break;
@@ -60,6 +60,7 @@ public class FunctionCallNode implements JottTree{
             } catch (Exception e) {
                 e.printStackTrace();
             }
+            result.append("\n\"");
 
             result.append(",");
             result.append(params.myExpressionNode.convertToC());
