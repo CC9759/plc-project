@@ -55,7 +55,12 @@ public class VarDeclarationNode implements JottTree{
      * Will output a string of this tree in C
      * @return a string representing the C code of this tree
      */
-    public String convertToC(){return type + " " + id.convertToC();}
+    public String convertToC(){
+        if(type.equals("String")){
+            return "char " + id.convertToC() + "[];";
+        }
+        return type + " " + id.convertToC();
+    }
 
     /**
      * Will output a string of this tree in Python

@@ -86,6 +86,7 @@ public class AssignmentNode implements JottTree {
      * Will output a string of this tree in C
      * @return a string representing the C code of this tree
      */
+    //TODO: discuss this one?
     public String convertToC() {
         StringBuilder finalString = new StringBuilder();
         if(myType != null) {
@@ -93,6 +94,9 @@ public class AssignmentNode implements JottTree {
             finalString.append(" ");
         }
         finalString.append(myIDKeywordNode.convertToC());
+        // if(myType.equals("String")){
+        //     finalString.append("[]");
+        // }
         finalString.append(" = ");
         finalString.append(myExpressionNode.convertToC());
         finalString.append(" ");

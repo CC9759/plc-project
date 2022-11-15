@@ -143,6 +143,13 @@ public class ExpressionNode implements JottTree {
         if(functionCallNode != null) {
             return " " + functionCallNode.convertToC() + " ";
         }
+        try {
+            if(this.WhatAmI() == InformationType.STRING &&  operationNode.convertToC().equals("+") ){
+                return "strcat(" + firstExpressionNode.convertToC() + "," + secondExpressionNode.convertToC() + ")";
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
         return firstExpressionNode.convertToC() + " " + operationNode.convertToC() + " " + secondExpressionNode.convertToC();
     }
 
