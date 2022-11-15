@@ -61,7 +61,6 @@ public class AssignmentNode implements JottTree {
         finalString.append(myIDKeywordNode.convertToJott());
         finalString.append(" = ");
         finalString.append(myExpressionNode.convertToJott());
-        finalString.append(";");
         return finalString.toString();
     }
 
