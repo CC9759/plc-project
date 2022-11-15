@@ -29,12 +29,18 @@ public class FunctionReturnNode implements JottTree{
 
     @Override
     public String convertToC() {
+        switch(returnToken.getToken()){
+            case "String": return "char*";
+            case "Integer": return "int";
+            case "Boolean": return "bool";
+            case "Double": return "double";
+        }
         return returnToken.getToken();
     }
 
     @Override
     public String convertToPython() {
-        return returnToken.getToken();
+        return "";
     }
 
     @Override

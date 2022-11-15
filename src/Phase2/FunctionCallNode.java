@@ -60,7 +60,7 @@ public class FunctionCallNode implements JottTree{
             } catch (Exception e) {
                 e.printStackTrace();
             }
-            result.append("\n\"");
+            result.append("\\n\"");
 
             result.append(",");
             result.append(params.expressions.get(0).convertToC());
