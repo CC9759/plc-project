@@ -96,11 +96,11 @@ public class BodyNode implements JottTree {
         StringBuilder finalString = new StringBuilder();
 
         for(BodyStatementNode i: bodyStatements){
-            finalString.append(i.convertToJott());
+            finalString.append(i.convertToPython());
             finalString.append("\n");
         }
         if(returnStatement != null){
-            finalString.append(returnStatement.convertToJott());
+            finalString.append(returnStatement.convertToPython()());
         }
         return finalString.toString();
     }
