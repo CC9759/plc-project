@@ -19,12 +19,12 @@ public class ExpressionNode implements JottTree {
     public InformationType WhatAmI() {
         try {
             if (idKeywordNode != null) {
-                //return localSymbolTable.get(idKeywordNode.getValue());
-                return InformationType.VOID; //TODO SAME AS ABOVE
+                return localSymbolTable.get(idKeywordNode.getValue());
+                //return InformationType.VOID; //TODO SAME AS ABOVE
             }
             if (functionCallNode != null) {
-                //return localSymbolTable.get(idKeywordNode.getValue());
-                return InformationType.VOID; //TODO SAME AS ABOVE
+                return ProgramNode.globalSymbolTable.get(functionCallNode.id.value).returnType;
+                //return InformationType.VOID; //TODO SAME AS ABOVE
             }
             if (constantNode != null) {
                 return constantNode.getMyType();
@@ -182,6 +182,29 @@ public class ExpressionNode implements JottTree {
      * @return true if valid Jott code; false otherwise
      */
     public boolean validateTree() {
-        return true;
+        boolean firstExpressionNodeBool = true;
+        boolean secondExpressionNodeBool = true;
+        boolean functionCallNodeBool = true;
+        boolean idKeyWordNodeBool = true;
+        boolean constantNodeBool = true;
+
+        if(firstExpressionNode!=null){
+            firstExpressionNodeBool = firstExpressionNode.validateTree();
+        }
+        if(secondExpressionNode!=null){
+            secondExpressionNodeBool = secondExpressionNode.validateTree();
+        }
+        if(functionCallNode!=null){
+            functionCallNodeBool = functionCallNode.validateTree();
+        }
+        if(idKeywordNode!=null){
+            idKeyWordNodeBool = idKeywordNode.validateTree();
+        }
+        if(constantNode!=null){
+            constantNodeBool = constantNode.validateTree();
+        }
+
+        return(firstExpressionNodeBool&&secondExpressionNodeBool&&functionCallNodeBool&&idKeyWordNodeBool&&constantNodeBool);
+
     }
 }

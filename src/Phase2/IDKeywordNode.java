@@ -65,6 +65,9 @@ public class IDKeywordNode implements JottTree {
      * @return true if valid Jott code; false otherwise
      */
     public boolean validateTree() {
+        if(value.equals("while")){
+            return false;
+        }
         return true;
     }
 

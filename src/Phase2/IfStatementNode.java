@@ -50,7 +50,7 @@ public class IfStatementNode extends BodyStatementNode{
             Token elseToken = tokens.get(0);
 
             if (elseToken.getToken().equals("else")){
-                tokens.remove(0);
+//                tokens.remove(0); we remove else inside the else node as well. Removing it here for now
                 elseNode = ElseNode.parseElseNode(tokens, localSymbolTable);
             }
         }

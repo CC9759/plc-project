@@ -10,7 +10,7 @@ import java.util.HashMap;
 
 public class FunctionCallNode implements JottTree{
 
-    private final IDKeywordNode id;
+    public final IDKeywordNode id;
     private final ParamsNode params;
     public HashMap<String, InformationType> localSymbolTable;
 
@@ -81,6 +81,12 @@ public class FunctionCallNode implements JottTree{
      * @return true if valid Jott code; false otherwise
      */
     public boolean validateTree(){
+        if(id.value.equals("print")) {
+            if (params.expressions.size() == 1) {
+                return true;
+            }
+            return false;
+        }
         if (ProgramNode.globalSymbolTable.containsKey(id.value)){
             FunctionDefNode function = ProgramNode.globalSymbolTable.get(id.value);
             if(function.paramTypes.size() != params.expressions.size()){

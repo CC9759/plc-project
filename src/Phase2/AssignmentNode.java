@@ -36,7 +36,6 @@ public class AssignmentNode implements JottTree {
         ParserUtils.removeToken(tokens, TokenType.ASSIGN);
         ExpressionNode expressionNode = ExpressionNode.parseExpressionNode(tokens, localSymbolTable);
         InformationType informationType = InformationType.VOID;
-
         if(typeToken != null) {
             if (Objects.equals(typeToken.getToken(), "Boolean")) {
                 informationType = InformationType.BOOLEAN;
@@ -47,11 +46,8 @@ public class AssignmentNode implements JottTree {
             } else if (Objects.equals(typeToken.getToken(), "String")) {
                 informationType = InformationType.STRING;
             }
+            localSymbolTable.put(idKeywordNode.value, informationType);
         }
-        else{
-            informationType = expressionNode.WhatAmI();
-        }
-        localSymbolTable.put(idKeywordNode.value, informationType);
         return new AssignmentNode(typeToken, idKeywordNode, expressionNode, localSymbolTable);
     }
     /**
@@ -83,6 +79,7 @@ public class AssignmentNode implements JottTree {
         finalString.append(myIDKeywordNode.convertToJava());
         finalString.append(" = ");
         finalString.append(myExpressionNode.convertToJava());
+        finalString.append(";");
         return finalString.toString();
     }
 
@@ -93,18 +90,13 @@ public class AssignmentNode implements JottTree {
     public String convertToC() {
         StringBuilder finalString = new StringBuilder();
         if(myType != null) {
-            switch(myType){
-                case "String": finalString.append("char*"); break;
-                case "Integer": finalString.append("int"); break;
-                case "Boolean": finalString.append("bool"); break;
-                case "Double": finalString.append("double"); break;
-                default: finalString.append(myType); break;
-            }
+            finalString.append(myType);
             finalString.append(" ");
         }
         finalString.append(myIDKeywordNode.convertToC());
         finalString.append(" = ");
         finalString.append(myExpressionNode.convertToC());
+        finalString.append(";");
         return finalString.toString();
     }
 
@@ -117,6 +109,7 @@ public class AssignmentNode implements JottTree {
         finalString.append(myIDKeywordNode.convertToPython());
         finalString.append(" = ");
         finalString.append(myExpressionNode.convertToPython());
+        finalString.append("\n");
         return finalString.toString();
     }
 
@@ -126,10 +119,12 @@ public class AssignmentNode implements JottTree {
      * @return true if valid Jott code; false otherwise
      */
     public boolean validateTree() {
-//        if localSymbolTable.get(myIDKeywordNode.value) {}
-//        localSymbolTable.put(myIDKeywordNode.value,myExpressionNode.WhatAmI());
-
-        return true;
+        if(localSymbolTable.containsKey(myIDKeywordNode.value)){
+            if(myIDKeywordNode.validateTree() && myExpressionNode.validateTree()){
+                return (localSymbolTable.get(myIDKeywordNode.value) == myExpressionNode.WhatAmI());
+            }
+            else{return false;}
+        } else{ return false;}
     }
 }
 
