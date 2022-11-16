@@ -82,7 +82,7 @@ public class FunctionDefNode implements JottTree{
 
     @Override
     public String convertToJava() {
-        String result = "public ";
+        String result = "public static";
         result += myReturnNode.convertToJava() + " ";
         result += myIDKeywordNode.convertToJava();
         result += "(";
