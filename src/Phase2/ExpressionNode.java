@@ -187,21 +187,54 @@ public class ExpressionNode implements JottTree {
         boolean functionCallNodeBool = true;
         boolean idKeyWordNodeBool = true;
         boolean constantNodeBool = true;
+        InformationType type = null;
 
         if(firstExpressionNode!=null){
             firstExpressionNodeBool = firstExpressionNode.validateTree();
+            if(type != null && type != firstExpressionNode.WhatAmI()) {
+                return false;
+            }
+            else{
+                type = firstExpressionNode.WhatAmI();
+            }
+
         }
         if(secondExpressionNode!=null){
             secondExpressionNodeBool = secondExpressionNode.validateTree();
+            if(type != null && type != secondExpressionNode.WhatAmI()) {
+                return false;
+            }
+            else{
+                type = secondExpressionNode.WhatAmI();
+            }
         }
         if(functionCallNode!=null){
             functionCallNodeBool = functionCallNode.validateTree();
+            if (!functionCallNodeBool) { return functionCallNodeBool;}
+            if(type != null && type != ProgramNode.globalSymbolTable.get(functionCallNode.id.value).returnType) {
+                return false;
+            }
+            else{
+                type = ProgramNode.globalSymbolTable.get(functionCallNode.id.value).returnType;
+            }
         }
         if(idKeywordNode!=null){
             idKeyWordNodeBool = idKeywordNode.validateTree();
+            if(type != null && type != localSymbolTable.get(idKeywordNode.value)) {
+                return false;
+            }
+            else{
+                type = localSymbolTable.get(idKeywordNode.value);
+            }
         }
         if(constantNode!=null){
             constantNodeBool = constantNode.validateTree();
+            if(type != null && type != constantNode.getMyType()) {
+                return false;
+            }
+            else{
+                type = constantNode.getMyType();
+            }
         }
 
         return(firstExpressionNodeBool&&secondExpressionNodeBool&&functionCallNodeBool&&idKeyWordNodeBool&&constantNodeBool);

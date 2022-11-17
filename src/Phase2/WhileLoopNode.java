@@ -75,5 +75,9 @@ public class WhileLoopNode extends BodyStatementNode{
      *     private final BodyNode body;
      */
 
-    public ReturnStatementNode returnable() {return body.returnable();}
+    public ReturnStatementNode returnable() {
+//      return body.returnable();
+//      while loops don't have to run, so they can't be used in returnables
+        return null;
+    }
 }
