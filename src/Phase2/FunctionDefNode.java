@@ -5,7 +5,6 @@ package Phase2;
  * @author Jonathon LoTempio, Halle Masaryk, Celina Chen, Kaiming Zhang
  **/
 
-import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Objects;
@@ -13,7 +12,7 @@ import java.util.Objects;
 public class FunctionDefNode implements JottTree{
 
     public HashMap<String, InformationType> localSymbolTable;
-    public  ArrayList<InformationType> paramTypes = new ArrayList<>();
+    public ArrayList<InformationType> paramTypes = new ArrayList<>();
     public InformationType returnType;
     final IDKeywordNode myIDKeywordNode;
     final FunctionDefParamsNode myFunctionDefParamsNode;
@@ -58,6 +57,23 @@ public class FunctionDefNode implements JottTree{
         //TODO check that types are correct
         ParserUtils.removeToken(inputTokens, TokenType.L_BRACKET);
         FunctionDefParamsNode myFunctionDefParamsNode = FunctionDefParamsNode.parseFunctionDefParamsNode(inputTokens);
+        for (int i = 0; i < myFunctionDefParamsNode.paramIDs.size(); i ++) {
+            Token typeToken = myFunctionDefParamsNode.paramTypes.get(i);
+            InformationType informationType = InformationType.VOID;
+            if(typeToken != null) {
+                if (Objects.equals(typeToken.getToken(), "Boolean")) {
+                    informationType = InformationType.BOOLEAN;
+                } else if (Objects.equals(typeToken.getToken(), "Double")) {
+                    informationType = InformationType.DOUBLE;
+                } else if (Objects.equals(typeToken.getToken(), "Integer")) {
+                    informationType = InformationType.INT;
+                } else if (Objects.equals(typeToken.getToken(), "String")) {
+                    informationType = InformationType.STRING;
+                }
+                localSymbolTable.put(myFunctionDefParamsNode.paramIDs.get(i).value, informationType);
+            }
+
+        }
         ParserUtils.removeToken(inputTokens, TokenType.R_BRACKET);
         ParserUtils.removeToken(inputTokens, TokenType.COLON);
         FunctionReturnNode myReturnNode = FunctionReturnNode.parseFunctionReturnNode(inputTokens);
@@ -82,11 +98,16 @@ public class FunctionDefNode implements JottTree{
 
     @Override
     public String convertToJava() {
-        String result = "public static";
+        String result = "public static ";
         result += myReturnNode.convertToJava() + " ";
         result += myIDKeywordNode.convertToJava();
-        result += "(";
-        result += myFunctionDefParamsNode.convertToJava();
+        if(myIDKeywordNode.convertToJava().equals("main")){
+            result += "(String args[]";
+        }
+        else{
+            result += "(";
+            result += myFunctionDefParamsNode.convertToJava();
+        }
         result += "){";
         result += myBodyNode.convertToJava();
         result += "}";
