@@ -12,14 +12,18 @@ public class ProgramNode implements JottTree{
     private final ArrayList<FunctionDefNode> functionDefs;
     public static HashMap<String, FunctionDefNode> globalSymbolTable;
 
-    private ProgramNode(ArrayList<FunctionDefNode> functionDefs, HashMap<String, FunctionDefNode> table) {
+    public static Token lastToken;
+
+    private ProgramNode(ArrayList<FunctionDefNode> functionDefs, HashMap<String, FunctionDefNode> table, Token lastToken) {
         this.functionDefs = functionDefs;
         this.globalSymbolTable = table;
+        this.lastToken = lastToken;
     }
 
     public static ProgramNode parseProgramNode(ArrayList<Token> tokens) {
         ArrayList<FunctionDefNode> functionDefs = new ArrayList<>();
         HashMap<String, FunctionDefNode> newTable = new HashMap<>();
+        Token lastToken = tokens.get(tokens.size()-1);
         try {
             while (!tokens.isEmpty()) {
 
@@ -28,7 +32,7 @@ public class ProgramNode implements JottTree{
                 newTable.put(function.myIDKeywordNode.getValue(), function);
 
             }
-            return new ProgramNode(functionDefs, newTable);
+            return new ProgramNode(functionDefs, newTable, lastToken);
         } catch(Exception e) {
           System.err.println(e.getMessage());
           return null;
@@ -91,11 +95,11 @@ public class ProgramNode implements JottTree{
         try {
 
             if (!globalSymbolTable.containsKey("main")) {
-                return false;
+                throw new ParserException(lastToken, "Missing a main function", true);
             }
             FunctionDefNode main = globalSymbolTable.get("main");
             if (!(main.paramTypes.size() == 0) || main.returnType != InformationType.VOID) {
-                return false;
+                throw new ParserException(main.token, "Incorrect main definition", true);
             }
             for (FunctionDefNode node : functionDefs
             ) {

@@ -21,6 +21,7 @@ public class ReturnStatementNode implements JottTree {
     }
 
     public static ReturnStatementNode ParseReturnStatementNode(ArrayList<Token> inputList, HashMap<String, InformationType> localSymbolTable) throws Exception {
+        FunctionDefNode.returnToken = inputList.get(0);
         inputList.remove(0);
         ExpressionNode expressionNode = ExpressionNode.parseExpressionNode(inputList, localSymbolTable);
         ParserUtils.removeToken(inputList,TokenType.SEMICOLON);

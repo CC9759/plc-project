@@ -12,19 +12,22 @@ public class FunctionCallNode implements JottTree{
 
     public final IDKeywordNode id;
     private final ParamsNode params;
+    public Token token;
     public HashMap<String, InformationType> localSymbolTable;
 
-    private FunctionCallNode(IDKeywordNode idKeywordNode, ParamsNode paramsNode, HashMap<String, InformationType> localSymbolTable){
+    private FunctionCallNode(IDKeywordNode idKeywordNode, ParamsNode paramsNode, HashMap<String, InformationType> localSymbolTable, Token token){
         this.id = idKeywordNode;
         this.params = paramsNode;
         this.localSymbolTable = localSymbolTable;
+        this.token = token;
     }
     public static FunctionCallNode parseFunctionCallNode(ArrayList<Token> tokens, HashMap<String, InformationType> localSymbolTable) throws Exception{
+        Token token = tokens.get(0);
         IDKeywordNode idKeywordNode = IDKeywordNode.parseIdKeyWordNode(tokens);
         ParserUtils.removeToken(tokens,TokenType.L_BRACKET);
         ParamsNode paramsNode = ParamsNode.parseParamsNode(tokens, localSymbolTable);
         ParserUtils.removeToken(tokens,TokenType.R_BRACKET);
-        return new FunctionCallNode(idKeywordNode, paramsNode, localSymbolTable);
+        return new FunctionCallNode(idKeywordNode, paramsNode, localSymbolTable, token);
     }
 
     /**
@@ -91,16 +94,16 @@ public class FunctionCallNode implements JottTree{
         if (ProgramNode.globalSymbolTable.containsKey(id.value)){
             FunctionDefNode function = ProgramNode.globalSymbolTable.get(id.value);
             if(function.paramTypes.size() != params.expressions.size()){
-                return false;
+                throw new ParserException(token, "Invalid number of parameters for function " + id.value, true);
             }
             for (int i = 0; i <function.paramTypes.size(); i ++){
                 if(!(params.expressions.get(i).WhatAmI() == function.paramTypes.get(i))){
-                    return false;
+                    throw new ParserException(token, "Invalid parameter type for function " + id.value, true);
                 }
             }
             return (id.validateTree() && params.validateTree());
         }else {
-            throw new ParserException(params.expressions.get(0).token, "Call to unknown function " + id.value, true);
+            throw new ParserException(token, "Call to unknown function " + id.value, true);
         }
     }
 }

@@ -117,11 +117,12 @@ public class AssignmentNode implements JottTree {
      */
     public boolean validateTree() throws Exception {
         if(localSymbolTable.containsKey(myIDKeywordNode.value)){
+            if (localSymbolTable.get(myIDKeywordNode.value) != myExpressionNode.WhatAmI()){throw new ParserException(myExpressionNode.token, "Invalid Type being assigned to " + myIDKeywordNode.value, true);}
             if(myIDKeywordNode.validateTree() && myExpressionNode.validateTree()){
                 return (localSymbolTable.get(myIDKeywordNode.value) == myExpressionNode.WhatAmI());
             }
-            else{throw new ParserException(myExpressionNode.token, "Invalid Type being assigned to " + myIDKeywordNode.value, true);}
-        } else{ return false;}
+            else{return false;}
+        } else{ throw new ParserException(myExpressionNode.token, "Variable " + myIDKeywordNode.value+ " uninitialized", true);}
     }
 }
 
