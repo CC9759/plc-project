@@ -39,12 +39,7 @@ public class Phase3Tester {
     private void createTestCases(){
         this.testCases = new ArrayList<>();
         testCases.add(new TestCase("provided writeup example1", "providedExample1.jott", false ));
-//        testCases.add(new TestCase("provided writeup example2 (error)", "providedExample2.jott", true ));
-//        testCases.add(new TestCase("provided writeup example3 (error)", "providedExample3.jott", true ));
-//        testCases.add(new TestCase("provided writeup example4 (error)", "providedExample4.jott", true ));
-//        testCases.add(new TestCase("provided writeup example5 (error)", "providedExample5.jott", true ));
         testCases.add(new TestCase("hello world", "helloWorld.jott", false ));
-//        testCases.add(new TestCase("1foo error (error)", "1foo.jott", true ));
         testCases.add(new TestCase("return <id> type mismatch", "returnId.jott", true ));
 //        testCases.add(new TestCase("type:var error (error)", "paramOrderSwapped.jott", true ));
 //        testCases.add(new TestCase("missing expr (error)", "missingExp.jott", true ));
@@ -52,6 +47,16 @@ public class Phase3Tester {
 //        testCases.add(new TestCase("elseif without if (error)", "elseIfNoIf.jott", true ));
         testCases.add(new TestCase("missing return", "missingReturn.jott", true ));
 //        testCases.add(new TestCase("Void not valid param type (error)", "voidParam.jott", true ));
+        testCases.add(new TestCase("function has wrong param types", "funcWrongParamType.jott", true ));
+        testCases.add(new TestCase("return inside if statement", "ifStmtReturns.jott", false ));
+        testCases.add(new TestCase("large valid vild", "largerValid.jott", false ));
+        testCases.add(new TestCase("missing function params", "missingFuncParams.jott", true ));
+        testCases.add(new TestCase("missing return in if statement", "noReturnIf.jott", true ));
+        testCases.add(new TestCase("no Return in while loop", "noReturnWhile.jott", true ));
+        testCases.add(new TestCase("return in void function should be invalid", "voidReturn.jott", true ));
+
+
+
         testCases.add(new TestCase("function not defined", "funcNotDefined.jott", true ));
         testCases.add(new TestCase("mismatch return type", "mismatchedReturn.jott", true ));
         testCases.add(new TestCase("function call param type not matching", "funcCallParamInvalid.jott", true ));
