@@ -125,7 +125,7 @@ public class FunctionDefNode implements JottTree{
         this.myReturnNode.validateTree() && this.myBodyNode.validateTree());
     }
 
-    public boolean returnable() {
+    public JottTree returnable() {
         return myBodyNode.returnable();
     }
 }

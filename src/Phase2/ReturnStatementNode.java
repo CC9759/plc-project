@@ -58,5 +58,9 @@ public class ReturnStatementNode implements JottTree {
      */
     public boolean validateTree(){return expression.validateTree();}
 
+    public ExpressionNode getExpressionNode() {
+        return expression;
+    }
+
     
 }

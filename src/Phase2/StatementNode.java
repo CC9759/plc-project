@@ -79,7 +79,7 @@ public class StatementNode extends BodyStatementNode{
         return node.validateTree();
     }
 
-    public boolean returnable() {
-        return false;
+    public ReturnStatementNode returnable() {
+        return null;
     }
 }

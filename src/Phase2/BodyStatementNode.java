@@ -50,5 +50,5 @@ public abstract class BodyStatementNode implements JottTree{
      */
     public abstract boolean validateTree();
 
-    public abstract boolean returnable();
+    public abstract ReturnStatementNode returnable();
 }

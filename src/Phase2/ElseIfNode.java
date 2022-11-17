@@ -77,10 +77,13 @@ public class ElseIfNode implements JottTree {
      *     private final ElseIfNode elseIfNode;
      */
 
-    public boolean returnable() {
+    public ReturnStatementNode returnable() {
         if(elseIfNode == null) {
             return bodyNode.returnable();
         }
-        return elseIfNode.returnable() && bodyNode.returnable();
+        if(elseIfNode.returnable() == null || bodyNode.returnable() == null || elseIfNode.returnable().getExpressionNode().WhatAmI() != bodyNode.returnable().getExpressionNode().WhatAmI()) {
+            return null;
+        }
+        return elseIfNode.returnable();
     }
 }

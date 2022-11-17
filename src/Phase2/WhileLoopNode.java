@@ -75,5 +75,5 @@ public class WhileLoopNode extends BodyStatementNode{
      *     private final BodyNode body;
      */
 
-    public boolean returnable() {return body.returnable();}
+    public ReturnStatementNode returnable() {return body.returnable();}
 }
