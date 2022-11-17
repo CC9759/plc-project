@@ -127,7 +127,7 @@ public class IfStatementNode extends BodyStatementNode{
      * Errors validating will be reported to System.err
      * @return true if valid Jott code; false otherwise
      */
-    public boolean validateTree() throws ParserException {
+    public boolean validateTree() throws Exception {
         boolean expressionBool = boolExpression.validateTree();
         boolean bodyBool = body.validateTree();
         boolean elseIfBool = true;

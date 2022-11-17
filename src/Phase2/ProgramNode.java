@@ -105,6 +105,7 @@ public class ProgramNode implements JottTree{
             }
             return true;
         }catch (Exception exception){
+            System.err.println(exception.getMessage());
            return false;
         }
     }

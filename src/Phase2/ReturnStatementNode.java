@@ -56,7 +56,7 @@ public class ReturnStatementNode implements JottTree {
      * Errors validating will be reported to System.err
      * @return true if valid Jott code; false otherwise
      */
-    public boolean validateTree(){return expression.validateTree();}
+    public boolean validateTree() throws Exception{return expression.validateTree();}
 
     public ExpressionNode getExpressionNode() {
         return expression;

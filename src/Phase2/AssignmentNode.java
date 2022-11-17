@@ -115,7 +115,7 @@ public class AssignmentNode implements JottTree {
      * Errors validating will be reported to System.err
      * @return true if valid Jott code; false otherwise
      */
-    public boolean validateTree() throws ParserException {
+    public boolean validateTree() throws Exception {
         if(localSymbolTable.containsKey(myIDKeywordNode.value)){
             if(myIDKeywordNode.validateTree() && myExpressionNode.validateTree()){
                 return (localSymbolTable.get(myIDKeywordNode.value) == myExpressionNode.WhatAmI());
