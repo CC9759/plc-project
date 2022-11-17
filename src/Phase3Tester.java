@@ -107,7 +107,7 @@ public class Phase3Tester {
             System.out.println(jottCode);
             boolean valid = root.validateTree();
             try {
-                FileWriter writer = new FileWriter("parserTestCases/parserTestTemp.jott");
+                FileWriter writer = new FileWriter("phase3TestCases/parserTestTemp.jott");
                 if (jottCode == null) {
                     System.err.println("\tFailed Test: " + test.testName);
                     System.err.println("Expected a program string; got null");
@@ -119,7 +119,7 @@ public class Phase3Tester {
                 e.printStackTrace();
             }
 
-            ArrayList<Token> newTokens = JottTokenizer.tokenize("parserTestCases/parserTestTemp.jott");
+            ArrayList<Token> newTokens = JottTokenizer.tokenize("phase3TestCases/parserTestTemp.jott");
 
             if (newTokens == null) {
                 System.err.println("\tFailed Test: " + test.testName);
@@ -185,7 +185,7 @@ public class Phase3Tester {
         String orginalJottCode;
         try {
             orginalJottCode = new String(
-                    Files.readAllBytes(Paths.get("parserTestCases/" + test.fileName)));
+                    Files.readAllBytes(Paths.get("phase3TestCases/" + test.fileName)));
         } catch (IOException e) {
             e.printStackTrace();
             return false;
