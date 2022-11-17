@@ -121,7 +121,8 @@ public class FunctionDefNode implements JottTree{
 
     @Override
     public boolean validateTree() {
-        if(!returnable() && returnType!=InformationType.VOID){return false;}
+        if(returnable() ==null && returnType!=InformationType.VOID){return false;}
+        if(returnable() !=null && returnType==InformationType.VOID){return false;}
         return (this.myIDKeywordNode.validateTree() && this.myFunctionDefParamsNode.validateTree() &&
         this.myReturnNode.validateTree() && this.myBodyNode.validateTree());
     }
