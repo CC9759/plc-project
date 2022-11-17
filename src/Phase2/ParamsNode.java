@@ -50,7 +50,7 @@ public class ParamsNode implements JottTree {
         String result = "";
         for (int i = 0; i < expressions.size(); i ++) {
             ExpressionNode expression = expressions.get(i);
-            result += expression.convertToJott();
+            result += expression.convertToJava();
             if (i  < expressions.size()-1) {
                 result +=",";
             }
@@ -66,7 +66,7 @@ public class ParamsNode implements JottTree {
         String result = "";
         for (int i = 0; i < expressions.size(); i ++) {
             ExpressionNode expression = expressions.get(i);
-            result += expression.convertToJott();
+            result += expression.convertToC();
             if (i  < expressions.size()-1) {
                 result +=",";
             }
@@ -82,7 +82,7 @@ public class ParamsNode implements JottTree {
         String result = "";
         for (int i = 0; i < expressions.size(); i ++) {
             ExpressionNode expression = expressions.get(i);
-            result += expression.convertToJott();
+            result += expression.convertToPython();
             if (i  < expressions.size()-1) {
                 result +=",";
             }

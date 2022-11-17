@@ -24,6 +24,9 @@ public class FunctionReturnNode implements JottTree{
 
     @Override
     public String convertToJava() {
+        if(returnToken.getToken().equals("Void")){
+            return "void";
+        }
         return returnToken.getToken();
     }
 
@@ -34,6 +37,7 @@ public class FunctionReturnNode implements JottTree{
             case "Integer": return "int";
             case "Boolean": return "bool";
             case "Double": return "double";
+            case "Void": return "void";
         }
         return returnToken.getToken();
     }

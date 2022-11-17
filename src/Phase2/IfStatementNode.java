@@ -95,12 +95,12 @@ public class IfStatementNode extends BodyStatementNode{
      * @return a string representing the C code of this tree
      */
     public String convertToC() {
-        String result = "if (" + boolExpression.convertToJava()+ "){ "+ body.convertToJava()+ "}";
+        String result = "if (" + boolExpression.convertToC()+ "){ "+ body.convertToC()+ "}";
         if (elsIf != null){
-            result += elsIf.convertToJava();
+            result += elsIf.convertToC();
         }
         if (elseStatement != null){
-            result += elseStatement.convertToJava();
+            result += elseStatement.convertToC();
         }
 
         return result;
@@ -111,7 +111,7 @@ public class IfStatementNode extends BodyStatementNode{
      * @return a string representing the Python code of this tree
      */
     public String convertToPython() {
-        String result = "if (" + boolExpression.convertToPython()+ "):\n\t"+ body.convertToJava().replace("\n", "\n\t");
+        String result = "if (" + boolExpression.convertToPython()+ "):\n\t"+ body.convertToPython().replace("\n", "\n\t");
         if (elsIf != null){
             result += elsIf.convertToPython();
         }
