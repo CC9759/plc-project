@@ -6,10 +6,11 @@ public class Phase2Testing {
     public static void main(String[] args) throws Exception{
 
         System.out.println("testing on the function definition in phase1Example");
-        ArrayList<Token> tokens =  JottTokenizer.tokenize("phase3TestCases/funcReturnInExpr.jott");
+        ArrayList<Token> tokens =  JottTokenizer.tokenize("phase3TestCases/largerValid.jott");
         ProgramNode result = ProgramNode.parseProgramNode(tokens);
         if(result != null) {
-            System.out.println(result.convertToJott());
+//            System.out.println(result.convertToJott());
+            System.out.println(result.convertToC());
             Boolean valid = result.validateTree();
 
             System.out.printf("valid:" + valid);

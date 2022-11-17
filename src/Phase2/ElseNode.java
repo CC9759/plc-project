@@ -73,7 +73,7 @@ public class ElseNode implements JottTree {
         }
     }
 
-    public boolean validateTree() {
+    public boolean validateTree() throws Exception {
         return bodyNode.validateTree();
     }
 
