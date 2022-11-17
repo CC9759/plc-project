@@ -33,6 +33,7 @@ public class Jott {
         try {
             BufferedWriter f_writer = new BufferedWriter(new FileWriter(outputName));
             f_writer.write(result);
+            f_writer.close();
         } catch (IOException e) {
             e.printStackTrace();
         }
