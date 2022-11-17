@@ -128,7 +128,7 @@ public class BodyNode implements JottTree {
 
     public ReturnStatementNode returnable() {
         if(returnStatement != null) {
-            return null;
+            return returnStatement;
         }
         ReturnStatementNode returnable = null;
         for(int i = 0; i < bodyStatements.size(); i ++) {
