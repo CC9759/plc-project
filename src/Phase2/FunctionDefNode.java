@@ -57,6 +57,23 @@ public class FunctionDefNode implements JottTree{
         //TODO check that types are correct
         ParserUtils.removeToken(inputTokens, TokenType.L_BRACKET);
         FunctionDefParamsNode myFunctionDefParamsNode = FunctionDefParamsNode.parseFunctionDefParamsNode(inputTokens);
+        for (int i = 0; i < myFunctionDefParamsNode.paramIDs.size(); i ++) {
+            Token typeToken = myFunctionDefParamsNode.paramTypes.get(i);
+            InformationType informationType = InformationType.VOID;
+            if(typeToken != null) {
+                if (Objects.equals(typeToken.getToken(), "Boolean")) {
+                    informationType = InformationType.BOOLEAN;
+                } else if (Objects.equals(typeToken.getToken(), "Double")) {
+                    informationType = InformationType.DOUBLE;
+                } else if (Objects.equals(typeToken.getToken(), "Integer")) {
+                    informationType = InformationType.INT;
+                } else if (Objects.equals(typeToken.getToken(), "String")) {
+                    informationType = InformationType.STRING;
+                }
+                localSymbolTable.put(myFunctionDefParamsNode.paramIDs.get(i).value, informationType);
+            }
+
+        }
         ParserUtils.removeToken(inputTokens, TokenType.R_BRACKET);
         ParserUtils.removeToken(inputTokens, TokenType.COLON);
         FunctionReturnNode myReturnNode = FunctionReturnNode.parseFunctionReturnNode(inputTokens);
