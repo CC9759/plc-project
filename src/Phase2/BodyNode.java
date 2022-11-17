@@ -126,11 +126,11 @@ public class BodyNode implements JottTree {
         return returnBool;
     }
 
-    public boolean returnable() {
+    public ReturnStatementNode returnable() {
         if(returnStatement != null) {
-            return true;
+            return null;
         }
-        boolean returnable = false;
+        ReturnStatementNode returnable = null;
         for(int i = 0; i < bodyStatements.size(); i ++) {
             if(!bodyStatements.get(i).isStatement) {
                 returnable = bodyStatements.get(i).returnable();

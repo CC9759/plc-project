@@ -139,20 +139,51 @@ public class IfStatementNode extends BodyStatementNode{
         return (expressionBool && bodyBool && elseIfBool && elseBool);
     }
 
-    public boolean returnable() {
-        boolean bodyReturnable = false;
-        boolean elifReturnable = false;
-        boolean elseReturnable = false;
+    public ReturnStatementNode returnable() {
+        ReturnStatementNode bodyReturnable = null;
+        ReturnStatementNode elifReturnable = null;
+        ReturnStatementNode elseReturnable = null;
+        boolean bodyHasReturn = false;
+        boolean elifHasReturn = false;
+        boolean elseHasReturn = false;
         if(body != null) {
             bodyReturnable = body.returnable();
+            bodyHasReturn = true;
         }
         if(elsIf != null) {
             elifReturnable = elsIf.returnable();
+            elifHasReturn = true;
         }
         if(elseStatement != null) {
             elseReturnable = elseStatement.returnable();
+            elseHasReturn = true;
         }
-        return bodyReturnable && (elifReturnable || elseReturnable);
+        if(bodyHasReturn) {
+            if(!elifHasReturn && !elseHasReturn) {
+                return bodyReturnable;
+            }
+            if(elifHasReturn && !elseHasReturn) {
+                if(elifReturnable != null && bodyReturnable != null && elifReturnable.getExpressionNode().WhatAmI() == bodyReturnable.getExpressionNode().WhatAmI()) {
+                    return elifReturnable;
+                }
+                return null;
+            }
+            if(!elifHasReturn && elseHasReturn) {
+                if(elseReturnable != null && bodyReturnable != null && elseReturnable.getExpressionNode().WhatAmI() == bodyReturnable.getExpressionNode().WhatAmI()) {
+                    return elseReturnable;
+                }
+                return null;
+
+            }
+            if(elifHasReturn && elseHasReturn) {
+                if(elifReturnable != null && bodyReturnable != null && elseReturnable != null && elifReturnable.getExpressionNode().WhatAmI() == bodyReturnable.getExpressionNode().WhatAmI() && elseReturnable.getExpressionNode().WhatAmI() == bodyReturnable.getExpressionNode().WhatAmI()) {
+                    return bodyReturnable;
+                }
+                return null;
+
+            }
+        }
+        return null;
     }
 
 }
