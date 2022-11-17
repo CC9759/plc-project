@@ -87,20 +87,25 @@ public class ProgramNode implements JottTree{
     }
 
     @Override
-    public boolean validateTree() {
-        if(!globalSymbolTable.containsKey("main")){
-            return false;
-        }
-        FunctionDefNode main = globalSymbolTable.get("main");
-        if(!(main.paramTypes.size() == 0)  || main.returnType != InformationType.VOID ){
-            return false;
-        }
-        for (FunctionDefNode node:  functionDefs
-             ) {
-            if(!node.validateTree()){
+    public boolean validateTree() throws ParserException {
+        try {
+
+            if (!globalSymbolTable.containsKey("main")) {
                 return false;
             }
+            FunctionDefNode main = globalSymbolTable.get("main");
+            if (!(main.paramTypes.size() == 0) || main.returnType != InformationType.VOID) {
+                return false;
+            }
+            for (FunctionDefNode node : functionDefs
+            ) {
+                if (!node.validateTree()) {
+                    return false;
+                }
+            }
+            return true;
+        }catch (Exception exception){
+           return false;
         }
-        return true;
     }
 }

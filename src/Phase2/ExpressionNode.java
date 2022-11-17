@@ -10,6 +10,8 @@ import java.util.*;
 public class ExpressionNode implements JottTree {
 
     public HashMap<String, InformationType> localSymbolTable;
+
+    public Token token;
     ExpressionNode firstExpressionNode;
     ExpressionNode secondExpressionNode;
     JottTree operationNode;
@@ -38,22 +40,26 @@ public class ExpressionNode implements JottTree {
         }
     }
 
-    public ExpressionNode(FunctionCallNode input, HashMap<String, InformationType> localSymbolTable) {
+    public ExpressionNode(FunctionCallNode input, HashMap<String, InformationType> localSymbolTable, Token token) {
+        this.token = token;
         functionCallNode = input;
         this.localSymbolTable = localSymbolTable;
     }
 
-    public ExpressionNode(IDKeywordNode input, HashMap<String, InformationType> localSymbolTable) {
+    public ExpressionNode(IDKeywordNode input, HashMap<String, InformationType> localSymbolTable, Token token) {
+        this.token = token;
         idKeywordNode = input;
         this.localSymbolTable = localSymbolTable;
     }
 
-    public ExpressionNode(ConstantNode input, HashMap<String, InformationType> localSymbolTable) {
+    public ExpressionNode(ConstantNode input, HashMap<String, InformationType> localSymbolTable, Token token) {
+        this.token = token;
         constantNode = input;
         this.localSymbolTable = localSymbolTable;
     }
 
-    public ExpressionNode(ExpressionNode first, JottTree op, ExpressionNode second, HashMap<String, InformationType> localSymbolTable) {
+    public ExpressionNode(ExpressionNode first, JottTree op, ExpressionNode second, HashMap<String, InformationType> localSymbolTable, Token token) {
+        this.token = token;
         firstExpressionNode = first;
         operationNode = op;
         secondExpressionNode = second;
@@ -67,21 +73,21 @@ public class ExpressionNode implements JottTree {
 
         if(inputList.get(0).getTokenType() == TokenType.ID_KEYWORD) {
             if(inputList.get(1).getTokenType() == TokenType.L_BRACKET) {
-                firstExpression = new ExpressionNode(FunctionCallNode.parseFunctionCallNode(inputList, localSymbolTable), localSymbolTable);
+                firstExpression = new ExpressionNode(FunctionCallNode.parseFunctionCallNode(inputList, localSymbolTable), localSymbolTable, inputList.get(0));
             }
             else if(inputList.get(0).getToken().equals("True") ||
                     inputList.get(0).getToken().equals("False")) {
-                firstExpression = new ExpressionNode(ConstantNode.parseConstantNode(inputList), localSymbolTable);
+                firstExpression = new ExpressionNode(ConstantNode.parseConstantNode(inputList), localSymbolTable, inputList.get(0));
             }
             else {
-                firstExpression = new ExpressionNode(IDKeywordNode.parseIdKeyWordNode(inputList), localSymbolTable);
+                firstExpression = new ExpressionNode(IDKeywordNode.parseIdKeyWordNode(inputList), localSymbolTable, inputList.get(0));
             }
         }
         else if(inputList.get(0).getTokenType() == TokenType.NUMBER) {
-            firstExpression = new ExpressionNode(ConstantNode.parseConstantNode(inputList), localSymbolTable);
+            firstExpression = new ExpressionNode(ConstantNode.parseConstantNode(inputList), localSymbolTable, inputList.get(0));
         }
         else if(inputList.get(0).getTokenType() == TokenType.STRING) {
-            firstExpression = new ExpressionNode(ConstantNode.parseConstantNode(inputList), localSymbolTable);
+            firstExpression = new ExpressionNode(ConstantNode.parseConstantNode(inputList), localSymbolTable, inputList.get(0));
         }
         else {
             throw new Exception("Invalid start of expression. Expected ID or Number but got " + inputList.get(0).getTokenType());
@@ -98,7 +104,7 @@ public class ExpressionNode implements JottTree {
         }
 
         secondExpression = ExpressionNode.parseExpressionNode(inputList, localSymbolTable);
-        return new ExpressionNode(firstExpression, op, secondExpression, localSymbolTable);
+        return new ExpressionNode(firstExpression, op, secondExpression, localSymbolTable, inputList.get(0));
     }
 
     /**

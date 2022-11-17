@@ -115,12 +115,12 @@ public class AssignmentNode implements JottTree {
      * Errors validating will be reported to System.err
      * @return true if valid Jott code; false otherwise
      */
-    public boolean validateTree() {
+    public boolean validateTree() throws ParserException {
         if(localSymbolTable.containsKey(myIDKeywordNode.value)){
             if(myIDKeywordNode.validateTree() && myExpressionNode.validateTree()){
                 return (localSymbolTable.get(myIDKeywordNode.value) == myExpressionNode.WhatAmI());
             }
-            else{return false;}
+            else{throw new ParserException(myExpressionNode.token, "Invalid Type being assigned to" + myIDKeywordNode.value, true);}
         } else{ return false;}
     }
 }

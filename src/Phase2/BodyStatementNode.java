@@ -48,7 +48,7 @@ public abstract class BodyStatementNode implements JottTree{
      * Errors validating will be reported to System.err
      * @return true if valid Jott code; false otherwise
      */
-    public abstract boolean validateTree();
+    public abstract boolean validateTree() throws ParserException;
 
     public abstract ReturnStatementNode returnable();
 }

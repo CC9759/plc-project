@@ -68,7 +68,7 @@ public class WhileLoopNode extends BodyStatementNode{
      * Errors validating will be reported to System.err
      * @return true if valid Jott code; false otherwise
      */
-    public boolean validateTree(){return (boolExpression.validateTree() && body.validateTree());}
+    public boolean validateTree() throws ParserException {return (boolExpression.validateTree() && body.validateTree());}
 
     /**
      *     private final ExpressionNode boolExpression;
