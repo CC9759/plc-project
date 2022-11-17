@@ -99,7 +99,8 @@ public class FunctionCallNode implements JottTree{
                 }
             }
             return (id.validateTree() && params.validateTree());
+        }else {
+            throw new ParserException(params.expressions.get(0).token, "Call to unknown function " + id.value, true);
         }
-        return false;
     }
 }

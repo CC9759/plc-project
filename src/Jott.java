@@ -5,7 +5,7 @@ import Phase1.*;
 import Phase2.*;
 
 public class Jott {
-    public static void main(String args[]) {
+    public static void main(String args[]) throws Exception {
         String inputName = args[1];
         String outputName = args[2];
         String language = args[3];
@@ -13,6 +13,7 @@ public class Jott {
 
         ArrayList<Token> tokens =  JottTokenizer.tokenize(inputName);
         ProgramNode root = ProgramNode.parseProgramNode(tokens);
+        root.validateTree();
 
         switch(language){
             case "Java":
