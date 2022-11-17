@@ -116,13 +116,16 @@ public class AssignmentNode implements JottTree {
      * @return true if valid Jott code; false otherwise
      */
     public boolean validateTree() throws Exception {
+        if(myIDKeywordNode.value.equals("while") || myIDKeywordNode.value.equals("print")|| myIDKeywordNode.value.equals("return") || myIDKeywordNode.value.equals("if")|| myIDKeywordNode.value.equals("elif")|| myIDKeywordNode.value.equals("else")){
+            throw new ParserException(myExpressionNode.token, "Can't use the keyword " + myIDKeywordNode.value+ " as a variable name", true);
+        }
         if(localSymbolTable.containsKey(myIDKeywordNode.value)){
             if (localSymbolTable.get(myIDKeywordNode.value) != myExpressionNode.WhatAmI()){throw new ParserException(myExpressionNode.token, "Invalid Type being assigned to " + myIDKeywordNode.value, true);}
             if(myIDKeywordNode.validateTree() && myExpressionNode.validateTree()){
                 return (localSymbolTable.get(myIDKeywordNode.value) == myExpressionNode.WhatAmI());
             }
             else{return false;}
-        } else{ throw new ParserException(myExpressionNode.token, "Variable " + myIDKeywordNode.value+ " uninitialized", true);}
+        } else{ throw new ParserException(myExpressionNode.token, "Variable " + myIDKeywordNode.value+ " undefined", true);}
     }
 }
 
