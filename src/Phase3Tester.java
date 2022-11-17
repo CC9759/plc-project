@@ -72,7 +72,7 @@ public class Phase3Tester {
 
     private boolean parserTest(TestCase test, String orginalJottCode){
         try {
-            ArrayList<Token> tokens = JottTokenizer.tokenize("parserTestCases/" + test.fileName);
+            ArrayList<Token> tokens = JottTokenizer.tokenize("phase3TestCases/" + test.fileName);
 
             if (tokens == null) {
                 System.err.println("\tFailed Test: " + test.testName);
