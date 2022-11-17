@@ -97,8 +97,8 @@ public class BodyNode implements JottTree {
 
         for(BodyStatementNode i: bodyStatements){
             finalString.append(i.convertToPython());
-            finalString.append("\n");
         }
+        finalString.append("\n");
         if(returnStatement != null){
             finalString.append(returnStatement.convertToPython());
         }
