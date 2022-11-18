@@ -31,6 +31,7 @@ public class ExpressionNode implements JottTree {
                 //return InformationType.VOID; //TODO SAME AS ABOVE
             }
             if (functionCallNode != null) {
+                if(!ProgramNode.globalSymbolTable.containsKey(functionCallNode.id.value)){throw new ParserException(token, "Call to unknown function " + functionCallNode.id.getValue(), true);}
                 return ProgramNode.globalSymbolTable.get(functionCallNode.id.value).returnType;
                 //return InformationType.VOID; //TODO SAME AS ABOVE
             }

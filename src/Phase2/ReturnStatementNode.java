@@ -12,7 +12,7 @@ public class ReturnStatementNode implements JottTree {
 
     public HashMap<String, InformationType> localSymbolTable;
     public HashMap<String, Boolean> initialized;
-    private final ExpressionNode expression;
+    public final ExpressionNode expression;
 
 
 

@@ -155,11 +155,16 @@ public class FunctionDefNode implements JottTree{
     public boolean validateTree() throws Exception {
         if(returnable() ==null && returnType!=InformationType.VOID){throw new ParserException(ProgramNode.lastToken, "Missing a return statement in function "+myIDKeywordNode.value, true);}
         if(returnable()!=null && returnType==InformationType.VOID){throw new ParserException(returnToken, "Returning a non Void value in function "+myIDKeywordNode.value, true);}
+        if(returnable()!=null){
+            InformationType expressionType = returnable().expression.WhatAmI();
+            if(expressionType == null ){return false;}
+            if(expressionType!=returnType){throw new ParserException(returnToken, "Returning wrong type in function "+myIDKeywordNode.value, true);}
+        }
         return (this.myIDKeywordNode.validateTree() && this.myFunctionDefParamsNode.validateTree() &&
         this.myReturnNode.validateTree() && this.myBodyNode.validateTree());
     }
 
-    public JottTree returnable() {
+    public ReturnStatementNode returnable() {
         return myBodyNode.returnable();
     }
 }
