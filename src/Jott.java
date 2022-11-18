@@ -8,7 +8,7 @@ public class Jott {
     public static void main(String args[]) throws Exception {
         String inputName = args[1];
         String outputName = args[2];
-        String language = args[3];
+        String language = args[3].toLowerCase();
         String result = "";
 
         ArrayList<Token> tokens =  JottTokenizer.tokenize(inputName);
@@ -16,17 +16,17 @@ public class Jott {
         root.validateTree();
 
         switch(language){
-            case "Java":
+            case "java":
                 result = root.convertToJava();
                 result.replaceFirst("Main", outputName.split(".")[0]);
                 break;
-            case "Python":
+            case "python":
                 result = root.convertToPython();
                 break;
-            case "C":
+            case "c":
                 result = root.convertToC();
                 break;
-            case "Jott":
+            case "jott":
                 result = root.convertToJott();
                 break;
         }
