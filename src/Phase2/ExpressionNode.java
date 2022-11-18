@@ -221,6 +221,7 @@ public class ExpressionNode implements JottTree {
         }
         if(secondExpressionNode!=null){
             secondExpressionNodeBool = secondExpressionNode.validateTree();
+            if(!secondExpressionNodeBool){return false;}
             if(secondExpressionNode.WhatAmI() == null){return false;}
             if(type != null && type != secondExpressionNode.WhatAmI()) {
                 throw new ParserException(token, "Can't do comparison of two different types", true);
