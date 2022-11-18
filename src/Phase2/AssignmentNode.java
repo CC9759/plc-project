@@ -13,16 +13,21 @@ public class AssignmentNode implements JottTree {
     final IDKeywordNode myIDKeywordNode;
     final ExpressionNode myExpressionNode;
     public HashMap<String, InformationType> localSymbolTable;
-    private AssignmentNode(Token type, IDKeywordNode id, ExpressionNode expression, HashMap<String, InformationType> localSymbolTable){//}, EndStatementNode endStatement){
+
+
+    public HashMap<String, Boolean> initialized;
+
+    private AssignmentNode(Token type, IDKeywordNode id, ExpressionNode expression, HashMap<String, InformationType> localSymbolTable, HashMap<String, Boolean> initialized){//}, EndStatementNode endStatement){
         if(type != null) {
             this.myType = type.getToken();
         }
         this.myIDKeywordNode = id;
         this.myExpressionNode = expression;
         this.localSymbolTable = localSymbolTable;
+        this.initialized = initialized;
     }
 
-    static AssignmentNode parseAssignmentNode(ArrayList<Token> tokens, HashMap<String, InformationType> localSymbolTable) throws Exception{
+    static AssignmentNode parseAssignmentNode(ArrayList<Token> tokens, HashMap<String, InformationType> localSymbolTable, HashMap<String, Boolean> initialized) throws Exception{
         String firstTokenAsString = tokens.get(0).getToken();
         Token typeToken = null;
         if(firstTokenAsString.equals("Boolean") ||
@@ -34,7 +39,7 @@ public class AssignmentNode implements JottTree {
 
         IDKeywordNode idKeywordNode = IDKeywordNode.parseIdKeyWordNode(tokens);
         ParserUtils.removeToken(tokens, TokenType.ASSIGN);
-        ExpressionNode expressionNode = ExpressionNode.parseExpressionNode(tokens, localSymbolTable);
+        ExpressionNode expressionNode = ExpressionNode.parseExpressionNode(tokens, localSymbolTable, initialized);
         InformationType informationType = InformationType.VOID;
         if(typeToken != null) {
             if (Objects.equals(typeToken.getToken(), "Boolean")) {
@@ -47,8 +52,9 @@ public class AssignmentNode implements JottTree {
                 informationType = InformationType.STRING;
             }
             localSymbolTable.put(idKeywordNode.value, informationType);
+            initialized.put(idKeywordNode.value, true);
         }
-        return new AssignmentNode(typeToken, idKeywordNode, expressionNode, localSymbolTable);
+        return new AssignmentNode(typeToken, idKeywordNode, expressionNode, localSymbolTable, initialized);
     }
     /**
      * Will output a string of this tree in Jott
@@ -120,6 +126,8 @@ public class AssignmentNode implements JottTree {
             throw new ParserException(myExpressionNode.token, "Can't use the keyword " + myIDKeywordNode.value+ " as a variable name", true);
         }
         if(localSymbolTable.containsKey(myIDKeywordNode.value)){
+            if(!initialized.get(myIDKeywordNode.value)){throw new ParserException(myExpressionNode.token, "Variable " + myIDKeywordNode.value+ " uninitialized", true);}
+            if(myExpressionNode.WhatAmI()==null){return false;}
             if (localSymbolTable.get(myIDKeywordNode.value) != myExpressionNode.WhatAmI()){throw new ParserException(myExpressionNode.token, "Invalid Type being assigned to " + myIDKeywordNode.value, true);}
             if(myIDKeywordNode.validateTree() && myExpressionNode.validateTree()){
                 return (localSymbolTable.get(myIDKeywordNode.value) == myExpressionNode.WhatAmI());

@@ -11,6 +11,8 @@ public class ExpressionNode implements JottTree {
 
     public HashMap<String, InformationType> localSymbolTable;
 
+    public HashMap<String, Boolean> initialized;
+    
     public Token token;
     ExpressionNode firstExpressionNode;
     ExpressionNode secondExpressionNode;
@@ -18,9 +20,11 @@ public class ExpressionNode implements JottTree {
     FunctionCallNode functionCallNode;
     IDKeywordNode idKeywordNode;
     ConstantNode constantNode;
-    public InformationType WhatAmI() {
+    public InformationType WhatAmI(){
         try {
             if (idKeywordNode != null) {
+                //if(!localSymbolTable.containsKey(idKeywordNode.getValue())){throw new ParserException(token, "Variable " + idKeywordNode.getValue()+ " undefined", true);}
+                //if(!initialized.get(idKeywordNode.getValue())){throw new ParserException(token, "Variable " + idKeywordNode.getValue()+ " uninitialized", true);}
                 return localSymbolTable.get(idKeywordNode.getValue());
                 //return InformationType.VOID; //TODO SAME AS ABOVE
             }
@@ -35,59 +39,64 @@ public class ExpressionNode implements JottTree {
                 throw new Exception("Invalid expression types joined by operation");
             }
             return firstExpressionNode.WhatAmI();
-        }catch (Exception e){
+        }catch (Exception exception){
+          System.err.println(exception.getMessage());
             return null;
         }
     }
 
-    public ExpressionNode(FunctionCallNode input, HashMap<String, InformationType> localSymbolTable, Token token) {
+    public ExpressionNode(FunctionCallNode input, HashMap<String, InformationType> localSymbolTable, Token token, HashMap<String, Boolean> initialized) {
         this.token = token;
         functionCallNode = input;
         this.localSymbolTable = localSymbolTable;
+        this.initialized = initialized;
     }
 
-    public ExpressionNode(IDKeywordNode input, HashMap<String, InformationType> localSymbolTable, Token token) {
+    public ExpressionNode(IDKeywordNode input, HashMap<String, InformationType> localSymbolTable, Token token, HashMap<String, Boolean> initialized) {
         this.token = token;
         idKeywordNode = input;
         this.localSymbolTable = localSymbolTable;
+        this.initialized = initialized;
     }
 
-    public ExpressionNode(ConstantNode input, HashMap<String, InformationType> localSymbolTable, Token token) {
+    public ExpressionNode(ConstantNode input, HashMap<String, InformationType> localSymbolTable, Token token, HashMap<String, Boolean> initialized) {
         this.token = token;
         constantNode = input;
         this.localSymbolTable = localSymbolTable;
+        this.initialized = initialized;
     }
 
-    public ExpressionNode(ExpressionNode first, JottTree op, ExpressionNode second, HashMap<String, InformationType> localSymbolTable, Token token) {
+    public ExpressionNode(ExpressionNode first, JottTree op, ExpressionNode second, HashMap<String, InformationType> localSymbolTable, Token token, HashMap<String, Boolean> initialized) {
         this.token = token;
         firstExpressionNode = first;
         operationNode = op;
         secondExpressionNode = second;
         this.localSymbolTable = localSymbolTable;
+        this.initialized = initialized;
     }
 
-    public static ExpressionNode parseExpressionNode(ArrayList<Token> inputList, HashMap<String, InformationType> localSymbolTable) throws Exception {
+    public static ExpressionNode parseExpressionNode(ArrayList<Token> inputList, HashMap<String, InformationType> localSymbolTable, HashMap<String, Boolean> initialized) throws Exception {
         ExpressionNode firstExpression;
         JottTree op;
         ExpressionNode secondExpression;
 
         if(inputList.get(0).getTokenType() == TokenType.ID_KEYWORD) {
             if(inputList.get(1).getTokenType() == TokenType.L_BRACKET) {
-                firstExpression = new ExpressionNode(FunctionCallNode.parseFunctionCallNode(inputList, localSymbolTable), localSymbolTable, inputList.get(0));
+                firstExpression = new ExpressionNode(FunctionCallNode.parseFunctionCallNode(inputList, localSymbolTable, initialized), localSymbolTable, inputList.get(0), initialized);
             }
             else if(inputList.get(0).getToken().equals("True") ||
                     inputList.get(0).getToken().equals("False")) {
-                firstExpression = new ExpressionNode(ConstantNode.parseConstantNode(inputList), localSymbolTable, inputList.get(0));
+                firstExpression = new ExpressionNode(ConstantNode.parseConstantNode(inputList), localSymbolTable, inputList.get(0), initialized);
             }
             else {
-                firstExpression = new ExpressionNode(IDKeywordNode.parseIdKeyWordNode(inputList), localSymbolTable, inputList.get(0));
+                firstExpression = new ExpressionNode(IDKeywordNode.parseIdKeyWordNode(inputList), localSymbolTable, inputList.get(0), initialized);
             }
         }
         else if(inputList.get(0).getTokenType() == TokenType.NUMBER) {
-            firstExpression = new ExpressionNode(ConstantNode.parseConstantNode(inputList), localSymbolTable, inputList.get(0));
+            firstExpression = new ExpressionNode(ConstantNode.parseConstantNode(inputList), localSymbolTable, inputList.get(0), initialized);
         }
         else if(inputList.get(0).getTokenType() == TokenType.STRING) {
-            firstExpression = new ExpressionNode(ConstantNode.parseConstantNode(inputList), localSymbolTable, inputList.get(0));
+            firstExpression = new ExpressionNode(ConstantNode.parseConstantNode(inputList), localSymbolTable, inputList.get(0), initialized);
         }
         else {
             throw new Exception("Invalid start of expression. Expected ID or Number but got " + inputList.get(0).getTokenType());
@@ -103,8 +112,8 @@ public class ExpressionNode implements JottTree {
             return firstExpression;
         }
 
-        secondExpression = ExpressionNode.parseExpressionNode(inputList, localSymbolTable);
-        return new ExpressionNode(firstExpression, op, secondExpression, localSymbolTable, inputList.get(0));
+        secondExpression = ExpressionNode.parseExpressionNode(inputList, localSymbolTable, initialized);
+        return new ExpressionNode(firstExpression, op, secondExpression, localSymbolTable, inputList.get(0), initialized);
     }
 
     /**

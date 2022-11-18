@@ -13,6 +13,8 @@ public class FunctionDefNode implements JottTree{
 
     public HashMap<String, InformationType> localSymbolTable;
 
+    public HashMap<String, Boolean> initialized;
+
     public Token token;
 
     public static Token returnToken;
@@ -22,12 +24,13 @@ public class FunctionDefNode implements JottTree{
     final FunctionDefParamsNode myFunctionDefParamsNode;
     final FunctionReturnNode myReturnNode;
     final BodyNode myBodyNode;
-    private FunctionDefNode(IDKeywordNode myIDKeywordNode, FunctionDefParamsNode myFunctionDefParamsNode, FunctionReturnNode myReturnNode, BodyNode myBodyNode, HashMap<String, InformationType> table, Token token) {
+    private FunctionDefNode(IDKeywordNode myIDKeywordNode, FunctionDefParamsNode myFunctionDefParamsNode, FunctionReturnNode myReturnNode, BodyNode myBodyNode, HashMap<String, InformationType> table, Token token, HashMap<String, Boolean> initialized) {
         this.myIDKeywordNode = myIDKeywordNode;
         this.myFunctionDefParamsNode = myFunctionDefParamsNode;
         this.myReturnNode = myReturnNode;
         this.token = token;
         this.returnType = InformationType.VOID;
+        this.initialized = initialized;
         if(Objects.equals(myReturnNode.returnToken.getToken(), "Boolean")){
             this.returnType = InformationType.BOOLEAN;
         }else if(Objects.equals(myReturnNode.returnToken.getToken(), "Double")){
@@ -58,6 +61,7 @@ public class FunctionDefNode implements JottTree{
     }
     public static FunctionDefNode parseFunctionDefNode(ArrayList<Token> inputTokens) throws Exception {
         HashMap<String, InformationType> localSymbolTable = new HashMap<>();
+        HashMap<String, Boolean> initialized = new HashMap<>();
         Token token = inputTokens.get(0);
         IDKeywordNode myIDKeywordNode = IDKeywordNode.parseIdKeyWordNode(inputTokens);
         //TODO check that types are correct
@@ -84,9 +88,9 @@ public class FunctionDefNode implements JottTree{
         ParserUtils.removeToken(inputTokens, TokenType.COLON);
         FunctionReturnNode myReturnNode = FunctionReturnNode.parseFunctionReturnNode(inputTokens);
         ParserUtils.removeToken(inputTokens,TokenType.L_BRACE);
-        BodyNode myBodyNode = BodyNode.parseBodyNode(inputTokens, localSymbolTable);
+        BodyNode myBodyNode = BodyNode.parseBodyNode(inputTokens, localSymbolTable, initialized);
         ParserUtils.removeToken(inputTokens, TokenType.R_BRACE);
-        return new FunctionDefNode(myIDKeywordNode,myFunctionDefParamsNode,myReturnNode,myBodyNode, localSymbolTable, token);
+        return new FunctionDefNode(myIDKeywordNode,myFunctionDefParamsNode,myReturnNode,myBodyNode, localSymbolTable, token, initialized);
     }
     @Override
     public String convertToJott() {

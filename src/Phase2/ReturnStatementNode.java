@@ -11,21 +11,23 @@ import java.util.HashMap;
 public class ReturnStatementNode implements JottTree {
 
     public HashMap<String, InformationType> localSymbolTable;
+    public HashMap<String, Boolean> initialized;
     private final ExpressionNode expression;
 
 
 
-    public ReturnStatementNode(ExpressionNode expressionNode, HashMap<String, InformationType> localSymbolTable) throws Exception {
+    public ReturnStatementNode(ExpressionNode expressionNode, HashMap<String, InformationType> localSymbolTable, HashMap<String, Boolean> initialized) throws Exception {
         this.expression = expressionNode;
         this.localSymbolTable = localSymbolTable;
+        this.initialized = initialized;
     }
 
-    public static ReturnStatementNode ParseReturnStatementNode(ArrayList<Token> inputList, HashMap<String, InformationType> localSymbolTable) throws Exception {
+    public static ReturnStatementNode ParseReturnStatementNode(ArrayList<Token> inputList, HashMap<String, InformationType> localSymbolTable, HashMap<String, Boolean> initialized) throws Exception {
         FunctionDefNode.returnToken = inputList.get(0);
         inputList.remove(0);
-        ExpressionNode expressionNode = ExpressionNode.parseExpressionNode(inputList, localSymbolTable);
+        ExpressionNode expressionNode = ExpressionNode.parseExpressionNode(inputList, localSymbolTable, initialized);
         ParserUtils.removeToken(inputList,TokenType.SEMICOLON);
-        return new ReturnStatementNode(expressionNode, localSymbolTable);
+        return new ReturnStatementNode(expressionNode, localSymbolTable, initialized);
     }
 
     /**

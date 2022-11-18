@@ -10,16 +10,16 @@ import java.util.*;
 public abstract class BodyStatementNode implements JottTree{
     public static boolean isStatement;
 
-    public static BodyStatementNode parseBodyStatementNode(ArrayList<Token> tokens, HashMap<String, InformationType> localSymbolTable) throws Exception{
+    public static BodyStatementNode parseBodyStatementNode(ArrayList<Token> tokens, HashMap<String, InformationType> localSymbolTable, HashMap<String, Boolean> initialized) throws Exception{
         Token check = tokens.get(0);
         if(check.getToken().equals("if")){
-            return IfStatementNode.parseIfStatementNode(tokens, localSymbolTable);
+            return IfStatementNode.parseIfStatementNode(tokens, localSymbolTable, initialized);
         }
         else if(check.getToken().equals("while")){
-            return WhileLoopNode.parseWhileLoopNode(tokens, localSymbolTable);
+            return WhileLoopNode.parseWhileLoopNode(tokens, localSymbolTable, initialized);
         }
         else{
-            return StatementNode.parseStatementNode(tokens, localSymbolTable); //insert statement node parse here
+            return StatementNode.parseStatementNode(tokens, localSymbolTable, initialized); //insert statement node parse here
         }
     }
 

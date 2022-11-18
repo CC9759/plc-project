@@ -1,0 +1,14 @@
+#this will pass phase 2 and phase 3
+
+foo[x:Integer]:Integer{
+    print[y];
+    return 5;
+}
+
+main[]:Void{
+    Integer x = 0;
+	while[x<10]{
+	    x = foo[z];
+		print[x];
+	}
+}

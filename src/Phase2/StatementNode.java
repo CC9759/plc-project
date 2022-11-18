@@ -15,7 +15,7 @@ public class StatementNode extends BodyStatementNode{
     public StatementNode(JottTree node) {
         this.node = node;
     }
-    public static StatementNode parseStatementNode(ArrayList<Token> tokens, HashMap<String, InformationType> localSymbolTable) throws Exception{
+    public static StatementNode parseStatementNode(ArrayList<Token> tokens, HashMap<String, InformationType> localSymbolTable, HashMap<String, Boolean> initialized) throws Exception{
         JottTree result;
         Token firstToken = tokens.get(0);
         String firstTokenValue = firstToken.getToken();
@@ -26,12 +26,12 @@ public class StatementNode extends BodyStatementNode{
         boolean b = firstTokenValue.equals("Boolean") || firstTokenValue.equals("Integer") ||
                 firstTokenValue.equals("String") || firstTokenValue.equals("Double");
         if (b && thirdTokenValue.equals(";")){
-                result =  VarDeclarationNode.parseVariableDeclarationNode(tokens, localSymbolTable);
+                result =  VarDeclarationNode.parseVariableDeclarationNode(tokens, localSymbolTable, initialized);
 
         } else if ((b && thirdTokenValue.equals("=")) || secondTokenValue.equals("=")){
-            result = AssignmentNode.parseAssignmentNode(tokens, localSymbolTable);
+            result = AssignmentNode.parseAssignmentNode(tokens, localSymbolTable, initialized);
         }else{
-            result = FunctionCallNode.parseFunctionCallNode(tokens, localSymbolTable);
+            result = FunctionCallNode.parseFunctionCallNode(tokens, localSymbolTable, initialized);
         }
         ParserUtils.removeToken(tokens,TokenType.SEMICOLON);
         return new StatementNode(result);

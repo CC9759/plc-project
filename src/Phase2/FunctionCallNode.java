@@ -14,20 +14,22 @@ public class FunctionCallNode implements JottTree{
     private final ParamsNode params;
     public Token token;
     public HashMap<String, InformationType> localSymbolTable;
+    public HashMap<String, Boolean> initialized;
 
-    private FunctionCallNode(IDKeywordNode idKeywordNode, ParamsNode paramsNode, HashMap<String, InformationType> localSymbolTable, Token token){
+    private FunctionCallNode(IDKeywordNode idKeywordNode, ParamsNode paramsNode, HashMap<String, InformationType> localSymbolTable, Token token, HashMap<String, Boolean> initialized){
         this.id = idKeywordNode;
         this.params = paramsNode;
         this.localSymbolTable = localSymbolTable;
         this.token = token;
+        this.initialized = initialized;
     }
-    public static FunctionCallNode parseFunctionCallNode(ArrayList<Token> tokens, HashMap<String, InformationType> localSymbolTable) throws Exception{
+    public static FunctionCallNode parseFunctionCallNode(ArrayList<Token> tokens, HashMap<String, InformationType> localSymbolTable, HashMap<String, Boolean> initialized) throws Exception{
         Token token = tokens.get(0);
         IDKeywordNode idKeywordNode = IDKeywordNode.parseIdKeyWordNode(tokens);
         ParserUtils.removeToken(tokens,TokenType.L_BRACKET);
-        ParamsNode paramsNode = ParamsNode.parseParamsNode(tokens, localSymbolTable);
+        ParamsNode paramsNode = ParamsNode.parseParamsNode(tokens, localSymbolTable, initialized);
         ParserUtils.removeToken(tokens,TokenType.R_BRACKET);
-        return new FunctionCallNode(idKeywordNode, paramsNode, localSymbolTable, token);
+        return new FunctionCallNode(idKeywordNode, paramsNode, localSymbolTable, token, initialized);
     }
 
     /**

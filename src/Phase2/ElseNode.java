@@ -10,20 +10,22 @@ import java.util.*;
 public class ElseNode implements JottTree {
     private final BodyNode bodyNode;
     public HashMap<String, InformationType> localSymbolTable;
+    public HashMap<String, Boolean> initialized;
 
-    public ElseNode(ArrayList<Token> inputList, HashMap<String, InformationType> localSymbolTable) throws Exception{
-        this.bodyNode = BodyNode.parseBodyNode(inputList, localSymbolTable);
+    public ElseNode(ArrayList<Token> inputList, HashMap<String, InformationType> localSymbolTable, HashMap<String, Boolean> initialized) throws Exception{
+        this.bodyNode = BodyNode.parseBodyNode(inputList, localSymbolTable, initialized);
         this.localSymbolTable = localSymbolTable;
+        this.initialized = initialized;
     }
 
-    public static ElseNode parseElseNode(ArrayList<Token> inputList, HashMap<String, InformationType> localSymbolTable) throws Exception{
+    public static ElseNode parseElseNode(ArrayList<Token> inputList, HashMap<String, InformationType> localSymbolTable, HashMap<String, Boolean> initialized) throws Exception{
         ElseNode elseNode;
         
         if(inputList.get(0).getToken().equals("else")){
             // remove else and left brace
             inputList.remove(0);
             ParserUtils.removeToken(inputList,TokenType.L_BRACE);
-            elseNode = new ElseNode(inputList, localSymbolTable);
+            elseNode = new ElseNode(inputList, localSymbolTable, initialized);
             // remove right brace
             ParserUtils.removeToken(inputList,TokenType.R_BRACE);
 //            inputList.remove(0);
@@ -77,7 +79,7 @@ public class ElseNode implements JottTree {
         return bodyNode.validateTree();
     }
 
-    public ReturnStatementNode returnable() {
+    public ReturnStatementNode returnable(){
         return bodyNode.returnable();
     }
 }

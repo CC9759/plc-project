@@ -11,29 +11,31 @@ import java.util.HashMap;
 public class WhileLoopNode extends BodyStatementNode{
 
     public HashMap<String, InformationType> localSymbolTable;
+    public HashMap<String, Boolean> initialized;
 
     public final boolean isStatement = false;
 
     private final ExpressionNode boolExpression;
     private final BodyNode body;
 
-    private WhileLoopNode(ExpressionNode boolExpressionNode, BodyNode bodyNode, HashMap<String, InformationType> localSymbolTable){
+    private WhileLoopNode(ExpressionNode boolExpressionNode, BodyNode bodyNode, HashMap<String, InformationType> localSymbolTable, HashMap<String, Boolean> initialized){
         this.boolExpression = boolExpressionNode;
         this.body = bodyNode;
         this.localSymbolTable = localSymbolTable;
+        this.initialized = initialized;
     }
 
 
-    public static WhileLoopNode parseWhileLoopNode(ArrayList<Token> tokens, HashMap<String, InformationType> localSymbolTable) throws Exception{
+    public static WhileLoopNode parseWhileLoopNode(ArrayList<Token> tokens, HashMap<String, InformationType> localSymbolTable, HashMap<String, Boolean> initialized) throws Exception{
         //ask about the braces
         tokens.remove(0); //removes while
         ParserUtils.removeToken(tokens, TokenType.L_BRACKET);
-        ExpressionNode boolExpressionNode = ExpressionNode.parseExpressionNode(tokens, localSymbolTable);
+        ExpressionNode boolExpressionNode = ExpressionNode.parseExpressionNode(tokens, localSymbolTable, initialized);
         ParserUtils.removeToken(tokens,TokenType.R_BRACKET);
         ParserUtils.removeToken(tokens,TokenType.L_BRACE);
-        BodyNode bodyNode = BodyNode.parseBodyNode(tokens, localSymbolTable);
+        BodyNode bodyNode = BodyNode.parseBodyNode(tokens, localSymbolTable, initialized);
         ParserUtils.removeToken(tokens,TokenType.R_BRACE);
-        return new WhileLoopNode(boolExpressionNode, bodyNode, localSymbolTable);
+        return new WhileLoopNode(boolExpressionNode, bodyNode, localSymbolTable, initialized);
 
 
     }

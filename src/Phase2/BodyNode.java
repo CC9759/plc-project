@@ -11,20 +11,22 @@ public class BodyNode implements JottTree {
     final ArrayList<BodyStatementNode> bodyStatements;
     ReturnStatementNode returnStatement;
     public HashMap<String, InformationType> localSymbolTable;
+    public HashMap<String, Boolean> initialized;
 
-    private BodyNode(HashMap<String, InformationType> localSymbolTable) {
+    private BodyNode(HashMap<String, InformationType> localSymbolTable, HashMap<String, Boolean> initialized) {
         bodyStatements = new ArrayList<BodyStatementNode>();
         returnStatement = null;
         this.localSymbolTable = localSymbolTable;
+        this.initialized = initialized;
     }
 
-    public static BodyNode parseBodyNode(ArrayList<Token> inputList, HashMap<String, InformationType> localSymbolTable) throws Exception{
-        BodyNode bodyNode = new BodyNode(localSymbolTable);
+    public static BodyNode parseBodyNode(ArrayList<Token> inputList, HashMap<String, InformationType> localSymbolTable, HashMap<String, Boolean> initialized) throws Exception{
+        BodyNode bodyNode = new BodyNode(localSymbolTable, initialized);
         while (true){
             Token token = inputList.get(0);
     
             if(token.getToken().equals("return")){
-                bodyNode.returnStatement = ReturnStatementNode.ParseReturnStatementNode(inputList, localSymbolTable);
+                bodyNode.returnStatement = ReturnStatementNode.ParseReturnStatementNode(inputList, localSymbolTable, initialized);
                 break;
             }
             else if(token.getTokenType() == TokenType.R_BRACE){
@@ -32,7 +34,7 @@ public class BodyNode implements JottTree {
                 //return null;
             }
             else{
-                bodyNode.bodyStatements.add(BodyStatementNode.parseBodyStatementNode(inputList, localSymbolTable));
+                bodyNode.bodyStatements.add(BodyStatementNode.parseBodyStatementNode(inputList, localSymbolTable, initialized));
 
             }
 

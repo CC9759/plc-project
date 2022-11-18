@@ -11,6 +11,7 @@ import java.util.HashMap;
 public class IfStatementNode extends BodyStatementNode{
 
     public HashMap<String, InformationType> localSymbolTable;
+    public HashMap<String, Boolean> initialized;
 
     public final boolean isStatement = false;
 
@@ -19,20 +20,21 @@ public class IfStatementNode extends BodyStatementNode{
 
     private final ElseIfNode elsIf;
     private final ElseNode elseStatement;
-    public IfStatementNode(ExpressionNode boolExpressionNode, BodyNode bodyNode, ElseIfNode elseIfNode, ElseNode elseNode, HashMap<String, InformationType> localSymbolTable) throws Exception{
+    public IfStatementNode(ExpressionNode boolExpressionNode, BodyNode bodyNode, ElseIfNode elseIfNode, ElseNode elseNode, HashMap<String, InformationType> localSymbolTable, HashMap<String, Boolean> initialized) throws Exception{
         this.boolExpression = boolExpressionNode;
         this.body = bodyNode;
         this.elsIf = elseIfNode;
         this.elseStatement = elseNode;
         this.localSymbolTable = localSymbolTable;
+        this.initialized = initialized;
     }
-    public static IfStatementNode parseIfStatementNode(ArrayList<Token> tokens, HashMap<String, InformationType> localSymbolTable) throws Exception{
+    public static IfStatementNode parseIfStatementNode(ArrayList<Token> tokens, HashMap<String, InformationType> localSymbolTable, HashMap<String, Boolean> initialized) throws Exception{
         tokens.remove(0); //remove if
         ParserUtils.removeToken(tokens,TokenType.L_BRACKET);
-        ExpressionNode boolExpressionNode = ExpressionNode.parseExpressionNode(tokens, localSymbolTable);
+        ExpressionNode boolExpressionNode = ExpressionNode.parseExpressionNode(tokens, localSymbolTable, initialized);
         ParserUtils.removeToken(tokens, TokenType.R_BRACKET);
         ParserUtils.removeToken(tokens, TokenType.L_BRACE);
-        BodyNode bodyNode = BodyNode.parseBodyNode(tokens, localSymbolTable);
+        BodyNode bodyNode = BodyNode.parseBodyNode(tokens, localSymbolTable, initialized);
         ParserUtils.removeToken(tokens, TokenType.R_BRACE);
 
         ElseIfNode elseIfNode = null;
@@ -41,7 +43,7 @@ public class IfStatementNode extends BodyStatementNode{
 
             if(elseifToken.getToken().equals("elseif")) {
                 tokens.remove(0);
-                elseIfNode = ElseIfNode.parseElseIfNode(tokens, localSymbolTable);
+                elseIfNode = ElseIfNode.parseElseIfNode(tokens, localSymbolTable, initialized);
             }
         }
 
@@ -51,11 +53,11 @@ public class IfStatementNode extends BodyStatementNode{
 
             if (elseToken.getToken().equals("else")){
 //                tokens.remove(0); we remove else inside the else node as well. Removing it here for now
-                elseNode = ElseNode.parseElseNode(tokens, localSymbolTable);
+                elseNode = ElseNode.parseElseNode(tokens, localSymbolTable, initialized);
             }
         }
 
-        return new IfStatementNode(boolExpressionNode, bodyNode, elseIfNode, elseNode, localSymbolTable);
+        return new IfStatementNode(boolExpressionNode, bodyNode, elseIfNode, elseNode, localSymbolTable, initialized);
     }
     /**
      * Will output a string of this tree in Jott

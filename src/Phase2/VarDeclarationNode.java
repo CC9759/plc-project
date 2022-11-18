@@ -12,17 +12,19 @@ import java.util.Objects;
 public class VarDeclarationNode implements JottTree{
 
     public HashMap<String, InformationType> localSymbolTable;
+    public HashMap<String, Boolean> initialized;
     private final String type;
     private final IDKeywordNode id;
 
 
-    private VarDeclarationNode(Token typeToken, IDKeywordNode idKeywordNode, HashMap<String, InformationType> localSymbolTable){
+    private VarDeclarationNode(Token typeToken, IDKeywordNode idKeywordNode, HashMap<String, InformationType> localSymbolTable, HashMap<String, Boolean> initialized){
         this.type = typeToken.getToken();
         this.id = idKeywordNode;
         this.localSymbolTable = localSymbolTable;
+        this.initialized = initialized;
     }
 
-    static VarDeclarationNode parseVariableDeclarationNode(ArrayList<Token> tokens, HashMap<String, InformationType> localSymbolTable) throws Exception{
+    static VarDeclarationNode parseVariableDeclarationNode(ArrayList<Token> tokens, HashMap<String, InformationType> localSymbolTable, HashMap<String, Boolean> initialized) throws Exception{
         Token typeToken = tokens.remove(0);
         IDKeywordNode idNode = IDKeywordNode.parseIdKeyWordNode(tokens);
         InformationType informationType = InformationType.VOID;
@@ -36,7 +38,8 @@ public class VarDeclarationNode implements JottTree{
             informationType = InformationType.STRING;
         }
         localSymbolTable.put(idNode.value, informationType);
-        return new VarDeclarationNode(typeToken, idNode, localSymbolTable);
+        initialized.put(idNode.value, false);
+        return new VarDeclarationNode(typeToken, idNode, localSymbolTable, initialized);
     }
 
     /**

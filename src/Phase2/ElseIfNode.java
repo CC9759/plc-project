@@ -12,27 +12,29 @@ public class ElseIfNode implements JottTree {
     private final ExpressionNode bExpr;
     private final ElseIfNode elseIfNode;
     public HashMap<String, InformationType> localSymbolTable;
+    public HashMap<String, Boolean> initialized;
 
-    public ElseIfNode(ArrayList<Token> inputList, HashMap<String, InformationType> localSymbolTable) throws Exception{
-        bExpr = ExpressionNode.parseExpressionNode(inputList, localSymbolTable);
+    public ElseIfNode(ArrayList<Token> inputList, HashMap<String, InformationType> localSymbolTable, HashMap<String, Boolean> initialized) throws Exception{
+        bExpr = ExpressionNode.parseExpressionNode(inputList, localSymbolTable, initialized);
         // remove right bracket and left brace
         ParserUtils.removeToken(inputList, TokenType.R_BRACKET);
         ParserUtils.removeToken(inputList, TokenType.L_BRACE);
-        this.bodyNode = BodyNode.parseBodyNode(inputList, localSymbolTable);
+        this.bodyNode = BodyNode.parseBodyNode(inputList, localSymbolTable, initialized);
         // remove right brace
         ParserUtils.removeToken(inputList,TokenType.R_BRACE);
-        this.elseIfNode = ElseIfNode.parseElseIfNode(inputList, localSymbolTable);
+        this.elseIfNode = ElseIfNode.parseElseIfNode(inputList, localSymbolTable, initialized);
         this.localSymbolTable = localSymbolTable;
+        this.initialized = initialized;
     }
 
-    public static ElseIfNode parseElseIfNode(ArrayList<Token> inputList, HashMap<String, InformationType> localSymbolTable) throws Exception{
+    public static ElseIfNode parseElseIfNode(ArrayList<Token> inputList, HashMap<String, InformationType> localSymbolTable, HashMap<String, Boolean> initialized) throws Exception{
         ElseIfNode elseIfNode;
         
         if(inputList.get(0).getToken().equals("elseif")){
             // remove elseif and left bracket
             inputList.remove(0);
             inputList.remove(0);
-            elseIfNode = new ElseIfNode(inputList, localSymbolTable);
+            elseIfNode = new ElseIfNode(inputList, localSymbolTable, initialized);
         }
         else{
             return null;

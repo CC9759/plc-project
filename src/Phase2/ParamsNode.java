@@ -10,6 +10,7 @@ import java.util.*;
 public class ParamsNode implements JottTree {
 
     public HashMap<String, InformationType> localSymbolTable;
+    public HashMap<String, Boolean> initialized;
     final NodeType myType = NodeType.PARAMS;
 
     public ArrayList<ExpressionNode> expressions;
@@ -17,18 +18,19 @@ public class ParamsNode implements JottTree {
      * < params > -> < expr > < params_t > | 
      * < params_t > -> ,< expr > < params_t > | 
      */
-    private ParamsNode(ArrayList<ExpressionNode> expressions, HashMap<String, InformationType> localSymbolTable) {
+    private ParamsNode(ArrayList<ExpressionNode> expressions, HashMap<String, InformationType> localSymbolTable, HashMap<String, Boolean> initialized) {
         this.expressions = expressions;
         this.localSymbolTable = localSymbolTable;
+        this.initialized = initialized;
     }
 
-    public static ParamsNode parseParamsNode(ArrayList<Token> tokens, HashMap<String, InformationType> localSymbolTable) throws Exception {
+    public static ParamsNode parseParamsNode(ArrayList<Token> tokens, HashMap<String, InformationType> localSymbolTable, HashMap<String, Boolean> initialized) throws Exception {
         ArrayList<ExpressionNode> expressions = new ArrayList<>();
         if(tokens.get(0).getTokenType() != TokenType.R_BRACKET) {
-            ExpressionNode expressionNode = ExpressionNode.parseExpressionNode(tokens, localSymbolTable);
+            ExpressionNode expressionNode = ExpressionNode.parseExpressionNode(tokens, localSymbolTable, initialized);
             expressions.add(expressionNode);
         }
-        return new ParamsNode(expressions, localSymbolTable);
+        return new ParamsNode(expressions, localSymbolTable, initialized);
     }
     public String convertToJott() {
         String result = "";

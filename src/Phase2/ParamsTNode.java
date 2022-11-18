@@ -10,22 +10,24 @@ import java.util.*;
 public class ParamsTNode implements JottTree {
 
     public HashMap<String, InformationType> localSymbolTable;
+    public HashMap<String, Boolean> initialized;
     NodeType myType = NodeType.PARAMST;
     final ExpressionNode myExpressionNode;
     final ParamsTNode myParamsTNode;
-    private ParamsTNode(ExpressionNode expression, ParamsTNode paramsTNode, HashMap<String, InformationType> localSymbolTable) {
+    private ParamsTNode(ExpressionNode expression, ParamsTNode paramsTNode, HashMap<String, InformationType> localSymbolTable, HashMap<String, Boolean> initialized) {
         this.myExpressionNode = expression;
         this.myParamsTNode = paramsTNode;
         this.localSymbolTable = localSymbolTable;
+        this.initialized = initialized;
     }
 
-    public static ParamsTNode parseParamsT(ArrayList<Token> tokens, HashMap<String, InformationType> localSymbolTable) throws Exception{
+    public static ParamsTNode parseParamsT(ArrayList<Token> tokens, HashMap<String, InformationType> localSymbolTable, HashMap<String, Boolean> initialized) throws Exception{
 
         if(tokens.get(0).getTokenType() != TokenType.R_BRACKET) {
             ParserUtils.removeToken(tokens,TokenType.COMMA);
-            ExpressionNode expressionNode = ExpressionNode.parseExpressionNode(tokens, localSymbolTable);
-            ParamsTNode paramsTNode = parseParamsT(tokens, localSymbolTable);
-            return new ParamsTNode(expressionNode, paramsTNode, localSymbolTable);
+            ExpressionNode expressionNode = ExpressionNode.parseExpressionNode(tokens, localSymbolTable, initialized);
+            ParamsTNode paramsTNode = parseParamsT(tokens, localSymbolTable, initialized);
+            return new ParamsTNode(expressionNode, paramsTNode, localSymbolTable, initialized);
         }
         return null;
     }
