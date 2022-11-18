@@ -23,8 +23,10 @@ public class ExpressionNode implements JottTree {
     public InformationType WhatAmI(){
         try {
             if (idKeywordNode != null) {
-                //if(!localSymbolTable.containsKey(idKeywordNode.getValue())){throw new ParserException(token, "Variable " + idKeywordNode.getValue()+ " undefined", true);}
-                //if(!initialized.get(idKeywordNode.getValue())){throw new ParserException(token, "Variable " + idKeywordNode.getValue()+ " uninitialized", true);}
+                if(!localSymbolTable.containsKey(idKeywordNode.getValue())){
+                    throw new ParserException(token, "Variable " + idKeywordNode.getValue()+ " undefined", true);}
+                if(!initialized.get(idKeywordNode.getValue())){
+                    throw new ParserException(token, "Variable " + idKeywordNode.getValue()+ " uninitialized", true);}
                 return localSymbolTable.get(idKeywordNode.getValue());
                 //return InformationType.VOID; //TODO SAME AS ABOVE
             }
@@ -35,8 +37,10 @@ public class ExpressionNode implements JottTree {
             if (constantNode != null) {
                 return constantNode.getMyType();
             }
+            if(firstExpressionNode.WhatAmI() == null){return null;}
+            if(secondExpressionNode.WhatAmI() == null){return null;}
             if (firstExpressionNode.WhatAmI() != secondExpressionNode.WhatAmI()) {
-                throw new Exception("Invalid expression types joined by operation");
+                throw new ParserException(token, "Can't do comparison of two different types", true);
             }
             return firstExpressionNode.WhatAmI();
         }catch (Exception exception){
@@ -211,13 +215,15 @@ public class ExpressionNode implements JottTree {
             }
             else{
                 type = firstExpressionNode.WhatAmI();
+                if(type == null){return false;}
             }
 
         }
         if(secondExpressionNode!=null){
             secondExpressionNodeBool = secondExpressionNode.validateTree();
+            if(secondExpressionNode.WhatAmI() == null){return false;}
             if(type != null && type != secondExpressionNode.WhatAmI()) {
-                return false;
+                throw new ParserException(token, "Can't do comparison of two different types", true);
             }
             else{
                 type = secondExpressionNode.WhatAmI();
@@ -227,7 +233,7 @@ public class ExpressionNode implements JottTree {
             functionCallNodeBool = functionCallNode.validateTree();
             if (!functionCallNodeBool) { return functionCallNodeBool;}
             if(type != null && type != ProgramNode.globalSymbolTable.get(functionCallNode.id.value).returnType) {
-                return false;
+                return false; //Put error message here
             }
             else{
                 type = ProgramNode.globalSymbolTable.get(functionCallNode.id.value).returnType;

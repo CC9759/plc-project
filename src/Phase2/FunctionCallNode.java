@@ -89,7 +89,8 @@ public class FunctionCallNode implements JottTree{
     public boolean validateTree() throws Exception{
         if(id.value.equals("print")) {
             if (params.expressions.size() == 1) {
-                return true;
+                if(params.expressions.get(0).WhatAmI()==null){return false;}
+                else{return true;}
             }
             return false;
         }
@@ -99,6 +100,7 @@ public class FunctionCallNode implements JottTree{
                 throw new ParserException(token, "Invalid number of parameters for function " + id.value, true);
             }
             for (int i = 0; i <function.paramTypes.size(); i ++){
+                if(params.expressions.get(i).WhatAmI() == null){return false;}
                 if(!(params.expressions.get(i).WhatAmI() == function.paramTypes.get(i))){
                     throw new ParserException(token, "Invalid parameter type for function " + id.value, true);
                 }

@@ -1,14 +1,18 @@
 #this will pass phase 2 and phase 3
 
 foo[x:Integer]:Integer{
-    print[y];
+    Integer y = 0;
+    Double z = 0.0;
     return 5;
 }
 
 main[]:Void{
-    Integer x = 0;
+    if[x<10]{
+
+    }
+    foo[x];
 	while[x<10]{
-	    x = foo[z];
+	    x = foo[5];
 		print[x];
 	}
 }

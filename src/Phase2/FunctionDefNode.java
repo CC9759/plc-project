@@ -81,6 +81,7 @@ public class FunctionDefNode implements JottTree{
                     informationType = InformationType.STRING;
                 }
                 localSymbolTable.put(myFunctionDefParamsNode.paramIDs.get(i).value, informationType);
+                initialized.put(myFunctionDefParamsNode.paramIDs.get(i).value, true);
             }
 
         }
